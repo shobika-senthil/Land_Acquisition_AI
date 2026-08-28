@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LANDLYTICS | Parcel Details</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/gis.css') }}">
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         APPLICATION HEADER
+    ====================================================== -->
+
+    <header class="application-header">
+
+        <div class="header-brand">
+
+            <a href="/dashboard" class="brand-link">
+
+                <div class="brand-emblem">
+                    LL
+                </div>
+
+                <div class="brand-details">
+
+                    <h1>LANDLYTICS</h1>
+
+                    <p>
+                        Land Acquisition Intelligence & Monitoring System
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <div class="header-user">
+
+            <div class="system-status">
+
+                <span class="status-indicator"></span>
+
+                <span>
+                    System Operational
+                </span>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div class="user-avatar">
+                    U
+                </div>
+
+                <div class="user-details">
+
+                    <strong id="userName">
+                        User
+                    </strong>
+
+                    <span id="userRole">
+                        Authorized Officer
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-button"
+            >
+                Sign out
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN NAVIGATION
+    ====================================================== -->
+
+    <nav
+        class="main-navigation"
+        aria-label="Main navigation"
+    >
+
+        <div class="navigation-container">
+
+            <a
+                href="/dashboard"
+                class="navigation-item"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="/states"
+                class="navigation-item"
+            >
+                State-wise Analysis
+            </a>
+
+            <a
+                href="/districts"
+                class="navigation-item"
+            >
+                District-wise Analysis
+            </a>
+
+            <a
+                href="/projects"
+                class="navigation-item"
+            >
+                Projects
+            </a>
+
+            <a
+                href="/gis-map"
+                class="navigation-item active"
+            >
+                GIS Risk Map
+            </a>
+
+            <a
+                href="/ai-insights"
+                class="navigation-item"
+            >
+                AI Insights
+            </a>
+
+            <a
+                href="/alerts"
+                class="navigation-item"
+            >
+                Alerts
+            </a>
+
+            <a
+                href="/reports"
+                class="navigation-item"
+            >
+                Reports
+            </a>
+
+            <a
+                href="/admin"
+                class="navigation-item"
+            >
+                Administration
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="parcel-details-container">
+
+
+        <!-- =================================================
+             BREADCRUMB
+        ================================================== -->
+
+        <div class="detail-navigation">
+
+            <a
+                href="/projects"
+                class="back-link"
+            >
+                Projects
+            </a>
+
+            <span>
+                /
+            </span>
+
+            <a
+                href="/gis-map"
+                class="back-link"
+            >
+                GIS Risk Map
+            </a>
+
+            <span>
+                /
+            </span>
+
+            <span id="parcelBreadcrumb">
+                Parcel Details
+            </span>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PARCEL HEADER
+        ================================================== -->
+
+        <section class="parcel-header-section">
+
+            <div class="parcel-header-information">
+
+                <span class="section-label">
+                    PARCEL / PLOT RISK RECORD
+                </span>
+
+                <h2 id="parcelTitle">
+                    Parcel —
+                </h2>
+
+                <div class="parcel-identifiers">
+
+                    <span>
+                        Plot ID:
+                    </span>
+
+                    <strong id="plotId">
+                        —
+                    </strong>
+
+
+                    <span>
+                        Survey Number:
+                    </span>
+
+                    <strong id="surveyNumber">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="parcel-header-actions">
+
+                <button
+                    type="button"
+                    id="parcelReportButton"
+                    class="secondary-button"
+                >
+                    Parcel Report
+                </button>
+
+                <a
+                    id="parcelGISLink"
+                    href="/gis-map"
+                    class="primary-button"
+                >
+                    View on GIS
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PARCEL RISK SUMMARY
+        ================================================== -->
+
+        <section class="parcel-risk-summary">
+
+
+            <!-- RISK SCORE -->
+
+            <article class="parcel-risk-card">
+
+                <span class="risk-card-label">
+                    RISK SCORE
+                </span>
+
+                <strong
+                    id="parcelRiskScore"
+                    class="risk-card-value"
+                >
+                    —
+                </strong>
+
+                <p>
+                    Composite parcel-level risk assessment
+                </p>
+
+            </article>
+
+
+            <!-- RISK LEVEL -->
+
+            <article class="parcel-risk-card">
+
+                <span class="risk-card-label">
+                    RISK LEVEL
+                </span>
+
+                <strong
+                    id="parcelRiskLevel"
+                    class="risk-card-value"
+                >
+                    —
+                </strong>
+
+                <p>
+                    Current parcel risk classification
+                </p>
+
+            </article>
+
+
+            <!-- PROJECT -->
+
+            <article class="parcel-risk-card">
+
+                <span class="risk-card-label">
+                    PROJECT
+                </span>
+
+                <strong
+                    id="parcelProjectId"
+                    class="risk-card-value"
+                >
+                    —
+                </strong>
+
+                <p id="parcelProjectName">
+                    —
+                </p>
+
+            </article>
+
+
+            <!-- ACQUISITION STATUS -->
+
+            <article class="parcel-risk-card">
+
+                <span class="risk-card-label">
+                    ACQUISITION STATUS
+                </span>
+
+                <strong
+                    id="parcelAcquisitionStatus"
+                    class="risk-card-value"
+                >
+                    —
+                </strong>
+
+                <p>
+                    Current acquisition stage
+                </p>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PARCEL LOCATION
+        ================================================== -->
+
+        <section class="parcel-information-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        GEOGRAPHIC INFORMATION
+                    </span>
+
+                    <h3>
+                        Parcel Location
+                    </h3>
+
+                </div>
+
+                <a
+                    id="openParcelMap"
+                    href="/gis-map"
+                    class="panel-action"
+                >
+                    Open Interactive Map
+                </a>
+
+            </div>
+
+
+            <div class="information-grid">
+
+
+                <div class="information-item">
+
+                    <span>
+                        State
+                    </span>
+
+                    <strong id="parcelState">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span>
+                        District
+                    </span>
+
+                    <strong id="parcelDistrict">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span>
+                        Village / Locality
+                    </span>
+
+                    <strong id="parcelVillage">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span>
+                        Taluk
+                    </span>
+
+                    <strong id="parcelTaluk">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span>
+                        Latitude
+                    </span>
+
+                    <strong id="parcelLatitude">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span>
+                        Longitude
+                    </span>
+
+                    <strong id="parcelLongitude">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span>
+                        Land Area
+                    </span>
+
+                    <strong id="parcelArea">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span>
+                        Land Classification
+                    </span>
+
+                    <strong id="landClassification">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             OWNERSHIP & LEGAL
+        ================================================== -->
+
+        <section class="parcel-analysis-grid">
+
+
+            <!-- OWNERSHIP -->
+
+            <article class="parcel-analysis-panel">
+
+                <header class="panel-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            OWNERSHIP
+                        </span>
+
+                        <h3>
+                            Ownership Assessment
+                        </h3>
+
+                    </div>
+
+                </header>
+
+
+                <div class="assessment-content">
+
+
+                    <div class="assessment-status-row">
+
+                        <span>
+                            Ownership Conflict
+                        </span>
+
+                        <strong
+                            id="ownershipConflict"
+                            class="assessment-status"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="assessment-status-row">
+
+                        <span>
+                            Recorded Owner
+                        </span>
+
+                        <strong id="recordedOwner">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="assessment-status-row">
+
+                        <span>
+                            Ownership Verification
+                        </span>
+
+                        <strong id="ownershipVerification">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="assessment-status-row">
+
+                        <span>
+                            Number of Claimants
+                        </span>
+
+                        <strong id="claimantCount">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="assessment-status-row">
+
+                        <span>
+                            Record Match
+                        </span>
+
+                        <strong id="recordMatchStatus">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div
+                        id="ownershipAssessmentMessage"
+                        class="assessment-message"
+                    >
+                        Ownership assessment will appear here.
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- LEGAL -->
+
+            <article class="parcel-analysis-panel">
+
+                <header class="panel-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            LEGAL
+                        </span>
+
+                        <h3>
+                            Legal Dispute Assessment
+                        </h3>
+
+                    </div>
+
+                </header>
+
+
+                <div class="assessment-content">
+
+
+                    <div class="assessment-status-row">
+
+                        <span>
+                            Legal Dispute
+                        </span>
+
+                        <strong
+                            id="legalDispute"
+                            class="assessment-status"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="assessment-status-row">
+
+                        <span>
+                            Case Status
+                        </span>
+
+                        <strong id="legalCaseStatus">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="assessment-status-row">
+
+                        <span>
+                            Dispute Type
+                        </span>
+
+                        <strong id="disputeType">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="assessment-status-row">
+
+                        <span>
+                            Case Reference
+                        </span>
+
+                        <strong id="caseReference">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="assessment-status-row">
+
+                        <span>
+                            Last Legal Update
+                        </span>
+
+                        <strong id="legalLastUpdated">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div
+                        id="legalAssessmentMessage"
+                        class="assessment-message"
+                    >
+                        Legal assessment will appear here.
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- =================================================
+             COMPENSATION
+        ================================================== -->
+
+        <section class="parcel-compensation-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        COMPENSATION
+                    </span>
+
+                    <h3>
+                        Compensation Status
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="compensation-grid">
+
+
+                <article class="compensation-card">
+
+                    <span>
+                        ASSESSED VALUE
+                    </span>
+
+                    <strong id="assessedCompensation">
+                        —
+                    </strong>
+
+                    <p>
+                        Assessed compensation amount
+                    </p>
+
+                </article>
+
+
+                <article class="compensation-card">
+
+                    <span>
+                        SANCTIONED AMOUNT
+                    </span>
+
+                    <strong id="sanctionedCompensation">
+                        —
+                    </strong>
+
+                    <p>
+                        Sanctioned compensation
+                    </p>
+
+                </article>
+
+
+                <article class="compensation-card">
+
+                    <span>
+                        PAID AMOUNT
+                    </span>
+
+                    <strong id="paidCompensation">
+                        —
+                    </strong>
+
+                    <p>
+                        Compensation already disbursed
+                    </p>
+
+                </article>
+
+
+                <article class="compensation-card">
+
+                    <span>
+                        PAYMENT STATUS
+                    </span>
+
+                    <strong id="compensationStatus">
+                        —
+                    </strong>
+
+                    <p>
+                        Current payment status
+                    </p>
+
+                </article>
+
+            </div>
+
+
+            <div class="progress-section">
+
+                <div class="progress-header">
+
+                    <div>
+
+                        <strong>
+                            Compensation Completion
+                        </strong>
+
+                        <span>
+                            Payment progress
+                        </span>
+
+                    </div>
+
+                    <strong id="compensationProgressPercentage">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        id="compensationProgress"
+                        class="progress-value"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             DOCUMENTATION
+        ================================================== -->
+
+        <section class="parcel-documentation-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        DOCUMENTATION
+                    </span>
+
+                    <h3>
+                        Document Verification
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="documentation-grid">
+
+
+                <article class="document-status-card">
+
+                    <div class="document-status-header">
+
+                        <div>
+
+                            <h4>
+                                Land Record
+                            </h4>
+
+                            <span>
+                                Ownership record
+                            </span>
+
+                        </div>
+
+                        <strong id="landRecordStatus">
+                            —
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="document-status-card">
+
+                    <div class="document-status-header">
+
+                        <div>
+
+                            <h4>
+                                Title Document
+                            </h4>
+
+                            <span>
+                                Title verification
+                            </span>
+
+                        </div>
+
+                        <strong id="titleDocumentStatus">
+                            —
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="document-status-card">
+
+                    <div class="document-status-header">
+
+                        <div>
+
+                            <h4>
+                                Survey Record
+                            </h4>
+
+                            <span>
+                                Survey verification
+                            </span>
+
+                        </div>
+
+                        <strong id="surveyRecordStatus">
+                            —
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="document-status-card">
+
+                    <div class="document-status-header">
+
+                        <div>
+
+                            <h4>
+                                Acquisition Notice
+                            </h4>
+
+                            <span>
+                                Notice documentation
+                            </span>
+
+                        </div>
+
+                        <strong id="acquisitionNoticeStatus">
+                            —
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="document-status-card">
+
+                    <div class="document-status-header">
+
+                        <div>
+
+                            <h4>
+                                Compensation Record
+                            </h4>
+
+                            <span>
+                                Payment documentation
+                            </span>
+
+                        </div>
+
+                        <strong id="compensationDocumentStatus">
+                            —
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="document-status-card">
+
+                    <div class="document-status-header">
+
+                        <div>
+
+                            <h4>
+                                R&R Documentation
+                            </h4>
+
+                            <span>
+                                Rehabilitation record
+                            </span>
+
+                        </div>
+
+                        <strong id="rrDocumentStatus">
+                            —
+                        </strong>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <div class="documentation-summary">
+
+                <div>
+
+                    <span>
+                        Documentation Completion
+                    </span>
+
+                    <strong id="documentationPercentage">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        id="documentationProgress"
+                        class="progress-value"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             R&R
+        ================================================== -->
+
+        <section class="parcel-rr-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        REHABILITATION & RESETTLEMENT
+                    </span>
+
+                    <h3>
+                        R&R Status
+                    </h3>
+
+                    <p>
+                        Track rehabilitation and resettlement
+                        activities associated with this parcel.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="rr-grid">
+
+
+                <article class="rr-status-card">
+
+                    <span>
+                        R&R REQUIRED
+                    </span>
+
+                    <strong id="rrRequired">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="rr-status-card">
+
+                    <span>
+                        ELIGIBILITY
+                    </span>
+
+                    <strong id="rrEligibility">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="rr-status-card">
+
+                    <span>
+                        BENEFIT STATUS
+                    </span>
+
+                    <strong id="rrBenefitStatus">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="rr-status-card">
+
+                    <span>
+                        COMPLETION
+                    </span>
+
+                    <strong id="rrCompletion">
+                        —
+                    </strong>
+
+                </article>
+
+            </div>
+
+
+            <div class="progress-section">
+
+                <div class="progress-header">
+
+                    <div>
+
+                        <strong>
+                            R&R Completion
+                        </strong>
+
+                        <span>
+                            Rehabilitation and resettlement progress
+                        </span>
+
+                    </div>
+
+                    <strong id="rrProgressPercentage">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        id="rrProgress"
+                        class="progress-value"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             POSSESSION
+        ================================================== -->
+
+        <section class="parcel-possession-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        LAND POSSESSION
+                    </span>
+
+                    <h3>
+                        Possession Status
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="possession-grid">
+
+
+                <article class="possession-card">
+
+                    <span>
+                        POSSESSION STATUS
+                    </span>
+
+                    <strong id="possessionStatus">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="possession-card">
+
+                    <span>
+                        POSSESSION DATE
+                    </span>
+
+                    <strong id="possessionDate">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="possession-card">
+
+                    <span>
+                        EXPECTED DATE
+                    </span>
+
+                    <strong id="expectedPossessionDate">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="possession-card">
+
+                    <span>
+                        DELAY
+                    </span>
+
+                    <strong id="possessionDelay">
+                        —
+                    </strong>
+
+                </article>
+
+            </div>
+
+
+            <div class="progress-section">
+
+                <div class="progress-header">
+
+                    <div>
+
+                        <strong>
+                            Possession Completion
+                        </strong>
+
+                        <span>
+                            Land possession progress
+                        </span>
+
+                    </div>
+
+                    <strong id="possessionProgressPercentage">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        id="possessionProgress"
+                        class="progress-value"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PARCEL RISK FACTORS
+        ================================================== -->
+
+        <section class="parcel-risk-factors-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        RISK INTELLIGENCE
+                    </span>
+
+                    <h3>
+                        Parcel Risk Factors
+                    </h3>
+
+                    <p>
+                        Key factors contributing to the current
+                        parcel-level risk assessment.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="parcelRiskFactors"
+                class="risk-factors-list"
+            >
+
+                <div class="empty-state">
+                    Parcel risk factors will appear here.
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RECOMMENDED ACTION
+        ================================================== -->
+
+        <section class="recommended-action-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        DECISION SUPPORT
+                    </span>
+
+                    <h3>
+                        Recommended Action
+                    </h3>
+
+                    <p>
+                        Priority action recommended based on the
+                        current parcel risk profile.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <article class="recommended-action-card">
+
+                <div class="recommendation-priority">
+
+                    <span>
+                        PRIORITY
+                    </span>
+
+                    <strong id="recommendationPriority">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="recommendation-content">
+
+                    <span class="section-label">
+                        LANDLYTICS RECOMMENDATION
+                    </span>
+
+                    <h4 id="recommendedActionTitle">
+                        Assessment pending
+                    </h4>
+
+                    <p id="recommendedActionDescription">
+                        The recommended corrective action will appear
+                        after parcel risk analysis.
+                    </p>
+
+                </div>
+
+
+                <div class="recommendation-actions">
+
+                    <button
+                        type="button"
+                        id="acknowledgeRecommendation"
+                        class="primary-button"
+                    >
+                        Acknowledge
+                    </button>
+
+                    <button
+                        type="button"
+                        id="assignRecommendation"
+                        class="secondary-button"
+                    >
+                        Assign Action
+                    </button>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ACTION HISTORY
+        ================================================== -->
+
+        <section class="parcel-history-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        ACTIVITY RECORD
+                    </span>
+
+                    <h3>
+                        Parcel Action History
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="parcelActionHistory"
+                class="action-history"
+            >
+
+                <div class="empty-state">
+                    Parcel activity history will appear here.
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SYSTEM INFORMATION
+        ================================================== -->
+
+        <section class="system-information">
+
+            <div class="system-information-item">
+
+                <span>
+                    GIS Engine
+                </span>
+
+                <strong
+                    id="gisEngineStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    API
+                </span>
+
+                <strong
+                    id="apiStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Database
+                </span>
+
+                <strong
+                    id="databaseStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Last Updated
+                </span>
+
+                <strong id="lastUpdated">
+                    —
+                </strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="application-footer">
+
+        <div>
+
+            <strong>
+                LANDLYTICS
+            </strong>
+
+            <span>
+                Land Acquisition Intelligence & Monitoring System
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Authorized Government Decision Support Platform
+            </span>
+
+            <span>
+                © 2026
+            </span>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/parcels.js') }}"></script>
+
+</body>
+
+</html>

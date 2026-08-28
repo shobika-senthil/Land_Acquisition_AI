@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LANDLYTICS | Projects</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/projects.css') }}">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         APPLICATION HEADER
+    ====================================================== -->
+
+    <header class="application-header">
+
+        <div class="header-brand">
+
+            <a href="/dashboard" class="brand-link">
+
+                <div class="brand-emblem">
+                    LL
+                </div>
+
+                <div class="brand-details">
+
+                    <h1>LANDLYTICS</h1>
+
+                    <p>
+                        Land Acquisition Intelligence & Monitoring System
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <div class="header-user">
+
+            <div class="system-status">
+
+                <span class="status-indicator"></span>
+
+                <span>
+                    System Operational
+                </span>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div class="user-avatar">
+                    U
+                </div>
+
+                <div class="user-details">
+
+                    <strong id="userName">
+                        User
+                    </strong>
+
+                    <span id="userRole">
+                        Authorized Officer
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-button"
+            >
+                Sign out
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN NAVIGATION
+    ====================================================== -->
+
+    <nav
+        class="main-navigation"
+        aria-label="Main navigation"
+    >
+
+        <div class="navigation-container">
+
+            <a href="/dashboard"
+               class="navigation-item">
+                Dashboard
+            </a>
+
+            <a href="/states"
+               class="navigation-item">
+                State-wise Analysis
+            </a>
+
+            <a href="/districts"
+               class="navigation-item">
+                District-wise Analysis
+            </a>
+
+            <a href="/projects"
+               class="navigation-item active">
+                Projects
+            </a>
+
+            <a href="/gis-map"
+               class="navigation-item">
+                GIS Risk Map
+            </a>
+
+            <a href="/ai-insights"
+               class="navigation-item">
+                AI Insights
+            </a>
+
+            <a href="/alerts"
+               class="navigation-item">
+                Alerts
+            </a>
+
+            <a href="/reports"
+               class="navigation-item">
+                Reports
+            </a>
+
+            <a href="/admin"
+               class="navigation-item">
+                Administration
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="projects-container">
+
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <section class="page-introduction">
+
+            <div class="page-heading">
+
+                <span class="section-label">
+                    PROJECT REGISTRY
+                </span>
+
+                <h2>
+                    Land Acquisition Projects
+                </h2>
+
+                <p>
+                    Search, filter and monitor acquisition projects
+                    across states and districts.
+                </p>
+
+            </div>
+
+
+            <!-- ADD NEW PROJECT -->
+
+            <div class="page-actions">
+
+                <button
+                    type="button"
+                    id="refreshProjects"
+                    class="secondary-button"
+                >
+                    Refresh Data
+                </button>
+
+                <button
+                    type="button"
+                    id="openAddProject"
+                    class="primary-button"
+                >
+                    Add New Project
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROJECT SUMMARY
+        ================================================== -->
+
+        <section
+            class="project-summary-grid"
+            aria-label="Project summary"
+        >
+
+            <article class="project-summary-card">
+
+                <span>
+                    TOTAL PROJECTS
+                </span>
+
+                <strong id="totalProjectCount">
+                    --
+                </strong>
+
+            </article>
+
+
+            <article class="project-summary-card">
+
+                <span>
+                    HIGH-RISK
+                </span>
+
+                <strong id="highRiskProjectCount">
+                    --
+                </strong>
+
+            </article>
+
+
+            <article class="project-summary-card">
+
+                <span>
+                    CRITICAL
+                </span>
+
+                <strong id="criticalProjectCount">
+                    --
+                </strong>
+
+            </article>
+
+
+            <article class="project-summary-card">
+
+                <span>
+                    MONITORED
+                </span>
+
+                <strong id="monitoredProjectCount">
+                    --
+                </strong>
+
+            </article>
+
+        </section>
+
+
+        <!-- =================================================
+             PROJECT SEARCH & FILTERS
+        ================================================== -->
+
+        <section class="project-filter-section">
+
+            <div class="filter-section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        PROJECT SEARCH
+                    </span>
+
+                    <h3>
+                        Find a Project
+                    </h3>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="clearProjectFilters"
+                    class="text-button"
+                >
+                    Clear Filters
+                </button>
+
+            </div>
+
+
+            <div class="project-filter-grid">
+
+
+                <!-- SEARCH -->
+
+                <div class="search-field">
+
+                    <label for="projectSearch">
+                        Search
+                    </label>
+
+                    <div class="search-input-wrapper">
+
+                        <span
+                            class="search-icon"
+                            aria-hidden="true"
+                        >
+                            Search
+                        </span>
+
+                        <input
+                            type="search"
+                            id="projectSearch"
+                            name="project_search"
+                            placeholder="Project ID, project name..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- STATE FILTER -->
+
+                <div class="form-field">
+
+                    <label for="projectStateFilter">
+                        State
+                    </label>
+
+                    <select
+                        id="projectStateFilter"
+                        name="state"
+                    >
+
+                        <option value="">
+                            All States
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DISTRICT FILTER -->
+
+                <div class="form-field">
+
+                    <label for="projectDistrictFilter">
+                        District
+                    </label>
+
+                    <select
+                        id="projectDistrictFilter"
+                        name="district"
+                    >
+
+                        <option value="">
+                            All Districts
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PROJECT TYPE -->
+
+                <div class="form-field">
+
+                    <label for="projectTypeFilter">
+                        Project Type
+                    </label>
+
+                    <select
+                        id="projectTypeFilter"
+                        name="project_type"
+                    >
+
+                        <option value="">
+                            All Project Types
+                        </option>
+
+                        <option value="highway">
+                            Highway
+                        </option>
+
+                        <option value="railway">
+                            Railway
+                        </option>
+
+                        <option value="industrial">
+                            Industrial
+                        </option>
+
+                        <option value="irrigation">
+                            Irrigation
+                        </option>
+
+                        <option value="urban">
+                            Urban Development
+                        </option>
+
+                        <option value="other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- RISK FILTER -->
+
+                <div class="form-field">
+
+                    <label for="projectRiskFilter">
+                        Risk Level
+                    </label>
+
+                    <select
+                        id="projectRiskFilter"
+                        name="risk_level"
+                    >
+
+                        <option value="">
+                            All Risk Levels
+                        </option>
+
+                        <option value="CRITICAL">
+                            Critical
+                        </option>
+
+                        <option value="HIGH">
+                            High
+                        </option>
+
+                        <option value="MEDIUM">
+                            Medium
+                        </option>
+
+                        <option value="LOW">
+                            Low
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROJECT TABLE
+        ================================================== -->
+
+        <section class="project-registry-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        ACQUISITION REGISTER
+                    </span>
+
+                    <h3>
+                        Project Registry
+                    </h3>
+
+                </div>
+
+
+                <div class="registry-meta">
+
+                    <span id="projectResultCount">
+                        0 projects
+                    </span>
+
+                    <select
+                        id="projectsPerPage"
+                        aria-label="Projects per page"
+                    >
+
+                        <option value="10">
+                            10 per page
+                        </option>
+
+                        <option value="25">
+                            25 per page
+                        </option>
+
+                        <option value="50">
+                            50 per page
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="project-table-wrapper">
+
+                <table
+                    class="project-table"
+                    id="projectsTable"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th scope="col">
+                                Project ID
+                            </th>
+
+                            <th scope="col">
+                                Project Type
+                            </th>
+
+                            <th scope="col">
+                                State
+                            </th>
+
+                            <th scope="col">
+                                District
+                            </th>
+
+                            <th scope="col">
+                                Risk Score
+                            </th>
+
+                            <th scope="col">
+                                Risk Level
+                            </th>
+
+                            <th scope="col">
+                                Delay Probability
+                            </th>
+
+                            <th scope="col">
+                                Status
+                            </th>
+
+                            <th scope="col">
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="projectTableBody">
+
+                        <tr class="table-empty-row">
+
+                            <td
+                                colspan="9"
+                                id="projectTableMessage"
+                            >
+                                Project data will appear here.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- PAGINATION -->
+
+            <div class="table-pagination">
+
+                <div>
+
+                    <span id="paginationInformation">
+                        Showing 0 projects
+                    </span>
+
+                </div>
+
+
+                <div class="pagination-controls">
+
+                    <button
+                        type="button"
+                        id="previousPage"
+                        disabled
+                    >
+                        Previous
+                    </button>
+
+                    <span id="currentPage">
+                        1
+                    </span>
+
+                    <button
+                        type="button"
+                        id="nextPage"
+                        disabled
+                    >
+                        Next
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROJECT QUICK ACTIONS
+        ================================================== -->
+
+        <section class="project-quick-actions">
+
+            <article class="quick-action-card">
+
+                <div>
+
+                    <span class="section-label">
+                        PROJECT INTELLIGENCE
+                    </span>
+
+                    <h3>
+                        Need a geographic view?
+                    </h3>
+
+                    <p>
+                        Locate projects and identify high-risk
+                        parcels using the GIS Risk Map.
+                    </p>
+
+                </div>
+
+                <a
+                    href="/gis-map"
+                    class="secondary-button"
+                >
+                    Open GIS Risk Map
+                </a>
+
+            </article>
+
+
+            <article class="quick-action-card">
+
+                <div>
+
+                    <span class="section-label">
+                        AI INTELLIGENCE
+                    </span>
+
+                    <h3>
+                        Need predictive insights?
+                    </h3>
+
+                    <p>
+                        Review AI-identified delay drivers and
+                        recommended corrective actions.
+                    </p>
+
+                </div>
+
+                <a
+                    href="/ai-insights"
+                    class="secondary-button"
+                >
+                    View AI Insights
+                </a>
+
+            </article>
+
+        </section>
+
+
+        <!-- =================================================
+             SYSTEM INFORMATION
+        ================================================== -->
+
+        <section class="system-information">
+
+            <div class="system-information-item">
+
+                <span>
+                    API
+                </span>
+
+                <strong
+                    id="apiStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Database
+                </span>
+
+                <strong
+                    id="databaseStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    AI Model
+                </span>
+
+                <strong
+                    id="modelStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         ADD NEW PROJECT MODAL
+    ====================================================== -->
+
+    <div
+        id="addProjectModal"
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="addProjectTitle"
+        hidden
+    >
+
+        <div class="modal-backdrop"></div>
+
+
+        <div class="modal-dialog">
+
+            <header class="modal-header">
+
+                <div>
+
+                    <span class="section-label">
+                        PROJECT REGISTRATION
+                    </span>
+
+                    <h2 id="addProjectTitle">
+                        Add New Project
+                    </h2>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="closeAddProject"
+                    class="modal-close"
+                    aria-label="Close dialog"
+                >
+                    Close
+                </button>
+
+            </header>
+
+
+            <form
+                id="addProjectForm"
+                method="POST"
+                action="/api/projects"
+            >
+
+
+                <!-- PROJECT INFORMATION -->
+
+                <fieldset>
+
+                    <legend>
+                        Project Information
+                    </legend>
+
+
+                    <div class="modal-form-grid">
+
+
+                        <div class="form-field">
+
+                            <label for="newProjectId">
+                                Project ID
+                            </label>
+
+                            <input
+                                type="text"
+                                id="newProjectId"
+                                name="project_id"
+                                placeholder="e.g. P10003"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="newProjectName">
+                                Project Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="newProjectName"
+                                name="project_name"
+                                placeholder="Enter project name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="newProjectType">
+                                Project Type
+                            </label>
+
+                            <select
+                                id="newProjectType"
+                                name="project_type"
+                                required
+                            >
+
+                                <option value="">
+                                    Select project type
+                                </option>
+
+                                <option value="highway">
+                                    Highway
+                                </option>
+
+                                <option value="railway">
+                                    Railway
+                                </option>
+
+                                <option value="industrial">
+                                    Industrial
+                                </option>
+
+                                <option value="irrigation">
+                                    Irrigation
+                                </option>
+
+                                <option value="urban">
+                                    Urban Development
+                                </option>
+
+                                <option value="other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="newProjectState">
+                                State
+                            </label>
+
+                            <input
+                                type="text"
+                                id="newProjectState"
+                                name="state"
+                                placeholder="Enter state"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="newProjectDistrict">
+                                District
+                            </label>
+
+                            <input
+                                type="text"
+                                id="newProjectDistrict"
+                                name="district"
+                                placeholder="Enter district"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="newProjectDescription">
+                                Project Description
+                            </label>
+
+                            <textarea
+                                id="newProjectDescription"
+                                name="description"
+                                rows="4"
+                                placeholder="Enter project description"
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+
+                <!-- LOCATION -->
+
+                <fieldset>
+
+                    <legend>
+                        Geographic Information
+                    </legend>
+
+
+                    <div class="modal-form-grid">
+
+
+                        <div class="form-field">
+
+                            <label for="newProjectLatitude">
+                                Latitude
+                            </label>
+
+                            <input
+                                type="number"
+                                id="newProjectLatitude"
+                                name="latitude"
+                                step="any"
+                                placeholder="Latitude"
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="newProjectLongitude">
+                                Longitude
+                            </label>
+
+                            <input
+                                type="number"
+                                id="newProjectLongitude"
+                                name="longitude"
+                                step="any"
+                                placeholder="Longitude"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+
+                <!-- FORM ACTIONS -->
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        id="cancelAddProject"
+                        class="secondary-button"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        Create Project
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="addProjectMessage"
+                    class="form-message"
+                    role="alert"
+                    aria-live="polite"
+                ></div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/projects.js') }}"></script>
+
+</body>
+
+</html>

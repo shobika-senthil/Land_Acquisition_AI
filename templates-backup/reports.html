@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LANDLYTICS | Reports</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/reports.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         APPLICATION HEADER
+    ====================================================== -->
+
+    <header class="application-header">
+
+        <div class="header-brand">
+
+            <a href="/dashboard" class="brand-link">
+
+                <div class="brand-emblem">
+                    LL
+                </div>
+
+                <div class="brand-details">
+
+                    <h1>
+                        LANDLYTICS
+                    </h1>
+
+                    <p>
+                        Land Acquisition Intelligence & Monitoring System
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <div class="header-user">
+
+            <div class="system-status">
+
+                <span class="status-indicator"></span>
+
+                <span>
+                    System Operational
+                </span>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div class="user-avatar">
+                    U
+                </div>
+
+                <div class="user-details">
+
+                    <strong id="userName">
+                        User
+                    </strong>
+
+                    <span id="userRole">
+                        Authorized Officer
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-button"
+            >
+                Sign out
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN NAVIGATION
+    ====================================================== -->
+
+    <nav
+        class="main-navigation"
+        aria-label="Main navigation"
+    >
+
+        <div class="navigation-container">
+
+            <a href="/dashboard"
+               class="navigation-item">
+                Dashboard
+            </a>
+
+            <a href="/states"
+               class="navigation-item">
+                State-wise Analysis
+            </a>
+
+            <a href="/districts"
+               class="navigation-item">
+                District-wise Analysis
+            </a>
+
+            <a href="/projects"
+               class="navigation-item">
+                Projects
+            </a>
+
+            <a href="/gis-map"
+               class="navigation-item">
+                GIS Risk Map
+            </a>
+
+            <a href="/ai-insights"
+               class="navigation-item">
+                AI Insights
+            </a>
+
+            <a href="/alerts"
+               class="navigation-item">
+                Alerts
+            </a>
+
+            <a href="/reports"
+               class="navigation-item active">
+                Reports
+            </a>
+
+            <a href="/admin"
+               class="navigation-item">
+                Administration
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="reports-container">
+
+
+        <!-- =================================================
+             PAGE INTRODUCTION
+        ================================================== -->
+
+        <section class="page-introduction">
+
+            <div class="page-heading">
+
+                <span class="section-label">
+                    OFFICIAL REPORTING
+                </span>
+
+                <h2>
+                    Reports & Documents
+                </h2>
+
+                <p>
+                    Generate structured land acquisition reports
+                    for projects, states, districts and parcels.
+                </p>
+
+            </div>
+
+
+            <div class="page-actions">
+
+                <button
+                    type="button"
+                    id="refreshReports"
+                    class="secondary-button"
+                >
+                    Refresh
+                </button>
+
+                <button
+                    type="button"
+                    id="downloadCurrentReport"
+                    class="primary-button"
+                >
+                    Export Report
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             REPORT TYPE
+        ================================================== -->
+
+        <section class="report-builder-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        REPORT BUILDER
+                    </span>
+
+                    <h3>
+                        Select Report Type
+                    </h3>
+
+                    <p>
+                        Choose the level of information required
+                        for the official report.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="report-type-grid">
+
+
+                <!-- PROJECT REPORT -->
+
+                <button
+                    type="button"
+                    class="report-type-card active"
+                    data-report-type="project"
+                    id="projectReportType"
+                >
+
+                    <span class="report-type-number">
+                        01
+                    </span>
+
+                    <div>
+
+                        <h4>
+                            Project Report
+                        </h4>
+
+                        <p>
+                            Project status, AI risk, delays,
+                            parcels and recommendations.
+                        </p>
+
+                    </div>
+
+                </button>
+
+
+
+                <!-- STATE REPORT -->
+
+                <button
+                    type="button"
+                    class="report-type-card"
+                    data-report-type="state"
+                    id="stateReportType"
+                >
+
+                    <span class="report-type-number">
+                        02
+                    </span>
+
+                    <div>
+
+                        <h4>
+                            State Report
+                        </h4>
+
+                        <p>
+                            State-level acquisition performance,
+                            risk and district comparison.
+                        </p>
+
+                    </div>
+
+                </button>
+
+
+
+                <!-- DISTRICT REPORT -->
+
+                <button
+                    type="button"
+                    class="report-type-card"
+                    data-report-type="district"
+                    id="districtReportType"
+                >
+
+                    <span class="report-type-number">
+                        03
+                    </span>
+
+                    <div>
+
+                        <h4>
+                            District Report
+                        </h4>
+
+                        <p>
+                            District projects, risk trends,
+                            delays and performance indicators.
+                        </p>
+
+                    </div>
+
+                </button>
+
+
+
+                <!-- PARCEL REPORT -->
+
+                <button
+                    type="button"
+                    class="report-type-card"
+                    data-report-type="parcel"
+                    id="parcelReportType"
+                >
+
+                    <span class="report-type-number">
+                        04
+                    </span>
+
+                    <div>
+
+                        <h4>
+                            Parcel Report
+                        </h4>
+
+                        <p>
+                            Parcel ownership, legal, compensation,
+                            R&R and possession information.
+                        </p>
+
+                    </div>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             REPORT FILTERS
+        ================================================== -->
+
+        <section class="report-filter-section">
+
+            <div class="filter-section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        REPORT PARAMETERS
+                    </span>
+
+                    <h3>
+                        Configure Report
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="clearReportFilters"
+                    class="text-button"
+                >
+                    Clear Parameters
+                </button>
+
+            </div>
+
+
+            <div class="report-filter-grid">
+
+
+                <!-- STATE -->
+
+                <div class="form-field">
+
+                    <label for="reportState">
+                        State
+                    </label>
+
+                    <select id="reportState">
+
+                        <option value="">
+                            All States
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DISTRICT -->
+
+                <div class="form-field">
+
+                    <label for="reportDistrict">
+                        District
+                    </label>
+
+                    <select
+                        id="reportDistrict"
+                        disabled
+                    >
+
+                        <option value="">
+                            All Districts
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- PROJECT -->
+
+                <div class="form-field">
+
+                    <label for="reportProject">
+                        Project
+                    </label>
+
+                    <select id="reportProject">
+
+                        <option value="">
+                            All Projects
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- PARCEL -->
+
+                <div class="form-field">
+
+                    <label for="reportParcel">
+                        Parcel / Plot
+                    </label>
+
+                    <select
+                        id="reportParcel"
+                        disabled
+                    >
+
+                        <option value="">
+                            All Parcels
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- RISK -->
+
+                <div class="form-field">
+
+                    <label for="reportRisk">
+                        Risk Level
+                    </label>
+
+                    <select id="reportRisk">
+
+                        <option value="">
+                            All Risk Levels
+                        </option>
+
+                        <option value="CRITICAL">
+                            Critical
+                        </option>
+
+                        <option value="HIGH">
+                            High
+                        </option>
+
+                        <option value="MEDIUM">
+                            Medium
+                        </option>
+
+                        <option value="LOW">
+                            Low
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DATE FROM -->
+
+                <div class="form-field">
+
+                    <label for="reportDateFrom">
+                        From Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="reportDateFrom"
+                    >
+
+                </div>
+
+
+
+                <!-- DATE TO -->
+
+                <div class="form-field">
+
+                    <label for="reportDateTo">
+                        To Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="reportDateTo"
+                    >
+
+                </div>
+
+
+
+                <!-- FORMAT -->
+
+                <div class="form-field">
+
+                    <label for="reportFormat">
+                        Export Format
+                    </label>
+
+                    <select id="reportFormat">
+
+                        <option value="pdf">
+                            PDF
+                        </option>
+
+                        <option value="excel">
+                            Excel
+                        </option>
+
+                        <option value="csv">
+                            CSV
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             REPORT CONTENT OPTIONS
+        ================================================== -->
+
+        <section class="report-options-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        REPORT CONTENT
+                    </span>
+
+                    <h3>
+                        Include Information
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="report-options-grid">
+
+
+                <label class="report-option">
+
+                    <input
+                        type="checkbox"
+                        id="includeProjectInfo"
+                        checked
+                    >
+
+                    <div>
+
+                        <strong>
+                            Project Information
+                        </strong>
+
+                        <span>
+                            Basic project identification and status.
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <label class="report-option">
+
+                    <input
+                        type="checkbox"
+                        id="includeRiskAnalysis"
+                        checked
+                    >
+
+                    <div>
+
+                        <strong>
+                            Risk Analysis
+                        </strong>
+
+                        <span>
+                            Risk scores, categories and delay probability.
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <label class="report-option">
+
+                    <input
+                        type="checkbox"
+                        id="includeAIInsights"
+                        checked
+                    >
+
+                    <div>
+
+                        <strong>
+                            AI Insights
+                        </strong>
+
+                        <span>
+                            Delay drivers and predictive assessment.
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <label class="report-option">
+
+                    <input
+                        type="checkbox"
+                        id="includeTimeline"
+                        checked
+                    >
+
+                    <div>
+
+                        <strong>
+                            Timeline Analysis
+                        </strong>
+
+                        <span>
+                            Acquisition milestones and delays.
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <label class="report-option">
+
+                    <input
+                        type="checkbox"
+                        id="includeParcels"
+                        checked
+                    >
+
+                    <div>
+
+                        <strong>
+                            Parcel Information
+                        </strong>
+
+                        <span>
+                            Parcel-level acquisition and risk data.
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <label class="report-option">
+
+                    <input
+                        type="checkbox"
+                        id="includeGIS"
+                        checked
+                    >
+
+                    <div>
+
+                        <strong>
+                            GIS Information
+                        </strong>
+
+                        <span>
+                            Geographic coordinates and spatial risk.
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <label class="report-option">
+
+                    <input
+                        type="checkbox"
+                        id="includeRecommendations"
+                        checked
+                    >
+
+                    <div>
+
+                        <strong>
+                            Recommendations
+                        </strong>
+
+                        <span>
+                            Corrective actions and priority interventions.
+                        </span>
+
+                    </div>
+
+                </label>
+
+
+                <label class="report-option">
+
+                    <input
+                        type="checkbox"
+                        id="includeAuditInformation"
+                    >
+
+                    <div>
+
+                        <strong>
+                            Audit Information
+                        </strong>
+
+                        <span>
+                            Report generation and system metadata.
+                        </span>
+
+                    </div>
+
+                </label>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             REPORT PREVIEW
+        ================================================== -->
+
+        <section class="report-preview-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        DOCUMENT PREVIEW
+                    </span>
+
+                    <h3>
+                        Report Preview
+                    </h3>
+
+                    <p>
+                        Review the selected report before exporting.
+                    </p>
+
+                </div>
+
+
+                <div class="preview-actions">
+
+                    <button
+                        type="button"
+                        id="generatePreview"
+                        class="secondary-button"
+                    >
+                        Generate Preview
+                    </button>
+
+                    <button
+                        type="button"
+                        id="printReport"
+                        class="secondary-button"
+                    >
+                        Print
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- REPORT DOCUMENT -->
+
+            <article
+                id="reportPreview"
+                class="report-document"
+            >
+
+
+                <!-- DOCUMENT HEADER -->
+
+                <header class="report-document-header">
+
+                    <div class="report-document-brand">
+
+                        <div class="report-emblem">
+                            LL
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                LANDLYTICS
+                            </strong>
+
+                            <span>
+                                Land Acquisition Intelligence &
+                                Monitoring System
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="report-document-meta">
+
+                        <span>
+                            Report ID
+                        </span>
+
+                        <strong id="reportId">
+                            —
+                        </strong>
+
+                        <span>
+                            Generated
+                        </span>
+
+                        <strong id="reportGeneratedDate">
+                            —
+                        </strong>
+
+                    </div>
+
+                </header>
+
+
+
+                <!-- REPORT TITLE -->
+
+                <div class="report-document-title">
+
+                    <span class="section-label">
+                        OFFICIAL REPORT
+                    </span>
+
+                    <h2 id="reportTitle">
+                        Project Acquisition Report
+                    </h2>
+
+                    <p id="reportSubtitle">
+                        Generated using LANDLYTICS decision-support data.
+                    </p>
+
+                </div>
+
+
+
+                <!-- REPORT SUMMARY -->
+
+                <section class="report-summary">
+
+                    <h3>
+                        Executive Summary
+                    </h3>
+
+                    <p id="reportExecutiveSummary">
+                        Generate a preview to populate the report
+                        summary.
+                    </p>
+
+                </section>
+
+
+
+                <!-- KEY INDICATORS -->
+
+                <section class="report-key-indicators">
+
+                    <h3>
+                        Key Indicators
+                    </h3>
+
+
+                    <div class="report-indicator-grid">
+
+
+                        <div class="report-indicator">
+
+                            <span>
+                                Projects
+                            </span>
+
+                            <strong id="reportProjectCount">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="report-indicator">
+
+                            <span>
+                                High Risk
+                            </span>
+
+                            <strong id="reportHighRiskCount">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="report-indicator">
+
+                            <span>
+                                Critical
+                            </span>
+
+                            <strong id="reportCriticalCount">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="report-indicator">
+
+                            <span>
+                                Delay Probability
+                            </span>
+
+                            <strong id="reportDelayProbability">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- REPORT DATA -->
+
+                <section class="report-data-section">
+
+                    <h3>
+                        Report Data
+                    </h3>
+
+                    <div
+                        id="reportDataContent"
+                        class="report-data-content"
+                    >
+
+                        <div class="empty-state">
+
+                            Configure the report parameters
+                            and generate a preview.
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- REPORT AI SECTION -->
+
+                <section class="report-ai-section">
+
+                    <h3>
+                        AI Risk Assessment
+                    </h3>
+
+                    <div
+                        id="reportAIContent"
+                        class="report-ai-content"
+                    >
+
+                        <div class="empty-state">
+                            AI analysis will appear here.
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- RECOMMENDATIONS -->
+
+                <section class="report-recommendations-section">
+
+                    <h3>
+                        Recommended Actions
+                    </h3>
+
+                    <div
+                        id="reportRecommendations"
+                        class="report-recommendations"
+                    >
+
+                        <div class="empty-state">
+                            Recommended actions will appear here.
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- DOCUMENT FOOTER -->
+
+                <footer class="report-document-footer">
+
+                    <div>
+
+                        <strong>
+                            LANDLYTICS
+                        </strong>
+
+                        <span>
+                            Authorized Decision Support System
+                        </span>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Generated by authorized user
+                        </span>
+
+                        <span id="reportFooterDate">
+                            —
+                        </span>
+
+                    </div>
+
+                </footer>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RECENT REPORTS
+        ================================================== -->
+
+        <section class="recent-reports-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        REPORT ARCHIVE
+                    </span>
+
+                    <h3>
+                        Recently Generated Reports
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table
+                    class="reports-table"
+                    id="recentReportsTable"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Report ID
+                            </th>
+
+                            <th>
+                                Report Type
+                            </th>
+
+                            <th>
+                                Scope
+                            </th>
+
+                            <th>
+                                Generated By
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Format
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="recentReportsBody">
+
+                        <tr>
+
+                            <td colspan="7">
+                                Recently generated reports
+                                will appear here.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SYSTEM INFORMATION
+        ================================================== -->
+
+        <section class="system-information">
+
+            <div class="system-information-item">
+
+                <span>
+                    Reporting Engine
+                </span>
+
+                <strong
+                    id="reportEngineStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    API
+                </span>
+
+                <strong
+                    id="apiStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Database
+                </span>
+
+                <strong
+                    id="databaseStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Last Updated
+                </span>
+
+                <strong id="lastUpdated">
+                    —
+                </strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="application-footer">
+
+        <div>
+
+            <strong>
+                LANDLYTICS
+            </strong>
+
+            <span>
+                Land Acquisition Intelligence & Monitoring System
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Authorized Government Decision Support Platform
+            </span>
+
+            <span>
+                © 2026
+            </span>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/reports.js') }}"></script>
+
+</body>
+
+</html>

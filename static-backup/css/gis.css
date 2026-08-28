@@ -1,0 +1,1119 @@
+/* =========================================================
+   LANDLYTICS
+   3D GIS RISK INTELLIGENCE
+   ========================================================= */
+
+
+/* =========================================================
+   GIS PAGE
+   ========================================================= */
+
+.gis-container {
+    padding-bottom: 24px;
+}
+
+
+/* =========================================================
+   GIS HEADER
+   ========================================================= */
+
+.gis-page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+
+.gis-page-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 11px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    font-size: 10px;
+}
+
+
+.gis-page-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--success);
+}
+
+
+/* =========================================================
+   GIS CONTROL BAR
+   ========================================================= */
+
+.gis-control-panel {
+    margin-top: 20px;
+    padding: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+}
+
+
+.gis-control-grid {
+    display: grid;
+    grid-template-columns:
+        1fr
+        1fr
+        1fr
+        auto;
+    gap: 10px;
+    align-items: end;
+}
+
+
+.gis-control-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.gis-control-field label {
+    color: var(--text-secondary);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+
+.gis-control-field select {
+    width: 100%;
+    min-height: 36px;
+    padding: 7px 10px;
+    background: var(--surface-soft);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 11px;
+    outline: none;
+}
+
+
+.gis-control-field select:focus {
+    border-color: var(--brown-400);
+    box-shadow:
+        0 0 0 3px rgba(118, 93, 69, 0.08);
+}
+
+
+.gis-control-actions {
+    display: flex;
+    gap: 7px;
+}
+
+
+/* =========================================================
+   GIS WORKSPACE
+   ========================================================= */
+
+.gis-workspace {
+    position: relative;
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        340px;
+    min-height: 690px;
+    margin-top: 16px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+
+/* =========================================================
+   MAP AREA
+   ========================================================= */
+
+.gis-map-area {
+    position: relative;
+    min-width: 0;
+    min-height: 690px;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% 42%,
+            #eee7da 0%,
+            #e5dccd 38%,
+            #d8cbbb 100%
+        );
+}
+
+
+/* =========================================================
+   MAP CANVAS
+   ========================================================= */
+
+#gisMap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+
+/* =========================================================
+   MAP GRID / ATMOSPHERE
+   ========================================================= */
+
+.gis-map-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            rgba(93, 70, 52, 0.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(93, 70, 52, 0.025) 1px,
+            transparent 1px
+        );
+    background-size: 40px 40px;
+}
+
+
+/* =========================================================
+   MAP TOP BAR
+   ========================================================= */
+
+.gis-map-header {
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    top: 18px;
+    z-index: 10;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    pointer-events: none;
+}
+
+
+.gis-map-title {
+    padding: 11px 13px;
+    background: rgba(255, 255, 255, 0.93);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    pointer-events: auto;
+}
+
+
+.gis-map-title span {
+    display: block;
+    color: var(--brown-400);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+
+.gis-map-title strong {
+    display: block;
+    margin-top: 3px;
+    color: var(--brown-700);
+    font-size: 13px;
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   3D MODE INDICATOR
+   ========================================================= */
+
+.gis-3d-indicator {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 11px;
+    background: rgba(255,255,255,0.93);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    color: var(--brown-600);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+
+.gis-3d-icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sand-200);
+    border-radius: 3px;
+    color: var(--brown-600);
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   MAP CONTROLS
+   ========================================================= */
+
+.gis-map-controls {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.gis-map-control {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.94);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    color: var(--brown-600);
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: var(--shadow-sm);
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.gis-map-control:hover {
+    background: var(--sand-100);
+    border-color: var(--brown-300);
+}
+
+
+/* =========================================================
+   MAP LEGEND
+   ========================================================= */
+
+.gis-legend {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    z-index: 10;
+    min-width: 180px;
+    padding: 13px;
+    background: rgba(255,255,255,0.95);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+
+.gis-legend-title {
+    display: block;
+    margin-bottom: 9px;
+    color: var(--brown-600);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+
+.gis-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 7px;
+}
+
+
+.gis-legend-marker {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+
+
+.gis-legend-marker.critical {
+    background: var(--critical);
+}
+
+
+.gis-legend-marker.high {
+    background: var(--high);
+}
+
+
+.gis-legend-marker.medium {
+    background: var(--medium);
+}
+
+
+.gis-legend-marker.low {
+    background: var(--low);
+}
+
+
+.gis-legend-item span {
+    color: var(--text-secondary);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   MAP DATA COUNTER
+   ========================================================= */
+
+.gis-map-counter {
+    position: absolute;
+    left: 18px;
+    top: 78px;
+    z-index: 10;
+    display: flex;
+    gap: 1px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.94);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+}
+
+
+.gis-counter-item {
+    min-width: 78px;
+    padding: 8px 10px;
+    background: rgba(255,255,255,0.94);
+    border-right: 1px solid var(--border-light);
+}
+
+
+.gis-counter-item:last-child {
+    border-right: none;
+}
+
+
+.gis-counter-item span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 8px;
+    text-transform: uppercase;
+}
+
+
+.gis-counter-item strong {
+    display: block;
+    margin-top: 2px;
+    color: var(--brown-700);
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   RISK MARKERS
+   ========================================================= */
+
+.gis-risk-marker {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.9);
+    box-shadow:
+        0 2px 7px rgba(50,35,25,0.22);
+    cursor: pointer;
+}
+
+
+.gis-risk-marker::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    opacity: 0.28;
+    animation: gisMarkerPulse 2.2s ease-out infinite;
+}
+
+
+.gis-risk-marker.critical {
+    background: var(--critical);
+    color: var(--critical);
+}
+
+
+.gis-risk-marker.high {
+    background: var(--high);
+    color: var(--high);
+}
+
+
+.gis-risk-marker.medium {
+    background: var(--medium);
+    color: var(--medium);
+}
+
+
+.gis-risk-marker.low {
+    background: var(--low);
+    color: var(--low);
+}
+
+
+@keyframes gisMarkerPulse {
+
+    0% {
+        transform: scale(0.75);
+        opacity: 0.7;
+    }
+
+    70% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================================================
+   SELECTED MAP MARKER
+   ========================================================= */
+
+.gis-risk-marker.selected {
+    width: 26px;
+    height: 26px;
+    border-width: 4px;
+    z-index: 20;
+}
+
+
+.gis-risk-marker.selected::after {
+    inset: -8px;
+    animation-duration: 1.2s;
+}
+
+
+/* =========================================================
+   PROJECT CLUSTERS
+   ========================================================= */
+
+.gis-project-cluster {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    background: var(--brown-600);
+    border: 3px solid rgba(255,255,255,0.9);
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 700;
+    box-shadow:
+        0 3px 12px rgba(50,35,25,0.22);
+}
+
+
+/* =========================================================
+   3D PROJECT BAR
+   ========================================================= */
+
+.gis-project-extrusion {
+    position: relative;
+    transform-origin: bottom center;
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease;
+}
+
+
+.gis-project-extrusion:hover {
+    filter: brightness(1.05);
+    transform: translateY(-3px) scale(1.03);
+}
+
+
+.gis-project-extrusion.critical {
+    --gis-height: 130px;
+}
+
+
+.gis-project-extrusion.high {
+    --gis-height: 100px;
+}
+
+
+.gis-project-extrusion.medium {
+    --gis-height: 70px;
+}
+
+
+.gis-project-extrusion.low {
+    --gis-height: 45px;
+}
+
+
+/* =========================================================
+   GIS INTELLIGENCE PANEL
+   ========================================================= */
+
+.gis-intelligence-panel {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background: var(--surface);
+    border-left: 1px solid var(--border-light);
+}
+
+
+.gis-panel-header {
+    padding: 18px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+
+.gis-panel-header span {
+    display: block;
+    color: var(--brown-400);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+
+.gis-panel-header h3 {
+    margin-top: 4px;
+    color: var(--brown-700);
+    font-size: 16px;
+    font-weight: 650;
+}
+
+
+.gis-panel-header p {
+    margin-top: 4px;
+    color: var(--text-muted);
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   SELECTED LOCATION
+   ========================================================= */
+
+.gis-selected-location {
+    padding: 15px 18px;
+    background: var(--sand-100);
+    border-bottom: 1px solid var(--border-light);
+}
+
+
+.gis-selected-location span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+
+.gis-selected-location strong {
+    display: block;
+    margin-top: 4px;
+    color: var(--brown-700);
+    font-size: 14px;
+}
+
+
+.gis-selected-location p {
+    margin-top: 2px;
+    color: var(--text-secondary);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   RISK SUMMARY
+   ========================================================= */
+
+.gis-risk-summary {
+    padding: 16px 18px;
+}
+
+
+.gis-risk-summary-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.gis-risk-summary-title span {
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+
+.gis-risk-summary-title strong {
+    color: var(--brown-700);
+    font-size: 20px;
+}
+
+
+.gis-risk-meter {
+    margin-top: 10px;
+}
+
+
+.gis-risk-meter-track {
+    width: 100%;
+    height: 8px;
+    overflow: hidden;
+    background: var(--sand-200);
+    border-radius: 10px;
+}
+
+
+.gis-risk-meter-value {
+    width: 0;
+    height: 100%;
+    background: var(--brown-400);
+    border-radius: inherit;
+    transition: width 0.5s ease;
+}
+
+
+.gis-risk-level {
+    margin-top: 6px;
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   SELECTED PROJECT DETAILS
+   ========================================================= */
+
+.gis-project-details {
+    padding: 0 18px 16px;
+}
+
+
+.gis-project-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    overflow: hidden;
+    background: var(--border-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+}
+
+
+.gis-project-detail {
+    padding: 10px;
+    background: var(--surface-soft);
+}
+
+
+.gis-project-detail span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 8px;
+}
+
+
+.gis-project-detail strong {
+    display: block;
+    margin-top: 3px;
+    color: var(--brown-700);
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   MAP RISK FACTORS
+   ========================================================= */
+
+.gis-risk-factors {
+    padding: 0 18px 16px;
+}
+
+
+.gis-risk-factor {
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr) 70px;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+
+.gis-risk-factor:last-child {
+    border-bottom: none;
+}
+
+
+.gis-risk-factor-name {
+    color: var(--text-secondary);
+    font-size: 9px;
+}
+
+
+.gis-risk-factor-value {
+    color: var(--brown-600);
+    font-size: 9px;
+    font-weight: 700;
+    text-align: right;
+}
+
+
+/* =========================================================
+   GIS ACTIONS
+   ========================================================= */
+
+.gis-panel-actions {
+    margin-top: auto;
+    padding: 15px 18px;
+    border-top: 1px solid var(--border-light);
+}
+
+
+.gis-panel-actions .primary-button {
+    width: 100%;
+}
+
+
+/* =========================================================
+   LIVE DATA INDICATOR
+   ========================================================= */
+
+.gis-live-data {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 12px;
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+
+.gis-live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--success);
+    animation: gisLivePulse 1.8s infinite;
+}
+
+
+@keyframes gisLivePulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.35;
+    }
+
+}
+
+
+/* =========================================================
+   MAP LOADING OVERLAY
+   ========================================================= */
+
+.gis-loading-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(247,244,238,0.84);
+    backdrop-filter: blur(2px);
+}
+
+
+.gis-loading-box {
+    min-width: 230px;
+    padding: 20px;
+    background: rgba(255,255,255,0.96);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+}
+
+
+.gis-loading-spinner {
+    width: 28px;
+    height: 28px;
+    margin: 0 auto 11px;
+    border: 3px solid var(--sand-200);
+    border-top-color: var(--brown-500);
+    border-radius: 50%;
+    animation: gisSpinner 0.8s linear infinite;
+}
+
+
+@keyframes gisSpinner {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+.gis-loading-box strong {
+    color: var(--brown-700);
+    font-size: 11px;
+}
+
+
+.gis-loading-box span {
+    display: block;
+    margin-top: 3px;
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   GIS ERROR
+   ========================================================= */
+
+.gis-error-state {
+    position: absolute;
+    inset: 0;
+    z-index: 60;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    background: rgba(247,244,238,0.94);
+}
+
+
+.gis-error-box {
+    max-width: 360px;
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-left: 3px solid var(--critical);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+
+.gis-error-box h4 {
+    color: var(--critical);
+    font-size: 12px;
+}
+
+
+.gis-error-box p {
+    margin-top: 5px;
+    color: var(--text-secondary);
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   GIS STATISTICS
+   ========================================================= */
+
+.gis-statistics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+}
+
+
+.gis-stat-card {
+    padding: 15px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+}
+
+
+.gis-stat-card span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+
+.gis-stat-card strong {
+    display: block;
+    margin-top: 6px;
+    color: var(--brown-700);
+    font-size: 20px;
+}
+
+
+.gis-stat-card p {
+    margin-top: 3px;
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+
+.gis-stat-card.critical {
+    border-left: 3px solid var(--critical);
+}
+
+
+.gis-stat-card.high {
+    border-left: 3px solid var(--high);
+}
+
+
+.gis-stat-card.medium {
+    border-left: 3px solid var(--medium);
+}
+
+
+.gis-stat-card.low {
+    border-left: 3px solid var(--low);
+}
+
+
+/* =========================================================
+   GIS INFORMATION NOTE
+   ========================================================= */
+
+.gis-data-note {
+    margin-top: 16px;
+    padding: 12px 14px;
+    background: var(--sand-100);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+
+.gis-data-note strong {
+    color: var(--brown-600);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .gis-workspace {
+        grid-template-columns: 1fr;
+    }
+
+    .gis-intelligence-panel {
+        border-left: none;
+        border-top: 1px solid var(--border-light);
+    }
+
+    .gis-map-area {
+        min-height: 600px;
+    }
+
+    .gis-statistics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .gis-control-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gis-control-actions {
+        grid-column: span 2;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .gis-page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .gis-control-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gis-control-actions {
+        grid-column: auto;
+    }
+
+    .gis-map-area {
+        min-height: 500px;
+    }
+
+    .gis-map-counter {
+        display: none;
+    }
+
+    .gis-legend {
+        right: 10px;
+        bottom: 10px;
+        min-width: 145px;
+    }
+
+    .gis-map-controls {
+        left: 10px;
+        bottom: 10px;
+    }
+
+    .gis-statistics {
+        grid-template-columns: 1fr;
+    }
+
+}

@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LANDLYTICS | AI Insights</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/ai-insights.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         APPLICATION HEADER
+    ====================================================== -->
+
+    <header class="application-header">
+
+        <div class="header-brand">
+
+            <a href="/dashboard" class="brand-link">
+
+                <div class="brand-emblem">
+                    LL
+                </div>
+
+                <div class="brand-details">
+
+                    <h1>
+                        LANDLYTICS
+                    </h1>
+
+                    <p>
+                        Land Acquisition Intelligence & Monitoring System
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <div class="header-user">
+
+            <div class="system-status">
+
+                <span class="status-indicator"></span>
+
+                <span>
+                    System Operational
+                </span>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div class="user-avatar">
+                    U
+                </div>
+
+                <div class="user-details">
+
+                    <strong id="userName">
+                        User
+                    </strong>
+
+                    <span id="userRole">
+                        Authorized Officer
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-button"
+            >
+                Sign out
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN NAVIGATION
+    ====================================================== -->
+
+    <nav
+        class="main-navigation"
+        aria-label="Main navigation"
+    >
+
+        <div class="navigation-container">
+
+            <a
+                href="/dashboard"
+                class="navigation-item"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="/states"
+                class="navigation-item"
+            >
+                State-wise Analysis
+            </a>
+
+            <a
+                href="/districts"
+                class="navigation-item"
+            >
+                District-wise Analysis
+            </a>
+
+            <a
+                href="/projects"
+                class="navigation-item"
+            >
+                Projects
+            </a>
+
+            <a
+                href="/gis-map"
+                class="navigation-item"
+            >
+                GIS Risk Map
+            </a>
+
+            <a
+                href="/ai-insights"
+                class="navigation-item active"
+            >
+                AI Insights
+            </a>
+
+            <a
+                href="/alerts"
+                class="navigation-item"
+            >
+                Alerts
+            </a>
+
+            <a
+                href="/reports"
+                class="navigation-item"
+            >
+                Reports
+            </a>
+
+            <a
+                href="/admin"
+                class="navigation-item"
+            >
+                Administration
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="ai-insights-container">
+
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <section class="page-introduction">
+
+            <div class="page-heading">
+
+                <span class="section-label">
+                    PREDICTIVE INTELLIGENCE
+                </span>
+
+                <h2>
+                    AI Insights
+                </h2>
+
+                <p>
+                    Predictive analysis of land acquisition risks,
+                    delay drivers and recommended interventions.
+                </p>
+
+            </div>
+
+
+            <div class="page-actions">
+
+                <button
+                    type="button"
+                    id="refreshAIInsights"
+                    class="secondary-button"
+                >
+                    Refresh Analysis
+                </button>
+
+                <a
+                    href="/reports"
+                    class="primary-button"
+                >
+                    Generate AI Report
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             AI MODEL STATUS
+        ================================================== -->
+
+        <section class="ai-model-status-panel">
+
+            <div class="ai-model-identity">
+
+                <div class="ai-model-emblem">
+                    AI
+                </div>
+
+                <div>
+
+                    <span class="section-label">
+                        LANDLYTICS INTELLIGENCE ENGINE
+                    </span>
+
+                    <h3>
+                        Predictive Risk Analysis
+                    </h3>
+
+                    <p>
+                        Machine-learning analysis of acquisition
+                        conditions and historical delay indicators.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="ai-model-status-details">
+
+                <div class="model-status-item">
+
+                    <span>
+                        Model Status
+                    </span>
+
+                    <strong
+                        id="aiModelStatus"
+                        class="status-ok"
+                    >
+                        Checking
+                    </strong>
+
+                </div>
+
+
+                <div class="model-status-item">
+
+                    <span>
+                        Analysis Status
+                    </span>
+
+                    <strong
+                        id="aiAnalysisStatus"
+                    >
+                        Ready
+                    </strong>
+
+                </div>
+
+
+                <div class="model-status-item">
+
+                    <span>
+                        Last Analysis
+                    </span>
+
+                    <strong
+                        id="aiLastAnalysis"
+                    >
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             AI SUMMARY
+        ================================================== -->
+
+        <section class="ai-summary-grid">
+
+
+            <article class="ai-summary-card">
+
+                <span class="section-label">
+                    PROJECT RISK
+                </span>
+
+                <strong id="aiHighRiskProjects">
+                    --
+                </strong>
+
+                <p>
+                    High and critical-risk projects identified
+                </p>
+
+            </article>
+
+
+            <article class="ai-summary-card">
+
+                <span class="section-label">
+                    PARCEL RISK
+                </span>
+
+                <strong id="aiHighRiskParcels">
+                    --
+                </strong>
+
+                <p>
+                    High and critical-risk parcels identified
+                </p>
+
+            </article>
+
+
+            <article class="ai-summary-card">
+
+                <span class="section-label">
+                    DELAY RISK
+                </span>
+
+                <strong id="aiAverageDelayProbability">
+                    --
+                </strong>
+
+                <p>
+                    Average predicted delay probability
+                </p>
+
+            </article>
+
+
+            <article class="ai-summary-card">
+
+                <span class="section-label">
+                    INTERVENTIONS
+                </span>
+
+                <strong id="aiRecommendedActions">
+                    --
+                </strong>
+
+                <p>
+                    Recommended interventions generated
+                </p>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- =================================================
+             TOP DELAY DRIVERS
+        ================================================== -->
+
+        <section class="ai-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        DELAY INTELLIGENCE
+                    </span>
+
+                    <h3>
+                        Top Delay Drivers
+                    </h3>
+
+                    <p>
+                        Major factors contributing to predicted
+                        land acquisition delays.
+                    </p>
+
+                </div>
+
+
+                <div class="analysis-controls">
+
+                    <select id="delayDriverScope">
+
+                        <option value="overall">
+                            Overall
+                        </option>
+
+                        <option value="state">
+                            State-wise
+                        </option>
+
+                        <option value="district">
+                            District-wise
+                        </option>
+
+                        <option value="project">
+                            Project-wise
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="delayDriversContainer"
+                class="delay-drivers-grid"
+            >
+
+                <article class="delay-driver-card">
+
+                    <div class="driver-rank">
+                        01
+                    </div>
+
+                    <div class="driver-content">
+
+                        <h4>
+                            Ownership Conflict
+                        </h4>
+
+                        <p>
+                            Analysis pending.
+                        </p>
+
+                    </div>
+
+                    <strong
+                        id="ownershipConflictContribution"
+                    >
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="delay-driver-card">
+
+                    <div class="driver-rank">
+                        02
+                    </div>
+
+                    <div class="driver-content">
+
+                        <h4>
+                            Legal Dispute
+                        </h4>
+
+                        <p>
+                            Analysis pending.
+                        </p>
+
+                    </div>
+
+                    <strong
+                        id="legalDisputeContribution"
+                    >
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="delay-driver-card">
+
+                    <div class="driver-rank">
+                        03
+                    </div>
+
+                    <div class="driver-content">
+
+                        <h4>
+                            Compensation Delay
+                        </h4>
+
+                        <p>
+                            Analysis pending.
+                        </p>
+
+                    </div>
+
+                    <strong
+                        id="compensationDelayContribution"
+                    >
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="delay-driver-card">
+
+                    <div class="driver-rank">
+                        04
+                    </div>
+
+                    <div class="driver-content">
+
+                        <h4>
+                            Documentation
+                        </h4>
+
+                        <p>
+                            Analysis pending.
+                        </p>
+
+                    </div>
+
+                    <strong
+                        id="documentationContribution"
+                    >
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="delay-driver-card">
+
+                    <div class="driver-rank">
+                        05
+                    </div>
+
+                    <div class="driver-content">
+
+                        <h4>
+                            R&R Delay
+                        </h4>
+
+                        <p>
+                            Analysis pending.
+                        </p>
+
+                    </div>
+
+                    <strong
+                        id="rrDelayContribution"
+                    >
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="delay-driver-card">
+
+                    <div class="driver-rank">
+                        06
+                    </div>
+
+                    <div class="driver-content">
+
+                        <h4>
+                            Possession Delay
+                        </h4>
+
+                        <p>
+                            Analysis pending.
+                        </p>
+
+                    </div>
+
+                    <strong
+                        id="possessionDelayContribution"
+                    >
+                        —
+                    </strong>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             HIGHEST RISK PROJECTS
+        ================================================== -->
+
+        <section class="ai-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        PROJECT RISK INTELLIGENCE
+                    </span>
+
+                    <h3>
+                        Highest-Risk Projects
+                    </h3>
+
+                    <p>
+                        Projects with the highest predicted risk
+                        and delay probability.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/projects"
+                    class="panel-action"
+                >
+                    View All Projects
+                </a>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table
+                    class="ai-risk-table"
+                    id="highestRiskProjectsTable"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Rank
+                            </th>
+
+                            <th>
+                                Project ID
+                            </th>
+
+                            <th>
+                                Project Type
+                            </th>
+
+                            <th>
+                                State
+                            </th>
+
+                            <th>
+                                District
+                            </th>
+
+                            <th>
+                                Risk Score
+                            </th>
+
+                            <th>
+                                Delay Probability
+                            </th>
+
+                            <th>
+                                Risk Level
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="highestRiskProjectsBody">
+
+                        <tr>
+
+                            <td colspan="9">
+
+                                AI project risk analysis
+                                will appear here.
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             HIGHEST RISK PARCELS
+        ================================================== -->
+
+        <section class="ai-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        PARCEL RISK INTELLIGENCE
+                    </span>
+
+                    <h3>
+                        Highest-Risk Parcels
+                    </h3>
+
+                    <p>
+                        Parcel-level locations requiring priority
+                        attention.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/gis-map"
+                    class="panel-action"
+                >
+                    Open GIS Map
+                </a>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table
+                    class="ai-risk-table"
+                    id="highestRiskParcelsTable"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Rank
+                            </th>
+
+                            <th>
+                                Plot ID
+                            </th>
+
+                            <th>
+                                Survey Number
+                            </th>
+
+                            <th>
+                                Project
+                            </th>
+
+                            <th>
+                                District
+                            </th>
+
+                            <th>
+                                Risk Score
+                            </th>
+
+                            <th>
+                                Ownership
+                            </th>
+
+                            <th>
+                                Legal
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="highestRiskParcelsBody">
+
+                        <tr>
+
+                            <td colspan="9">
+
+                                AI parcel risk analysis
+                                will appear here.
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             STATE-WISE TRENDS
+        ================================================== -->
+
+        <section class="ai-analysis-grid">
+
+
+            <article class="ai-chart-panel">
+
+                <header class="panel-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            REGIONAL INTELLIGENCE
+                        </span>
+
+                        <h3>
+                            State-wise Trends
+                        </h3>
+
+                    </div>
+
+
+                    <select id="stateTrendMetric">
+
+                        <option value="risk">
+                            Risk
+                        </option>
+
+                        <option value="delay">
+                            Delay Probability
+                        </option>
+
+                        <option value="projects">
+                            Project Count
+                        </option>
+
+                    </select>
+
+                </header>
+
+
+                <div
+                    id="stateTrendChart"
+                    class="ai-chart-container"
+                >
+
+                    <div class="chart-placeholder">
+                        State-wise AI trend visualization
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 DISTRICT-WISE TRENDS
+            ================================================== -->
+
+            <article class="ai-chart-panel">
+
+                <header class="panel-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            DISTRICT INTELLIGENCE
+                        </span>
+
+                        <h3>
+                            District-wise Trends
+                        </h3>
+
+                    </div>
+
+
+                    <select id="districtTrendMetric">
+
+                        <option value="risk">
+                            Risk
+                        </option>
+
+                        <option value="delay">
+                            Delay Probability
+                        </option>
+
+                        <option value="projects">
+                            Project Count
+                        </option>
+
+                    </select>
+
+                </header>
+
+
+                <div
+                    id="districtTrendChart"
+                    class="ai-chart-container"
+                >
+
+                    <div class="chart-placeholder">
+                        District-wise AI trend visualization
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PREDICTIVE RISK OUTLOOK
+        ================================================== -->
+
+        <section class="predictive-outlook-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        PREDICTIVE OUTLOOK
+                    </span>
+
+                    <h3>
+                        Future Risk Outlook
+                    </h3>
+
+                    <p>
+                        AI-based view of emerging acquisition
+                        risk patterns.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="outlook-grid">
+
+
+                <article class="outlook-card">
+
+                    <span>
+                        RISING RISK
+                    </span>
+
+                    <strong id="risingRiskCount">
+                        --
+                    </strong>
+
+                    <p>
+                        Projects showing increasing risk indicators.
+                    </p>
+
+                </article>
+
+
+                <article class="outlook-card">
+
+                    <span>
+                        STABLE
+                    </span>
+
+                    <strong id="stableRiskCount">
+                        --
+                    </strong>
+
+                    <p>
+                        Projects maintaining stable risk levels.
+                    </p>
+
+                </article>
+
+
+                <article class="outlook-card">
+
+                    <span>
+                        IMPROVING
+                    </span>
+
+                    <strong id="improvingRiskCount">
+                        --
+                    </strong>
+
+                    <p>
+                        Projects showing improving indicators.
+                    </p>
+
+                </article>
+
+
+                <article class="outlook-card">
+
+                    <span>
+                        NEWLY FLAGGED
+                    </span>
+
+                    <strong id="newlyFlaggedCount">
+                        --
+                    </strong>
+
+                    <p>
+                        Projects newly identified as high-risk.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PREDICTIVE RECOMMENDATIONS
+        ================================================== -->
+
+        <section class="recommendations-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        DECISION SUPPORT
+                    </span>
+
+                    <h3>
+                        Predictive Recommendations
+                    </h3>
+
+                    <p>
+                        Recommended interventions generated from
+                        current risk patterns.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="predictiveRecommendations"
+                class="recommendations-grid"
+            >
+
+
+                <article class="recommendation-card">
+
+                    <div class="recommendation-priority">
+                        HIGH
+                    </div>
+
+                    <div>
+
+                        <span class="section-label">
+                            RECOMMENDATION
+                        </span>
+
+                        <h4>
+                            Assessment pending
+                        </h4>
+
+                        <p>
+                            AI-generated intervention recommendations
+                            will appear here.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                    >
+                        Review
+                    </button>
+
+                </article>
+
+
+                <article class="recommendation-card">
+
+                    <div class="recommendation-priority">
+                        MEDIUM
+                    </div>
+
+                    <div>
+
+                        <span class="section-label">
+                            RECOMMENDATION
+                        </span>
+
+                        <h4>
+                            Assessment pending
+                        </h4>
+
+                        <p>
+                            AI-generated intervention recommendations
+                            will appear here.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        class="secondary-button"
+                    >
+                        Review
+                    </button>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             EXPLAINABLE AI
+        ================================================== -->
+
+        <section class="explainable-ai-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        RESPONSIBLE AI
+                    </span>
+
+                    <h3>
+                        Explainable AI
+                    </h3>
+
+                    <p>
+                        Understand how LANDLYTICS arrives at its
+                        risk predictions.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="explainable-ai-grid">
+
+
+                <article class="explainable-card">
+
+                    <div class="explainable-icon">
+                        01
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Risk Factors
+                        </h4>
+
+                        <p>
+                            Predictions are supported by measurable
+                            acquisition indicators such as ownership
+                            conflicts, legal disputes, compensation
+                            status and possession progress.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article class="explainable-card">
+
+                    <div class="explainable-icon">
+                        02
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Risk Contribution
+                        </h4>
+
+                        <p>
+                            Each identified factor can be presented
+                            with its relative contribution to the
+                            overall risk assessment.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article class="explainable-card">
+
+                    <div class="explainable-icon">
+                        03
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Decision Support
+                        </h4>
+
+                        <p>
+                            AI predictions are intended to support
+                            authorized officers in prioritizing
+                            intervention and monitoring.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             AI ACTIVITY LOG
+        ================================================== -->
+
+        <section class="ai-activity-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        AI ACTIVITY
+                    </span>
+
+                    <h3>
+                        Recent Intelligence Events
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="aiActivityLog"
+                class="ai-activity-log"
+            >
+
+                <div class="empty-state">
+                    Recent AI analysis events will appear here.
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SYSTEM INFORMATION
+        ================================================== -->
+
+        <section class="system-information">
+
+            <div class="system-information-item">
+
+                <span>
+                    AI Model
+                </span>
+
+                <strong
+                    id="modelStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    API
+                </span>
+
+                <strong
+                    id="apiStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Database
+                </span>
+
+                <strong
+                    id="databaseStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Last Updated
+                </span>
+
+                <strong id="lastUpdated">
+                    —
+                </strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="application-footer">
+
+        <div>
+
+            <strong>
+                LANDLYTICS
+            </strong>
+
+            <span>
+                Land Acquisition Intelligence & Monitoring System
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Authorized Government Decision Support Platform
+            </span>
+
+            <span>
+                © 2026
+            </span>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/ai-insights.js') }}"></script>
+
+</body>
+
+</html>

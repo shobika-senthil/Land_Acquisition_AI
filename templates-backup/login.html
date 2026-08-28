@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LANDLYTICS | Secure Login</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <!-- LEFT: PLATFORM INTRODUCTION -->
+
+        <section class="login-introduction">
+
+            <header class="login-brand">
+
+                <div class="brand-emblem" aria-hidden="true">
+                    LL
+                </div>
+
+                <div class="brand-details">
+                    <h1>LANDLYTICS</h1>
+
+                    <p>
+                        Land Acquisition Intelligence & Monitoring System
+                    </p>
+                </div>
+
+            </header>
+
+
+            <div class="login-hero">
+
+                <span class="eyebrow">
+                    NATIONAL LAND ACQUISITION PLATFORM
+                </span>
+
+                <h2>
+                    Intelligent monitoring.
+                    <br>
+                    <strong>Faster acquisition decisions.</strong>
+                </h2>
+
+                <p>
+                    A unified decision-support platform for monitoring
+                    land acquisition projects, identifying emerging
+                    risks and enabling timely intervention.
+                </p>
+
+            </div>
+
+
+            <div class="login-capabilities">
+
+                <article class="capability">
+
+                    <div class="capability-icon">
+                        GIS
+                    </div>
+
+                    <div>
+                        <h3>GIS Risk Intelligence</h3>
+
+                        <p>
+                            Identify project and parcel-level risks
+                            geographically.
+                        </p>
+                    </div>
+
+                </article>
+
+
+                <article class="capability">
+
+                    <div class="capability-icon">
+                        AI
+                    </div>
+
+                    <div>
+                        <h3>Predictive Risk Analysis</h3>
+
+                        <p>
+                            Detect potential acquisition delays before
+                            they become critical.
+                        </p>
+                    </div>
+
+                </article>
+
+
+                <article class="capability">
+
+                    <div class="capability-icon">
+                        SEC
+                    </div>
+
+                    <div>
+                        <h3>Secure Role-based Access</h3>
+
+                        <p>
+                            Controlled access for administrators,
+                            officers and authorized users.
+                        </p>
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT: LOGIN -->
+
+        <section class="login-panel">
+
+            <div class="login-card">
+
+                <header class="login-card-header">
+
+                    <span class="section-label">
+                        AUTHORIZED ACCESS
+                    </span>
+
+                    <h2>
+                        Sign in
+                    </h2>
+
+                    <p>
+                        Sign in to access the LANDLYTICS portal.
+                    </p>
+
+                </header>
+
+
+                <form
+                    id="loginForm"
+                    class="login-form"
+                    method="POST"
+                    action="/login"
+                >
+
+                    <!-- USERNAME -->
+
+                    <div class="form-field">
+
+                        <label for="username">
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            autocomplete="username"
+                            placeholder="Enter your username"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-field">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="password-field">
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                autocomplete="current-password"
+                                placeholder="Enter your password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                id="togglePassword"
+                                aria-label="Show password"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LOGIN OPTIONS -->
+
+                    <div class="login-options">
+
+                        <label class="remember-me">
+
+                            <input
+                                type="checkbox"
+                                id="rememberMe"
+                                name="remember_me"
+                            >
+
+                            <span>
+                                Remember this device
+                            </span>
+
+                        </label>
+
+
+                        <a
+                            href="#"
+                            id="forgotPassword"
+                        >
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+
+                    <!-- ERROR / STATUS -->
+
+                    <div
+                        id="loginError"
+                        class="form-message"
+                        role="alert"
+                        aria-live="polite"
+                    ></div>
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        id="loginButton"
+                        class="login-button"
+                    >
+                        <span>
+                            Sign in
+                        </span>
+                    </button>
+
+                </form>
+
+
+                <!-- SECURITY NOTICE -->
+
+                <aside class="security-notice">
+
+                    <div class="security-icon">
+                        SEC
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Authorized personnel only
+                        </strong>
+
+                        <p>
+                            Access to this system is restricted.
+                            All authenticated activity may be
+                            recorded for audit purposes.
+                        </p>
+
+                    </div>
+
+                </aside>
+
+
+                <!-- FOOTER INFORMATION -->
+
+                <footer class="login-footer">
+
+                    <span>
+                        LANDLYTICS
+                    </span>
+
+                    <span>
+                        Secure Decision Support Platform
+                    </span>
+
+                </footer>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+
+</body>
+</html>

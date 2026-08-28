@@ -1,0 +1,829 @@
+/* =========================================================
+   LANDLYTICS
+   PROJECT DETAILS
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.project-details-container {
+    padding-bottom: 24px;
+}
+
+
+/* =========================================================
+   PROJECT IDENTITY
+   ========================================================= */
+
+.project-identity-section {
+    margin-top: 24px;
+    padding: 22px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+}
+
+
+.project-identity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+
+.project-identity {
+    min-width: 0;
+}
+
+
+.project-code {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--brown-400);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+
+.project-identity h2 {
+    color: var(--brown-700);
+    font-size: 22px;
+    font-weight: 650;
+    line-height: 1.3;
+}
+
+
+.project-identity p {
+    margin-top: 5px;
+    color: var(--text-muted);
+    font-size: 11px;
+}
+
+
+.project-identity-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   PROJECT INFORMATION
+   ========================================================= */
+
+.project-information-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    margin-top: 20px;
+    overflow: hidden;
+    background: var(--border-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+}
+
+
+.project-information-item {
+    padding: 14px;
+    background: var(--surface-soft);
+}
+
+
+.project-information-item span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+
+.project-information-item strong {
+    display: block;
+    margin-top: 5px;
+    color: var(--text-primary);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   RISK OVERVIEW
+   ========================================================= */
+
+.project-risk-overview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+}
+
+
+.project-risk-card {
+    position: relative;
+    min-height: 130px;
+    padding: 18px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+}
+
+
+.project-risk-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--brown-300);
+}
+
+
+.project-risk-card.critical::before {
+    background: var(--critical);
+}
+
+
+.project-risk-card.high::before {
+    background: var(--high);
+}
+
+
+.project-risk-card.medium::before {
+    background: var(--medium);
+}
+
+
+.project-risk-card > span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+
+.project-risk-card > strong {
+    display: block;
+    margin-top: 10px;
+    color: var(--brown-700);
+    font-size: 27px;
+    font-weight: 650;
+    line-height: 1;
+}
+
+
+.project-risk-card p {
+    margin-top: 8px;
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   RISK SCORE
+   ========================================================= */
+
+.risk-score-display {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+    margin-top: 10px;
+}
+
+
+.risk-score-display strong {
+    color: var(--brown-700);
+    font-size: 29px;
+    font-weight: 650;
+    line-height: 1;
+}
+
+
+.risk-score-display span {
+    color: var(--text-muted);
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   MAIN ANALYTICS
+   ========================================================= */
+
+.project-analytics-grid {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.5fr)
+        minmax(300px, 0.8fr);
+    gap: 16px;
+    margin-top: 18px;
+}
+
+
+.project-detail-panel {
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+}
+
+
+.project-detail-panel-body {
+    padding: 20px;
+}
+
+
+/* =========================================================
+   TIMELINE ANALYSIS
+   ========================================================= */
+
+.timeline-analysis {
+    padding: 20px;
+}
+
+
+.timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: var(--border-medium);
+}
+
+
+.timeline-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr) auto;
+    gap: 12px;
+    padding: 0 0 22px;
+}
+
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+
+.timeline-marker {
+    position: relative;
+    z-index: 1;
+    width: 17px;
+    height: 17px;
+    margin-top: 2px;
+    background: var(--surface);
+    border: 4px solid var(--brown-300);
+    border-radius: 50%;
+}
+
+
+.timeline-item.completed .timeline-marker {
+    border-color: var(--success);
+}
+
+
+.timeline-item.delayed .timeline-marker {
+    border-color: var(--high);
+}
+
+
+.timeline-item.critical .timeline-marker {
+    border-color: var(--critical);
+}
+
+
+.timeline-content h4 {
+    color: var(--text-primary);
+    font-size: 11px;
+    font-weight: 650;
+}
+
+
+.timeline-content p {
+    margin-top: 3px;
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+
+.timeline-date {
+    color: var(--text-muted);
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   PROGRESS INDICATORS
+   ========================================================= */
+
+.project-progress-section {
+    margin-top: 18px;
+}
+
+
+.progress-indicators-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+}
+
+
+.progress-indicator-card {
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+}
+
+
+.progress-indicator-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+
+.progress-indicator-header span {
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+.progress-indicator-header strong {
+    color: var(--brown-700);
+    font-size: 14px;
+}
+
+
+.progress-indicator-card .progress-track {
+    margin-top: 11px;
+}
+
+
+.progress-indicator-card p {
+    margin-top: 7px;
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   KEY DELAY DRIVERS
+   ========================================================= */
+
+.delay-drivers-list {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.delay-driver-item {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 11px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+
+.delay-driver-item:last-child {
+    border-bottom: none;
+}
+
+
+.delay-driver-rank {
+    width: 27px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sand-100);
+    border-radius: 50%;
+    color: var(--brown-500);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+.delay-driver-content strong {
+    display: block;
+    color: var(--text-primary);
+    font-size: 10px;
+    font-weight: 650;
+}
+
+
+.delay-driver-content span {
+    display: block;
+    margin-top: 2px;
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+
+.delay-driver-impact {
+    min-width: 45px;
+    color: var(--brown-600);
+    font-size: 11px;
+    font-weight: 700;
+    text-align: right;
+}
+
+
+/* =========================================================
+   EXPLAINABLE AI
+   ========================================================= */
+
+.explainable-ai-section {
+    margin-top: 18px;
+}
+
+
+.xai-panel {
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+}
+
+
+.xai-introduction {
+    max-width: 850px;
+    color: var(--text-secondary);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+.xai-factor-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+
+.xai-factor {
+    display: grid;
+    grid-template-columns: minmax(140px, 0.8fr) 1.7fr 55px;
+    align-items: center;
+    gap: 13px;
+}
+
+
+.xai-factor-name {
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+.xai-factor-track {
+    height: 8px;
+    overflow: hidden;
+    background: var(--sand-200);
+    border-radius: 10px;
+}
+
+
+.xai-factor-value {
+    width: 0;
+    height: 100%;
+    background: var(--brown-400);
+    border-radius: inherit;
+    transition: width 0.5s ease;
+}
+
+
+.xai-factor-value.negative {
+    background: var(--critical);
+}
+
+
+.xai-factor-value.warning {
+    background: var(--high);
+}
+
+
+.xai-factor-value.positive {
+    background: var(--success);
+}
+
+
+.xai-factor-impact {
+    color: var(--brown-600);
+    font-size: 10px;
+    font-weight: 700;
+    text-align: right;
+}
+
+
+/* =========================================================
+   AI EXPLANATION
+   ========================================================= */
+
+.ai-explanation {
+    margin-top: 18px;
+    padding: 15px;
+    background: var(--sand-100);
+    border-left: 3px solid var(--brown-300);
+    border-radius: var(--radius-sm);
+}
+
+
+.ai-explanation-header {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+
+.ai-explanation-icon {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: var(--brown-200);
+    border-radius: 50%;
+    color: var(--brown-700);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+.ai-explanation h4 {
+    color: var(--brown-700);
+    font-size: 11px;
+}
+
+
+.ai-explanation p {
+    margin-top: 8px;
+    color: var(--text-secondary);
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CORRECTIVE RECOMMENDATIONS
+   ========================================================= */
+
+.corrective-recommendations-section {
+    margin-top: 18px;
+}
+
+
+.recommendations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.recommendation-card {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr) auto;
+    gap: 13px;
+    align-items: flex-start;
+    padding: 15px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+}
+
+
+.recommendation-priority {
+    width: 33px;
+    height: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sand-100);
+    border-radius: 50%;
+    color: var(--brown-600);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+.recommendation-card.critical .recommendation-priority {
+    background: var(--critical-soft);
+    color: var(--critical);
+}
+
+
+.recommendation-card.high .recommendation-priority {
+    background: var(--high-soft);
+    color: var(--high);
+}
+
+
+.recommendation-content h4 {
+    color: var(--brown-700);
+    font-size: 11px;
+    font-weight: 650;
+}
+
+
+.recommendation-content p {
+    margin-top: 4px;
+    color: var(--text-secondary);
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+
+.recommendation-meta {
+    margin-top: 7px;
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+
+.recommendation-action {
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   PARCEL RISK SUMMARY
+   ========================================================= */
+
+.parcel-risk-summary {
+    margin-top: 18px;
+}
+
+
+.parcel-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+
+.parcel-summary-card {
+    padding: 14px;
+    background: var(--surface-soft);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+}
+
+
+.parcel-summary-card span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 9px;
+    text-transform: uppercase;
+}
+
+
+.parcel-summary-card strong {
+    display: block;
+    margin-top: 5px;
+    color: var(--brown-700);
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   MODEL CONFIDENCE
+   ========================================================= */
+
+.model-confidence {
+    margin-top: 15px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-light);
+}
+
+
+.model-confidence-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.model-confidence-header span {
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+
+.model-confidence-header strong {
+    color: var(--brown-600);
+    font-size: 10px;
+}
+
+
+.model-confidence .progress-track {
+    margin-top: 7px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .project-information-grid,
+    .project-risk-overview {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-analytics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .progress-indicators-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .parcel-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .project-identity-header {
+        flex-direction: column;
+    }
+
+    .project-information-grid,
+    .project-risk-overview,
+    .progress-indicators-grid,
+    .parcel-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .xai-factor {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .xai-factor-impact {
+        text-align: left;
+    }
+
+    .recommendation-card {
+        grid-template-columns: 35px 1fr;
+    }
+
+    .recommendation-action {
+        grid-column: 2;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .project-identity-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .project-identity-actions button {
+        width: 100%;
+    }
+
+    .timeline-item {
+        grid-template-columns: 18px 1fr;
+    }
+
+    .timeline-date {
+        grid-column: 2;
+    }
+
+}

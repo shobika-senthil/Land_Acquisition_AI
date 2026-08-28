@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LANDLYTICS | GIS Risk Map</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/gis.css') }}">
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         APPLICATION HEADER
+    ====================================================== -->
+
+    <header class="application-header">
+
+        <div class="header-brand">
+
+            <a href="/dashboard" class="brand-link">
+
+                <div class="brand-emblem">
+                    LL
+                </div>
+
+                <div class="brand-details">
+
+                    <h1>
+                        LANDLYTICS
+                    </h1>
+
+                    <p>
+                        Land Acquisition Intelligence & Monitoring System
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <div class="header-user">
+
+            <div class="system-status">
+
+                <span class="status-indicator"></span>
+
+                <span>
+                    System Operational
+                </span>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div class="user-avatar">
+                    U
+                </div>
+
+                <div class="user-details">
+
+                    <strong id="userName">
+                        User
+                    </strong>
+
+                    <span id="userRole">
+                        Authorized Officer
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-button"
+            >
+                Sign out
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN NAVIGATION
+    ====================================================== -->
+
+    <nav
+        class="main-navigation"
+        aria-label="Main navigation"
+    >
+
+        <div class="navigation-container">
+
+            <a
+                href="/dashboard"
+                class="navigation-item"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="/states"
+                class="navigation-item"
+            >
+                State-wise Analysis
+            </a>
+
+            <a
+                href="/districts"
+                class="navigation-item"
+            >
+                District-wise Analysis
+            </a>
+
+            <a
+                href="/projects"
+                class="navigation-item"
+            >
+                Projects
+            </a>
+
+            <a
+                href="/gis-map"
+                class="navigation-item active"
+            >
+                GIS Risk Map
+            </a>
+
+            <a
+                href="/ai-insights"
+                class="navigation-item"
+            >
+                AI Insights
+            </a>
+
+            <a
+                href="/alerts"
+                class="navigation-item"
+            >
+                Alerts
+            </a>
+
+            <a
+                href="/reports"
+                class="navigation-item"
+            >
+                Reports
+            </a>
+
+            <a
+                href="/admin"
+                class="navigation-item"
+            >
+                Administration
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         MAIN GIS CONTENT
+    ====================================================== -->
+
+    <main class="gis-container">
+
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <section class="page-introduction gis-page-header">
+
+            <div class="page-heading">
+
+                <span class="section-label">
+                    GEOSPATIAL INTELLIGENCE
+                </span>
+
+                <h2>
+                    GIS Risk Map
+                </h2>
+
+                <p>
+                    Visualize land acquisition projects and
+                    parcel-level risk geographically.
+                </p>
+
+            </div>
+
+
+            <div class="page-actions">
+
+                <button
+                    type="button"
+                    id="refreshGIS"
+                    class="secondary-button"
+                >
+                    Refresh Map
+                </button>
+
+                <button
+                    type="button"
+                    id="locateUser"
+                    class="secondary-button"
+                >
+                    Locate
+                </button>
+
+                <button
+                    type="button"
+                    id="fullscreenMap"
+                    class="primary-button"
+                >
+                    Fullscreen Map
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MAP CONTROL BAR
+        ================================================== -->
+
+        <section class="gis-control-panel">
+
+            <div class="gis-control-header">
+
+                <div>
+
+                    <span class="section-label">
+                        GEOGRAPHIC FILTER
+                    </span>
+
+                    <h3>
+                        Explore Acquisition Risk
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="resetMapFilters"
+                    class="text-button"
+                >
+                    Reset Filters
+                </button>
+
+            </div>
+
+
+            <div class="gis-filter-grid">
+
+
+                <!-- STATE -->
+
+                <div class="form-field">
+
+                    <label for="gisStateSelector">
+                        State
+                    </label>
+
+                    <select
+                        id="gisStateSelector"
+                        name="state"
+                    >
+
+                        <option value="">
+                            All States
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DISTRICT -->
+
+                <div class="form-field">
+
+                    <label for="gisDistrictSelector">
+                        District
+                    </label>
+
+                    <select
+                        id="gisDistrictSelector"
+                        name="district"
+                        disabled
+                    >
+
+                        <option value="">
+                            All Districts
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PROJECT -->
+
+                <div class="form-field">
+
+                    <label for="gisProjectSelector">
+                        Project
+                    </label>
+
+                    <select
+                        id="gisProjectSelector"
+                        name="project"
+                        disabled
+                    >
+
+                        <option value="">
+                            All Projects
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PARCEL -->
+
+                <div class="form-field">
+
+                    <label for="gisParcelSelector">
+                        Parcel / Plot
+                    </label>
+
+                    <select
+                        id="gisParcelSelector"
+                        name="parcel"
+                        disabled
+                    >
+
+                        <option value="">
+                            All Parcels
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- RISK -->
+
+                <div class="form-field">
+
+                    <label for="gisRiskSelector">
+                        Risk Level
+                    </label>
+
+                    <select
+                        id="gisRiskSelector"
+                        name="risk_level"
+                    >
+
+                        <option value="">
+                            All Risk Levels
+                        </option>
+
+                        <option value="CRITICAL">
+                            Critical
+                        </option>
+
+                        <option value="HIGH">
+                            High
+                        </option>
+
+                        <option value="MEDIUM">
+                            Medium
+                        </option>
+
+                        <option value="LOW">
+                            Low
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PROJECT TYPE -->
+
+                <div class="form-field">
+
+                    <label for="gisProjectType">
+                        Project Type
+                    </label>
+
+                    <select
+                        id="gisProjectType"
+                        name="project_type"
+                    >
+
+                        <option value="">
+                            All Project Types
+                        </option>
+
+                        <option value="highway">
+                            Highway
+                        </option>
+
+                        <option value="railway">
+                            Railway
+                        </option>
+
+                        <option value="industrial">
+                            Industrial
+                        </option>
+
+                        <option value="irrigation">
+                            Irrigation
+                        </option>
+
+                        <option value="urban">
+                            Urban Development
+                        </option>
+
+                        <option value="other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             GIS WORKSPACE
+        ================================================== -->
+
+        <section class="gis-workspace">
+
+
+            <!-- =============================================
+                 MAP
+            ============================================== -->
+
+            <div
+                class="gis-map-panel"
+                id="gisMapPanel"
+            >
+
+                <div
+                    id="riskMap"
+                    class="risk-map"
+                    role="application"
+                    aria-label="Land acquisition geographic risk map"
+                >
+
+                    <!-- MAP LIBRARY WILL INITIALIZE HERE -->
+
+                    <div
+                        id="mapLoading"
+                        class="map-loading"
+                    >
+
+                        <span>
+                            Loading GIS intelligence...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MAP TOOLBAR -->
+
+                <div class="map-toolbar">
+
+                    <button
+                        type="button"
+                        id="zoomIn"
+                        class="map-tool"
+                        aria-label="Zoom in"
+                    >
+                        +
+                    </button>
+
+                    <button
+                        type="button"
+                        id="zoomOut"
+                        class="map-tool"
+                        aria-label="Zoom out"
+                    >
+                        −
+                    </button>
+
+                    <button
+                        type="button"
+                        id="resetMapView"
+                        class="map-tool"
+                        aria-label="Reset map view"
+                    >
+                        ⌂
+                    </button>
+
+                </div>
+
+
+                <!-- MAP LEGEND -->
+
+                <aside
+                    class="map-legend"
+                    aria-label="Map risk legend"
+                >
+
+                    <div class="legend-header">
+
+                        <strong>
+                            Risk Level
+                        </strong>
+
+                    </div>
+
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-marker critical"
+                            aria-hidden="true"
+                        ></span>
+
+                        <span>
+                            Critical
+                        </span>
+
+                    </div>
+
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-marker high"
+                            aria-hidden="true"
+                        ></span>
+
+                        <span>
+                            High
+                        </span>
+
+                    </div>
+
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-marker medium"
+                            aria-hidden="true"
+                        ></span>
+
+                        <span>
+                            Medium
+                        </span>
+
+                    </div>
+
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-marker low"
+                            aria-hidden="true"
+                        ></span>
+
+                        <span>
+                            Low
+                        </span>
+
+                    </div>
+
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-marker acquired"
+                            aria-hidden="true"
+                        ></span>
+
+                        <span>
+                            Acquired / Low Concern
+                        </span>
+
+                    </div>
+
+                </aside>
+
+
+                <!-- MAP LAYER CONTROL -->
+
+                <aside class="map-layer-control">
+
+                    <strong>
+                        Map Layers
+                    </strong>
+
+
+                    <label class="layer-toggle">
+
+                        <input
+                            type="checkbox"
+                            id="projectLayer"
+                            checked
+                        >
+
+                        <span>
+                            Projects
+                        </span>
+
+                    </label>
+
+
+                    <label class="layer-toggle">
+
+                        <input
+                            type="checkbox"
+                            id="parcelLayer"
+                            checked
+                        >
+
+                        <span>
+                            Parcels
+                        </span>
+
+                    </label>
+
+
+                    <label class="layer-toggle">
+
+                        <input
+                            type="checkbox"
+                            id="criticalLayer"
+                            checked
+                        >
+
+                        <span>
+                            Critical Risk
+                        </span>
+
+                    </label>
+
+
+                    <label class="layer-toggle">
+
+                        <input
+                            type="checkbox"
+                            id="highRiskLayer"
+                            checked
+                        >
+
+                        <span>
+                            High Risk
+                        </span>
+
+                    </label>
+
+                </aside>
+
+            </div>
+
+
+
+            <!-- =============================================
+                 GIS INFORMATION SIDEBAR
+            ============================================== -->
+
+            <aside class="gis-sidebar">
+
+
+                <!-- =========================================
+                     MAP SUMMARY
+                ========================================== -->
+
+                <section class="gis-summary-panel">
+
+                    <header class="panel-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                MAP SUMMARY
+                            </span>
+
+                            <h3>
+                                Current View
+                            </h3>
+
+                        </div>
+
+                    </header>
+
+
+                    <div class="gis-summary-grid">
+
+
+                        <div class="gis-summary-item">
+
+                            <span>
+                                Projects
+                            </span>
+
+                            <strong id="mapProjectCount">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="gis-summary-item">
+
+                            <span>
+                                Parcels
+                            </span>
+
+                            <strong id="mapParcelCount">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="gis-summary-item critical">
+
+                            <span>
+                                Critical
+                            </span>
+
+                            <strong id="mapCriticalCount">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="gis-summary-item high">
+
+                            <span>
+                                High Risk
+                            </span>
+
+                            <strong id="mapHighRiskCount">
+                                --
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =========================================
+                     SELECTED LOCATION
+                ========================================== -->
+
+                <section
+                    id="selectedLocationPanel"
+                    class="gis-selection-panel"
+                >
+
+                    <header class="panel-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                SELECTED LOCATION
+                            </span>
+
+                            <h3>
+                                Geographic Information
+                            </h3>
+
+                        </div>
+
+                    </header>
+
+
+                    <div
+                        id="selectedLocationContent"
+                        class="selected-location-content"
+                    >
+
+                        <div class="empty-state">
+
+                            Select a project or parcel on the
+                            map to view detailed information.
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =========================================
+                     SELECTED PROJECT
+                ========================================== -->
+
+                <section
+                    id="selectedProjectPanel"
+                    class="selected-risk-panel"
+                    hidden
+                >
+
+                    <header class="panel-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                PROJECT
+                            </span>
+
+                            <h3 id="selectedProjectName">
+                                —
+                            </h3>
+
+                        </div>
+
+                    </header>
+
+
+                    <div class="selected-project-details">
+
+
+                        <div class="detail-row">
+
+                            <span>
+                                Project ID
+                            </span>
+
+                            <strong id="selectedProjectId">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <span>
+                                State
+                            </span>
+
+                            <strong id="selectedProjectState">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <span>
+                                District
+                            </span>
+
+                            <strong id="selectedProjectDistrict">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <span>
+                                Project Type
+                            </span>
+
+                            <strong id="selectedProjectType">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <span>
+                                Risk Score
+                            </span>
+
+                            <strong id="selectedProjectRiskScore">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <span>
+                                Delay Probability
+                            </span>
+
+                            <strong id="selectedProjectDelayProbability">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <span>
+                                Risk Level
+                            </span>
+
+                            <strong
+                                id="selectedProjectRiskLevel"
+                                class="risk-badge"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="selected-project-actions">
+
+                        <a
+                            id="openProjectDetails"
+                            href="/project-details"
+                            class="primary-button"
+                        >
+                            View Project Details
+                        </a>
+
+                        <button
+                            type="button"
+                            id="zoomToProject"
+                            class="secondary-button"
+                        >
+                            Zoom to Project
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =========================================
+                     SELECTED PARCEL
+                ========================================== -->
+
+                <section
+                    id="selectedParcelPanel"
+                    class="selected-risk-panel"
+                    hidden
+                >
+
+                    <header class="panel-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                PARCEL / PLOT
+                            </span>
+
+                            <h3 id="selectedParcelTitle">
+                                —
+                            </h3>
+
+                        </div>
+
+                    </header>
+
+
+                    <div class="selected-parcel-details">
+
+
+                        <div class="detail-row">
+
+                            <span>
+                                Plot ID
+                            </span>
+
+                            <strong id="selectedPlotId">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <span>
+                                Survey Number
+                            </span>
+
+                            <strong id="selectedSurveyNumber">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <span>
+                                Risk Score
+                            </span>
+
+                            <strong id="selectedParcelRiskScore">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <span>
+                                Risk Level
+                            </span>
+
+                            <strong
+                                id="selectedParcelRiskLevel"
+                                class="risk-badge"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <span>
+                                Ownership Conflict
+                            </span>
+
+                            <strong id="selectedOwnershipConflict">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <span>
+                                Legal Dispute
+                            </span>
+
+                            <strong id="selectedLegalDispute">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="detail-row">
+
+                            <span>
+                                Compensation
+                            </span>
+
+                            <strong id="selectedParcelCompensation">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="selected-parcel-actions">
+
+                        <a
+                            id="openParcelDetails"
+                            href="/parcel-details"
+                            class="primary-button"
+                        >
+                            View Parcel Details
+                        </a>
+
+                        <button
+                            type="button"
+                            id="zoomToParcel"
+                            class="secondary-button"
+                        >
+                            Zoom to Parcel
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =========================================
+                     CRITICAL RISK WATCH
+                ========================================== -->
+
+                <section class="gis-watch-panel">
+
+                    <header class="panel-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                RISK WATCH
+                            </span>
+
+                            <h3>
+                                Critical Locations
+                            </h3>
+
+                        </div>
+
+                        <a
+                            href="/alerts"
+                            class="panel-action"
+                        >
+                            Alerts
+                        </a>
+
+                    </header>
+
+
+                    <div
+                        id="criticalLocations"
+                        class="critical-location-list"
+                    >
+
+                        <div class="empty-state">
+                            Critical locations will appear here.
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </aside>
+
+        </section>
+
+
+
+        <!-- =================================================
+             GIS ANALYTICS BELOW MAP
+        ================================================== -->
+
+        <section class="gis-analytics-section">
+
+
+            <!-- PROJECT RISK -->
+
+            <article class="gis-analytics-card">
+
+                <span class="section-label">
+                    PROJECT RISK
+                </span>
+
+                <h3>
+                    High-Risk Projects
+                </h3>
+
+                <strong id="gisHighRiskProjects">
+                    --
+                </strong>
+
+                <p>
+                    Projects requiring close monitoring.
+                </p>
+
+                <a
+                    href="/projects?risk=HIGH"
+                    class="panel-action"
+                >
+                    View Projects
+                </a>
+
+            </article>
+
+
+            <!-- CRITICAL PARCELS -->
+
+            <article class="gis-analytics-card">
+
+                <span class="section-label">
+                    PARCEL INTELLIGENCE
+                </span>
+
+                <h3>
+                    Critical Parcels
+                </h3>
+
+                <strong id="gisCriticalParcels">
+                    --
+                </strong>
+
+                <p>
+                    Parcels requiring immediate intervention.
+                </p>
+
+                <a
+                    href="/alerts?type=parcel"
+                    class="panel-action"
+                >
+                    Review Parcels
+                </a>
+
+            </article>
+
+
+            <!-- OWNERSHIP -->
+
+            <article class="gis-analytics-card">
+
+                <span class="section-label">
+                    OWNERSHIP RISK
+                </span>
+
+                <h3>
+                    Ownership Conflicts
+                </h3>
+
+                <strong id="gisOwnershipConflicts">
+                    --
+                </strong>
+
+                <p>
+                    Parcels with ownership-related risk.
+                </p>
+
+                <a
+                    href="/ai-insights"
+                    class="panel-action"
+                >
+                    Analyse Risk
+                </a>
+
+            </article>
+
+
+            <!-- LEGAL -->
+
+            <article class="gis-analytics-card">
+
+                <span class="section-label">
+                    LEGAL RISK
+                </span>
+
+                <h3>
+                    Legal Disputes
+                </h3>
+
+                <strong id="gisLegalDisputes">
+                    --
+                </strong>
+
+                <p>
+                    Parcels affected by legal disputes.
+                </p>
+
+                <a
+                    href="/alerts"
+                    class="panel-action"
+                >
+                    Review Alerts
+                </a>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- =================================================
+             GIS DATA TABLE
+        ================================================== -->
+
+        <section class="gis-data-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        GEOSPATIAL REGISTER
+                    </span>
+
+                    <h3>
+                        Locations in Current View
+                    </h3>
+
+                    <p>
+                        Select a project or parcel to inspect
+                        detailed risk information.
+                    </p>
+
+                </div>
+
+
+                <div class="gis-table-controls">
+
+                    <select id="gisTableType">
+
+                        <option value="projects">
+                            Projects
+                        </option>
+
+                        <option value="parcels">
+                            Parcels
+                        </option>
+
+                    </select>
+
+                    <button
+                        type="button"
+                        id="exportGISData"
+                        class="secondary-button"
+                    >
+                        Export Data
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table
+                    id="gisDataTable"
+                    class="gis-data-table"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th scope="col">
+                                ID
+                            </th>
+
+                            <th scope="col">
+                                Type
+                            </th>
+
+                            <th scope="col">
+                                State
+                            </th>
+
+                            <th scope="col">
+                                District
+                            </th>
+
+                            <th scope="col">
+                                Risk Score
+                            </th>
+
+                            <th scope="col">
+                                Risk Level
+                            </th>
+
+                            <th scope="col">
+                                Latitude
+                            </th>
+
+                            <th scope="col">
+                                Longitude
+                            </th>
+
+                            <th scope="col">
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="gisDataTableBody">
+
+                        <tr class="table-empty-row">
+
+                            <td colspan="9">
+
+                                GIS data will appear here after
+                                the map is loaded.
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             GIS SYSTEM INFORMATION
+        ================================================== -->
+
+        <section class="system-information">
+
+            <div class="system-information-item">
+
+                <span>
+                    GIS Engine
+                </span>
+
+                <strong
+                    id="gisEngineStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    API
+                </span>
+
+                <strong
+                    id="apiStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Database
+                </span>
+
+                <strong
+                    id="databaseStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Last Updated
+                </span>
+
+                <strong id="lastUpdated">
+                    —
+                </strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="application-footer">
+
+        <div>
+
+            <strong>
+                LANDLYTICS
+            </strong>
+
+            <span>
+                Land Acquisition Intelligence & Monitoring System
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Authorized Government Decision Support Platform
+            </span>
+
+            <span>
+                © 2026
+            </span>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/gis.js') }}"></script>
+
+</body>
+
+</html>

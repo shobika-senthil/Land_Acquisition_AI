@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="LANDLYTICS - Land Acquisition Intelligence Platform"
+    >
+
+    <title>LANDLYTICS | Land Acquisition Intelligence</title>
+
+
+    <!-- =====================================================
+         STYLESHEETS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/base.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/dashboard.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         APPLICATION SHELL
+         ===================================================== -->
+
+    <div class="app-shell">
+
+
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
+
+        <aside
+            class="sidebar"
+            id="sidebar"
+        >
+
+            <!-- BRAND -->
+
+            <div class="sidebar-brand">
+
+                <div class="brand-mark">
+                    LL
+                </div>
+
+                <div class="brand-text">
+
+                    <strong>
+                        LANDLYTICS
+                    </strong>
+
+                    <span>
+                        LAND ACQUISITION INTELLIGENCE
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 MAIN NAVIGATION
+                 ================================================= -->
+
+            <nav class="main-navigation">
+
+
+                <!-- OVERVIEW -->
+
+                <div class="navigation-group">
+
+                    <span class="navigation-label">
+                        OVERVIEW
+                    </span>
+
+                    <a
+                        href="/dashboard"
+                        class="navigation-item active"
+                    >
+
+                        <span class="navigation-icon">
+                            DB
+                        </span>
+
+                        <span>
+                            Dashboard
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- ANALYSIS -->
+
+                <div class="navigation-group">
+
+                    <span class="navigation-label">
+                        ANALYSIS
+                    </span>
+
+
+                    <a
+                        href="/states"
+                        class="navigation-item"
+                    >
+
+                        <span class="navigation-icon">
+                            ST
+                        </span>
+
+                        <span>
+                            State-wise Analysis
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/districts"
+                        class="navigation-item"
+                    >
+
+                        <span class="navigation-icon">
+                            DI
+                        </span>
+
+                        <span>
+                            District-wise Analysis
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- LAND ACQUISITION -->
+
+                <div class="navigation-group">
+
+                    <span class="navigation-label">
+                        LAND ACQUISITION
+                    </span>
+
+
+                    <a
+                        href="/projects"
+                        class="navigation-item"
+                    >
+
+                        <span class="navigation-icon">
+                            PR
+                        </span>
+
+                        <span>
+                            Projects
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/gis"
+                        class="navigation-item"
+                    >
+
+                        <span class="navigation-icon">
+                            GIS
+                        </span>
+
+                        <span>
+                            GIS Risk Map
+                        </span>
+
+                        <span class="navigation-badge">
+                            LIVE
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/parcel-details"
+                        class="navigation-item"
+                    >
+
+                        <span class="navigation-icon">
+                            PL
+                        </span>
+
+                        <span>
+                            Parcel Details
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- INTELLIGENCE -->
+
+                <div class="navigation-group">
+
+                    <span class="navigation-label">
+                        INTELLIGENCE
+                    </span>
+
+
+                    <a
+                        href="/ai-insights"
+                        class="navigation-item"
+                    >
+
+                        <span class="navigation-icon">
+                            AI
+                        </span>
+
+                        <span>
+                            AI Insights
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/alerts"
+                        class="navigation-item"
+                    >
+
+                        <span class="navigation-icon">
+                            AL
+                        </span>
+
+                        <span>
+                            Alerts
+                        </span>
+
+                        <span
+                            class="navigation-count"
+                            id="alertCount"
+                        >
+                            0
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="/reports"
+                        class="navigation-item"
+                    >
+
+                        <span class="navigation-icon">
+                            RP
+                        </span>
+
+                        <span>
+                            Reports
+                        </span>
+
+                    </a>
+
+                </div>
+
+
+                <!-- ADMINISTRATION -->
+
+                <div class="navigation-group">
+
+                    <span class="navigation-label">
+                        ADMINISTRATION
+                    </span>
+
+
+                    <a
+                        href="/admin"
+                        class="navigation-item"
+                    >
+
+                        <span class="navigation-icon">
+                            AD
+                        </span>
+
+                        <span>
+                            Administration
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </nav>
+
+
+            <!-- =================================================
+                 SIDEBAR FOOTER
+                 ================================================= -->
+
+            <div class="sidebar-footer">
+
+                <div class="system-status">
+
+                    <span class="system-status-dot"></span>
+
+                    <div>
+
+                        <strong>
+                            SYSTEM OPERATIONAL
+                        </strong>
+
+                        <span>
+                            AI MODEL ONLINE
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAIN APPLICATION
+             ================================================= -->
+
+        <main class="main-content">
+
+
+            <!-- =================================================
+                 TOP HEADER
+                 ================================================= -->
+
+            <header class="top-header">
+
+
+                <!-- HEADER LEFT -->
+
+                <div class="header-left">
+
+                    <button
+                        type="button"
+                        class="sidebar-toggle"
+                        id="sidebarToggle"
+                        aria-label="Toggle navigation"
+                    >
+                        ☰
+                    </button>
+
+
+                    <div class="breadcrumb">
+
+                        <span>
+                            LANDLYTICS
+                        </span>
+
+                        <span class="breadcrumb-separator">
+                            /
+                        </span>
+
+                        <strong>
+                            Dashboard
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HEADER RIGHT -->
+
+                <div class="header-right">
+
+
+                    <!-- SYSTEM STATUS -->
+
+                    <div class="header-status">
+
+                        <span class="header-status-dot"></span>
+
+                        <span>
+                            Services operational
+                        </span>
+
+                    </div>
+
+
+                    <!-- NOTIFICATIONS -->
+
+                    <button
+                        type="button"
+                        class="header-action"
+                        aria-label="Notifications"
+                    >
+
+                        <span>
+                            ♢
+                        </span>
+
+                        <small id="headerAlertCount">
+                            0
+                        </small>
+
+                    </button>
+
+
+                    <!-- USER -->
+
+                    <div class="user-profile">
+
+                        <div class="user-avatar">
+                            AD
+                        </div>
+
+                        <div class="user-details">
+
+                            <strong>
+                                Administrator
+                            </strong>
+
+                            <span>
+                                Authorized User
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =================================================
+                 PAGE CONTENT
+                 ================================================= -->
+
+            <section
+                class="page-content"
+                id="pageContent"
+            >
+
+
+                <!-- =================================================
+                     PAGE HEADING
+                     ================================================= -->
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            NATIONAL LAND ACQUISITION MONITORING
+                        </span>
+
+                        <h1>
+                            Dashboard
+                        </h1>
+
+                        <p>
+                            National overview of land acquisition
+                            progress, risk and predicted delays.
+                        </p>
+
+                    </div>
+
+
+                    <div class="page-heading-actions">
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            id="exportDashboardButton"
+                        >
+                            Export Report
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="primary-button"
+                            id="newProjectButton"
+                        >
+                            + New Project
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     KPI OVERVIEW
+                     ================================================= -->
+
+                <div class="kpi-grid">
+
+
+                    <!-- TOTAL PROJECTS -->
+
+                    <article class="kpi-card">
+
+                        <span>
+                            TOTAL PROJECTS
+                        </span>
+
+                        <strong id="totalProjects">
+                            —
+                        </strong>
+
+                        <p>
+                            Active acquisition projects
+                        </p>
+
+                    </article>
+
+
+                    <!-- HIGH RISK -->
+
+                    <article class="kpi-card critical">
+
+                        <span>
+                            HIGH-RISK PROJECTS
+                        </span>
+
+                        <strong id="highRiskProjects">
+                            —
+                        </strong>
+
+                        <p>
+                            Requiring immediate attention
+                        </p>
+
+                    </article>
+
+
+                    <!-- CRITICAL -->
+
+                    <article class="kpi-card warning">
+
+                        <span>
+                            CRITICAL PROJECTS
+                        </span>
+
+                        <strong id="criticalProjects">
+                            —
+                        </strong>
+
+                        <p>
+                            Severe acquisition risk
+                        </p>
+
+                    </article>
+
+
+                    <!-- DELAY PROBABILITY -->
+
+                    <article class="kpi-card">
+
+                        <span>
+                            DELAY PROBABILITY
+                        </span>
+
+                        <strong id="delayProbability">
+                            —
+                        </strong>
+
+                        <p>
+                            Predicted national average
+                        </p>
+
+                    </article>
+
+                </div>
+
+
+                <!-- =================================================
+                     GEOGRAPHIC ANALYTICS
+                     ================================================= -->
+
+                <div class="dashboard-grid">
+
+
+                    <!-- STATE RISK -->
+
+                    <section class="dashboard-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-label">
+                                    GEOGRAPHIC ANALYSIS
+                                </span>
+
+                                <h2>
+                                    State-wise Risk
+                                </h2>
+
+                            </div>
+
+
+                            <a
+                                href="/states"
+                                class="panel-link"
+                            >
+                                View analysis →
+                            </a>
+
+                        </div>
+
+
+                        <div
+                            class="chart-container"
+                            id="stateRiskChart"
+                        >
+
+                            <div class="chart-empty">
+
+                                <span>
+                                    DATA LOADING
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- DISTRICT RISK -->
+
+                    <section class="dashboard-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-label">
+                                    REGIONAL ANALYSIS
+                                </span>
+
+                                <h2>
+                                    District Risk
+                                </h2>
+
+                            </div>
+
+
+                            <a
+                                href="/districts"
+                                class="panel-link"
+                            >
+                                View districts →
+                            </a>
+
+                        </div>
+
+
+                        <div
+                            class="chart-container"
+                            id="districtRiskChart"
+                        >
+
+                            <div class="chart-empty">
+
+                                <span>
+                                    DATA LOADING
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- =================================================
+                     PERFORMANCE + ALERTS
+                     ================================================= -->
+
+                <div class="dashboard-grid">
+
+
+                    <!-- PERFORMANCE -->
+
+                    <section class="dashboard-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-label">
+                                    PERFORMANCE
+                                </span>
+
+                                <h2>
+                                    Overall Performance Indicators
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="performance-grid">
+
+
+                            <!-- COMPENSATION -->
+
+                            <div class="performance-item">
+
+                                <span>
+                                    COMPENSATION
+                                </span>
+
+                                <strong id="compensationProgress">
+                                    —
+                                </strong>
+
+                                <div class="progress-track">
+
+                                    <div
+                                        class="progress-value"
+                                        id="compensationProgressBar"
+                                        style="width: 0%"
+                                    ></div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- DOCUMENTATION -->
+
+                            <div class="performance-item">
+
+                                <span>
+                                    DOCUMENTATION
+                                </span>
+
+                                <strong id="documentationProgress">
+                                    —
+                                </strong>
+
+                                <div class="progress-track">
+
+                                    <div
+                                        class="progress-value"
+                                        id="documentationProgressBar"
+                                        style="width: 0%"
+                                    ></div>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- POSSESSION -->
+
+                            <div class="performance-item">
+
+                                <span>
+                                    POSSESSION
+                                </span>
+
+                                <strong id="possessionProgress">
+                                    —
+                                </strong>
+
+                                <div class="progress-track">
+
+                                    <div
+                                        class="progress-value"
+                                        id="possessionProgressBar"
+                                        style="width: 0%"
+                                    ></div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- RECENT ALERTS -->
+
+                    <section class="dashboard-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-label">
+                                    ATTENTION REQUIRED
+                                </span>
+
+                                <h2>
+                                    Recent Alerts
+                                </h2>
+
+                            </div>
+
+
+                            <a
+                                href="/alerts"
+                                class="panel-link"
+                            >
+                                View all →
+                            </a>
+
+                        </div>
+
+
+                        <div
+                            class="alerts-list"
+                            id="recentAlerts"
+                        >
+
+                            <div class="empty-state">
+
+                                <strong>
+                                    Loading alerts
+                                </strong>
+
+                                <span>
+                                    Checking acquisition risk signals...
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- =================================================
+                     SYSTEM INFORMATION
+                     ================================================= -->
+
+                <section class="system-information-panel">
+
+
+                    <!-- SYSTEM HEADER -->
+
+                    <div class="system-information-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                PLATFORM STATUS
+                            </span>
+
+                            <h2>
+                                Land Acquisition Intelligence System
+                            </h2>
+
+                        </div>
+
+
+                        <span class="status-pill success">
+                            OPERATIONAL
+                        </span>
+
+                    </div>
+
+
+                    <!-- SYSTEM GRID -->
+
+                    <div class="system-information-grid">
+
+
+                        <!-- DATABASE -->
+
+                        <div>
+
+                            <span>
+                                DATABASE
+                            </span>
+
+                            <strong id="databaseStatus">
+                                Checking...
+                            </strong>
+
+                        </div>
+
+
+                        <!-- AI MODEL -->
+
+                        <div>
+
+                            <span>
+                                AI MODEL
+                            </span>
+
+                            <strong id="modelStatus">
+                                Checking...
+                            </strong>
+
+                        </div>
+
+
+                        <!-- GIS -->
+
+                        <div>
+
+                            <span>
+                                GIS ENGINE
+                            </span>
+
+                            <strong id="gisStatus">
+                                Ready
+                            </strong>
+
+                        </div>
+
+
+                        <!-- LAST UPDATED -->
+
+                        <div>
+
+                            <span>
+                                LAST UPDATED
+                            </span>
+
+                            <strong id="lastUpdated">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 APPLICATION FOOTER
+                 ================================================= -->
+
+            <footer class="application-footer">
+
+                <span>
+                    LANDLYTICS
+                </span>
+
+                <span>
+                    Land Acquisition Intelligence Platform
+                </span>
+
+                <span>
+                    Secure Government Analytics Environment
+                </span>
+
+            </footer>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/main.js') }}"
+    ></script>
+
+    <script
+        src="{{ url_for('static', filename='js/dashboard.js') }}"
+    ></script>
+
+
+</body>
+
+</html>

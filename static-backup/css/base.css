@@ -1,0 +1,1394 @@
+/* =========================================================
+   LANDLYTICS
+   BASE DESIGN SYSTEM
+   Government / National Intelligence Portal
+   ========================================================= */
+
+
+/* =========================================================
+   1. DESIGN TOKENS
+   ========================================================= */
+
+:root {
+
+    /* ---------- Sand / Brown Palette ---------- */
+
+    --sand-50: #fcfaf7;
+    --sand-100: #f5f0e8;
+    --sand-200: #ebe1d2;
+    --sand-300: #ddcfbd;
+
+    --brown-100: #eee5da;
+    --brown-200: #d9c8b5;
+    --brown-300: #bda58d;
+    --brown-400: #967b61;
+    --brown-500: #725842;
+    --brown-600: #594331;
+    --brown-700: #3f2e22;
+    --brown-800: #2b1f17;
+
+    /* ---------- Surfaces ---------- */
+
+    --surface: #ffffff;
+    --surface-soft: #faf8f4;
+    --surface-muted: #f3eee7;
+
+    /* ---------- Text ---------- */
+
+    --text-primary: #2e261f;
+    --text-secondary: #5f5449;
+    --text-muted: #8b8176;
+    --text-light: #aaa096;
+
+    /* ---------- Borders ---------- */
+
+    --border-light: #e9e1d8;
+    --border-medium: #dcd1c5;
+    --border-dark: #c8baaa;
+
+    /* ---------- Risk ---------- */
+
+    --critical: #9b3d32;
+    --critical-soft: #f5e4e1;
+
+    --high: #a86d2e;
+    --high-soft: #f5eadb;
+
+    --medium: #a08a3b;
+    --medium-soft: #f3eedb;
+
+    --low: #58745d;
+    --low-soft: #e7efe8;
+
+    /* ---------- Status ---------- */
+
+    --success: #4e6d54;
+    --success-soft: #e7efe9;
+
+    --info: #596d78;
+    --info-soft: #e8eef1;
+
+    /* ---------- Layout ---------- */
+
+    --sidebar-width: 252px;
+    --header-height: 66px;
+
+    --content-max-width: 1700px;
+
+    /* ---------- Radius ---------- */
+
+    --radius-xs: 4px;
+    --radius-sm: 6px;
+    --radius-md: 9px;
+    --radius-lg: 12px;
+
+    /* ---------- Shadows ---------- */
+
+    --shadow-xs:
+        0 1px 2px rgba(60, 42, 28, 0.04);
+
+    --shadow-sm:
+        0 3px 10px rgba(60, 42, 28, 0.06);
+
+    --shadow-md:
+        0 8px 24px rgba(60, 42, 28, 0.08);
+
+    /* ---------- Typography ---------- */
+
+    --font-sans:
+        "Segoe UI",
+        "Inter",
+        Arial,
+        sans-serif;
+
+    --font-mono:
+        "Cascadia Code",
+        "Consolas",
+        monospace;
+}
+
+
+/* =========================================================
+   2. RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+html {
+    width: 100%;
+    min-height: 100%;
+
+    font-size: 16px;
+
+    scroll-behavior: smooth;
+}
+
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    margin: 0;
+    padding: 0;
+
+    background: var(--sand-50);
+
+    color: var(--text-primary);
+
+    font-family: var(--font-sans);
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* =========================================================
+   3. DEFAULT ELEMENTS
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+}
+
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+
+button {
+    cursor: pointer;
+}
+
+
+a {
+    color: inherit;
+
+    text-decoration: none;
+}
+
+
+img {
+    display: block;
+
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   4. APPLICATION SHELL
+   ========================================================= */
+
+.app-shell {
+    display: flex;
+
+    width: 100%;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   5. SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    position: fixed;
+
+    z-index: 1000;
+
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: var(--sidebar-width);
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: var(--brown-700);
+
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+
+    color: #ffffff;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        rgba(255,255,255,0.15)
+        transparent;
+}
+
+
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.14);
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   6. SIDEBAR BRAND
+   ========================================================= */
+
+.sidebar-brand {
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 17px 18px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+
+.brand-mark {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: var(--sand-200);
+
+    border-radius: 6px;
+
+    color: var(--brown-700);
+
+    font-family: var(--font-mono);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.04em;
+}
+
+
+.brand-text {
+    min-width: 0;
+}
+
+
+.brand-text strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+}
+
+
+.brand-text span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: rgba(255,255,255,0.55);
+
+    font-size: 7px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.08em;
+
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   7. MAIN NAVIGATION
+   ========================================================= */
+
+.main-navigation {
+    flex: 1;
+
+    padding: 17px 11px;
+}
+
+
+.navigation-group {
+    margin-bottom: 17px;
+}
+
+
+.navigation-group:last-child {
+    margin-bottom: 0;
+}
+
+
+.navigation-label {
+    display: block;
+
+    padding: 0 10px 7px;
+
+    color: rgba(255,255,255,0.38);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.13em;
+
+    text-transform: uppercase;
+}
+
+
+.navigation-item {
+    position: relative;
+
+    min-height: 37px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 2px 0;
+
+    padding: 8px 10px;
+
+    border-radius: 5px;
+
+    color: rgba(255,255,255,0.67);
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease;
+}
+
+
+.navigation-item:hover {
+    background: rgba(255,255,255,0.07);
+
+    color: #ffffff;
+}
+
+
+.navigation-item.active {
+    background: rgba(255,255,255,0.12);
+
+    color: #ffffff;
+
+    font-weight: 650;
+}
+
+
+.navigation-item.active::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+
+    width: 2px;
+
+    background: var(--sand-300);
+
+    border-radius: 2px;
+}
+
+
+.navigation-icon {
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: rgba(255,255,255,0.06);
+
+    border-radius: 4px;
+
+    color: rgba(255,255,255,0.62);
+
+    font-family: var(--font-mono);
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+
+.navigation-item.active .navigation-icon {
+    background: rgba(255,255,255,0.13);
+
+    color: #ffffff;
+}
+
+
+.navigation-badge,
+.navigation-count {
+    margin-left: auto;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 21px;
+    height: 18px;
+
+    padding: 0 5px;
+
+    border-radius: 4px;
+
+    background: rgba(255,255,255,0.08);
+
+    color: rgba(255,255,255,0.6);
+
+    font-family: var(--font-mono);
+
+    font-size: 6px;
+
+    font-weight: 700;
+}
+
+
+.navigation-badge {
+    background: rgba(221,207,189,0.14);
+
+    color: var(--sand-300);
+}
+
+
+/* =========================================================
+   8. SIDEBAR FOOTER
+   ========================================================= */
+
+.sidebar-footer {
+    padding: 13px 14px;
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+
+.system-status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 9px;
+
+    background: rgba(255,255,255,0.045);
+
+    border: 1px solid rgba(255,255,255,0.06);
+
+    border-radius: 5px;
+}
+
+
+.system-status-dot {
+    width: 7px;
+    height: 7px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #91aa96;
+
+    box-shadow:
+        0 0 0 3px rgba(145,170,150,0.10);
+}
+
+
+.system-status strong {
+    display: block;
+
+    color: rgba(255,255,255,0.78);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.07em;
+}
+
+
+.system-status span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: rgba(255,255,255,0.4);
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   9. MAIN CONTENT
+   ========================================================= */
+
+.main-content {
+    width: calc(100% - var(--sidebar-width));
+
+    min-height: 100vh;
+
+    margin-left: var(--sidebar-width);
+
+    background: var(--sand-50);
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   10. TOP HEADER
+   ========================================================= */
+
+.top-header {
+    position: sticky;
+
+    z-index: 900;
+
+    top: 0;
+
+    width: 100%;
+    height: var(--header-height);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 0 28px;
+
+    background: rgba(252,250,247,0.96);
+
+    border-bottom: 1px solid var(--border-light);
+
+    backdrop-filter: blur(10px);
+}
+
+
+.header-left,
+.header-right {
+    display: flex;
+
+    align-items: center;
+}
+
+
+.header-left {
+    gap: 16px;
+
+    min-width: 0;
+}
+
+
+.header-right {
+    gap: 17px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   11. SIDEBAR TOGGLE
+   ========================================================= */
+
+.sidebar-toggle {
+    display: none;
+
+    width: 34px;
+    height: 34px;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border-light);
+
+    border-radius: 5px;
+
+    color: var(--brown-700);
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   12. BREADCRUMB
+   ========================================================= */
+
+.breadcrumb {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    min-width: 0;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+}
+
+
+.breadcrumb span:first-child {
+    color: var(--brown-500);
+
+    font-weight: 600;
+}
+
+
+.breadcrumb-separator {
+    color: var(--border-dark);
+}
+
+
+.breadcrumb strong {
+    color: var(--text-primary);
+
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   13. HEADER STATUS
+   ========================================================= */
+
+.header-status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color: var(--text-muted);
+
+    font-size: 8px;
+
+    white-space: nowrap;
+}
+
+
+.header-status-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--success);
+}
+
+
+/* =========================================================
+   14. HEADER ACTION
+   ========================================================= */
+
+.header-action {
+    position: relative;
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+
+    border: 1px solid var(--border-light);
+
+    border-radius: 5px;
+
+    color: var(--brown-600);
+
+    font-size: 14px;
+}
+
+
+.header-action:hover {
+    background: var(--surface);
+
+    border-color: var(--border-medium);
+}
+
+
+.header-action small {
+    position: absolute;
+
+    right: -4px;
+    top: -4px;
+
+    min-width: 15px;
+    height: 15px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 3px;
+
+    background: var(--critical);
+
+    border: 2px solid var(--sand-50);
+
+    border-radius: 10px;
+
+    color: #ffffff;
+
+    font-size: 6px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   15. USER PROFILE
+   ========================================================= */
+
+.user-profile {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding-left: 13px;
+
+    border-left: 1px solid var(--border-light);
+}
+
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: var(--sand-200);
+
+    border-radius: 50%;
+
+    color: var(--brown-700);
+
+    font-family: var(--font-mono);
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+.user-details strong {
+    display: block;
+
+    color: var(--text-primary);
+
+    font-size: 9px;
+
+    font-weight: 650;
+}
+
+
+.user-details span {
+    display: block;
+
+    margin-top: 1px;
+
+    color: var(--text-muted);
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   16. PAGE CONTENT
+   ========================================================= */
+
+.page-content {
+    width: 100%;
+
+    max-width: var(--content-max-width);
+
+    margin: 0 auto;
+
+    padding: 28px 30px 36px;
+}
+
+
+/* =========================================================
+   17. PAGE HEADING
+   ========================================================= */
+
+.page-heading {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 22px;
+}
+
+
+.section-label {
+    display: block;
+
+    color: var(--brown-500);
+
+    font-size: 7px;
+
+    font-weight: 750;
+
+    letter-spacing: 0.12em;
+
+    line-height: 1.3;
+
+    text-transform: uppercase;
+}
+
+
+.page-heading h1 {
+    margin-top: 5px;
+
+    color: var(--brown-800);
+
+    font-size: 25px;
+
+    font-weight: 650;
+
+    letter-spacing: -0.02em;
+
+    line-height: 1.2;
+}
+
+
+.page-heading p {
+    margin-top: 6px;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+}
+
+
+.page-heading-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   18. BUTTONS
+   ========================================================= */
+
+.primary-button,
+.secondary-button {
+    min-height: 34px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    padding: 7px 13px;
+
+    border-radius: 5px;
+
+    font-size: 9px;
+
+    font-weight: 650;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+
+.primary-button {
+    background: var(--brown-600);
+
+    border: 1px solid var(--brown-600);
+
+    color: #ffffff;
+}
+
+
+.primary-button:hover {
+    background: var(--brown-700);
+
+    border-color: var(--brown-700);
+
+    transform: translateY(-1px);
+}
+
+
+.secondary-button {
+    background: var(--surface);
+
+    border: 1px solid var(--border-medium);
+
+    color: var(--brown-600);
+}
+
+
+.secondary-button:hover {
+    background: var(--surface-soft);
+
+    border-color: var(--brown-300);
+}
+
+
+/* =========================================================
+   19. STATUS PILLS
+   ========================================================= */
+
+.status-pill {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 22px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    font-size: 7px;
+
+    font-weight: 750;
+
+    letter-spacing: 0.06em;
+
+    text-transform: uppercase;
+}
+
+
+.status-pill.success {
+    background: var(--success-soft);
+
+    color: var(--success);
+}
+
+
+.status-pill.critical {
+    background: var(--critical-soft);
+
+    color: var(--critical);
+}
+
+
+.status-pill.high {
+    background: var(--high-soft);
+
+    color: var(--high);
+}
+
+
+.status-pill.medium {
+    background: var(--medium-soft);
+
+    color: var(--medium);
+}
+
+
+.status-pill.low {
+    background: var(--low-soft);
+
+    color: var(--low);
+}
+
+
+/* =========================================================
+   20. COMMON PANELS
+   ========================================================= */
+
+.dashboard-panel,
+.system-information-panel,
+.data-panel,
+.content-panel {
+    background: var(--surface);
+
+    border: 1px solid var(--border-light);
+
+    border-radius: var(--radius-md);
+
+    box-shadow: var(--shadow-xs);
+}
+
+
+/* =========================================================
+   21. COMMON PANEL HEADER
+   ========================================================= */
+
+.panel-header {
+    min-height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 15px 19px;
+
+    border-bottom: 1px solid var(--border-light);
+}
+
+
+.panel-header h2 {
+    margin-top: 4px;
+
+    color: var(--text-primary);
+
+    font-size: 13px;
+
+    font-weight: 650;
+}
+
+
+.panel-link {
+    flex-shrink: 0;
+
+    color: var(--brown-500);
+
+    font-size: 8px;
+
+    font-weight: 600;
+}
+
+
+.panel-link:hover {
+    color: var(--brown-700);
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   22. EMPTY / LOADING STATE
+   ========================================================= */
+
+.empty-state,
+.chart-empty {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 130px;
+
+    padding: 20px;
+
+    text-align: center;
+}
+
+
+.empty-state strong,
+.chart-empty strong {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+}
+
+
+.empty-state span,
+.chart-empty span {
+    margin-top: 4px;
+
+    color: var(--text-muted);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   23. APPLICATION FOOTER
+   ========================================================= */
+
+.application-footer {
+    width: calc(100% - 60px);
+
+    max-width: var(--content-max-width);
+
+    margin: 0 auto;
+
+    padding: 20px 0 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border-top: 1px solid var(--border-light);
+
+    color: var(--text-muted);
+
+    font-size: 7px;
+}
+
+
+.application-footer span:first-child {
+    color: var(--brown-500);
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   24. SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+
+::-webkit-scrollbar-track {
+    background: var(--sand-100);
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: var(--brown-200);
+
+    border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--brown-300);
+}
+
+
+/* =========================================================
+   25. SELECTION
+   ========================================================= */
+
+::selection {
+    background: var(--brown-200);
+
+    color: var(--brown-800);
+}
+
+
+/* =========================================================
+   26. RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    :root {
+        --sidebar-width: 225px;
+    }
+
+    .page-content {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    .top-header {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    .header-status {
+        display: none;
+    }
+
+}
+
+
+/* =========================================================
+   27. RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    :root {
+        --sidebar-width: 0px;
+    }
+
+    .sidebar {
+        width: 252px;
+
+        transform: translateX(-100%);
+
+        transition:
+            transform 0.25s ease;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        width: 100%;
+
+        margin-left: 0;
+    }
+
+    .sidebar-toggle {
+        display: flex;
+    }
+
+    .top-header {
+        height: 60px;
+
+        padding: 0 16px;
+    }
+
+    .user-details {
+        display: none;
+    }
+
+    .user-profile {
+        padding-left: 8px;
+
+        border-left: none;
+    }
+
+    .page-content {
+        padding: 22px 16px 30px;
+    }
+
+    .page-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .page-heading-actions {
+        width: 100%;
+    }
+
+    .page-heading-actions button {
+        flex: 1;
+    }
+
+    .application-footer {
+        width: calc(100% - 32px);
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 5px;
+    }
+
+}
+
+
+/* =========================================================
+   28. RESPONSIVE — SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 500px) {
+
+    .breadcrumb span:first-child,
+    .breadcrumb-separator {
+        display: none;
+    }
+
+    .header-right {
+        gap: 7px;
+    }
+
+    .page-heading h1 {
+        font-size: 22px;
+    }
+
+    .page-heading-actions {
+        flex-direction: column;
+    }
+
+    .page-heading-actions button {
+        width: 100%;
+    }
+
+}

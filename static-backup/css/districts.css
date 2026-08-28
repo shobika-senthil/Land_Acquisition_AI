@@ -1,0 +1,628 @@
+/* =========================================================
+   LANDLYTICS
+   DISTRICT-WISE ANALYSIS STYLES
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.districts-container {
+    padding-bottom: 20px;
+}
+
+
+/* =========================================================
+   DISTRICT SELECTION
+   ========================================================= */
+
+.district-selection-panel {
+    margin-top: 24px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+}
+
+
+.district-selection-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr 1fr;
+    gap: 14px;
+    align-items: end;
+}
+
+
+.district-selected-summary {
+    padding: 12px 14px;
+    background: var(--sand-100);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+}
+
+
+.district-selected-summary span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+
+.district-selected-summary strong {
+    display: block;
+    margin-top: 3px;
+    color: var(--brown-700);
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   DISTRICT KPI
+   ========================================================= */
+
+.district-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+}
+
+
+.district-kpi-card {
+    position: relative;
+    padding: 18px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+    overflow: hidden;
+}
+
+
+.district-kpi-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--brown-300);
+}
+
+
+.district-kpi-card.critical::before {
+    background: var(--critical);
+}
+
+
+.district-kpi-card.high::before {
+    background: var(--high);
+}
+
+
+.district-kpi-card.delay::before {
+    background: var(--brown-400);
+}
+
+
+.district-kpi-card span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+
+.district-kpi-card strong {
+    display: block;
+    margin-top: 9px;
+    color: var(--brown-700);
+    font-size: 25px;
+    font-weight: 650;
+    line-height: 1.1;
+}
+
+
+.district-kpi-card p {
+    margin-top: 5px;
+    color: var(--text-muted);
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   MAIN ANALYTICS
+   ========================================================= */
+
+.district-analysis-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.85fr);
+    gap: 16px;
+    margin-top: 18px;
+}
+
+
+.district-analysis-panel {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CHART
+   ========================================================= */
+
+.district-chart-container {
+    min-height: 310px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.district-chart-placeholder {
+    width: 100%;
+    min-height: 270px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 51px,
+            var(--border-light) 52px
+        );
+    border-bottom: 1px solid var(--border-medium);
+    color: var(--text-muted);
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PROJECT RISK
+   ========================================================= */
+
+.project-risk-section {
+    margin-top: 18px;
+}
+
+
+.project-risk-table {
+    min-width: 800px;
+}
+
+
+.project-risk-table .project-name {
+    color: var(--brown-600);
+    font-weight: 600;
+}
+
+
+.project-risk-table .risk-score {
+    color: var(--brown-700);
+    font-weight: 650;
+}
+
+
+.project-risk-table .delay-value {
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   RISK DISTRIBUTION
+   ========================================================= */
+
+.district-risk-distribution {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+}
+
+
+.district-risk-item {
+    display: grid;
+    grid-template-columns: 70px 1fr 45px;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.district-risk-item-label {
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+.district-risk-track {
+    height: 8px;
+    overflow: hidden;
+    background: var(--sand-200);
+    border-radius: 20px;
+}
+
+
+.district-risk-value {
+    width: 0;
+    height: 100%;
+    background: var(--brown-400);
+    border-radius: inherit;
+    transition: width 0.5s ease;
+}
+
+
+.district-risk-item.critical .district-risk-value {
+    background: var(--critical);
+}
+
+
+.district-risk-item.high .district-risk-value {
+    background: var(--high);
+}
+
+
+.district-risk-item.medium .district-risk-value {
+    background: var(--medium);
+}
+
+
+.district-risk-item.low .district-risk-value {
+    background: var(--low);
+}
+
+
+.district-risk-percentage {
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 600;
+    text-align: right;
+}
+
+
+/* =========================================================
+   PERFORMANCE INDICATORS
+   ========================================================= */
+
+.district-performance-section {
+    margin-top: 18px;
+}
+
+
+.district-performance-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+
+.district-performance-card {
+    padding: 17px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+}
+
+
+.district-performance-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+
+.district-performance-card-header span {
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+
+.district-performance-card-header strong {
+    color: var(--brown-700);
+    font-size: 18px;
+}
+
+
+.district-performance-card p {
+    margin-top: 6px;
+    color: var(--text-muted);
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   PERFORMANCE BARS
+   ========================================================= */
+
+.district-performance-bar {
+    margin-top: 12px;
+}
+
+
+.district-performance-bar-track {
+    width: 100%;
+    height: 7px;
+    overflow: hidden;
+    background: var(--sand-200);
+    border-radius: 20px;
+}
+
+
+.district-performance-bar-value {
+    width: 0;
+    height: 100%;
+    background: var(--brown-400);
+    border-radius: inherit;
+    transition: width 0.5s ease;
+}
+
+
+/* =========================================================
+   COMPARATIVE ANALYTICS
+   ========================================================= */
+
+.comparative-analytics-section {
+    margin-top: 18px;
+}
+
+
+.comparative-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+
+.comparative-panel {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+}
+
+
+.comparative-list {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+}
+
+
+.comparative-item {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+
+.comparative-item:last-child {
+    border-bottom: none;
+}
+
+
+.comparative-rank {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sand-100);
+    border: 1px solid var(--border-light);
+    border-radius: 50%;
+    color: var(--brown-500);
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+.comparative-name {
+    color: var(--text-primary);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+.comparative-meta {
+    display: block;
+    margin-top: 2px;
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+
+.comparative-value {
+    color: var(--brown-600);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   DELAY DRIVERS
+   ========================================================= */
+
+.delay-drivers-section {
+    margin-top: 18px;
+}
+
+
+.delay-drivers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+
+.delay-driver {
+    padding: 15px;
+    background: var(--surface-soft);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+}
+
+
+.delay-driver-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+
+.delay-driver-header span {
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+
+.delay-driver-header strong {
+    color: var(--brown-600);
+    font-size: 13px;
+}
+
+
+.delay-driver h4 {
+    margin-top: 9px;
+    color: var(--brown-700);
+    font-size: 11px;
+    font-weight: 650;
+}
+
+
+.delay-driver p {
+    margin-top: 4px;
+    color: var(--text-muted);
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   DISTRICT INSIGHT
+   ========================================================= */
+
+.district-insight-section {
+    margin-top: 18px;
+}
+
+
+.district-insight-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    padding: 18px;
+    background: var(--sand-100);
+    border: 1px solid var(--border-light);
+    border-left: 3px solid var(--brown-300);
+    border-radius: var(--radius-md);
+}
+
+
+.district-insight-icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--brown-200);
+    color: var(--brown-700);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+.district-insight-card h4 {
+    color: var(--brown-700);
+    font-size: 12px;
+    font-weight: 650;
+}
+
+
+.district-insight-card p {
+    margin-top: 4px;
+    color: var(--text-secondary);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .district-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .district-analysis-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .district-performance-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .delay-drivers-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .district-selection-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .comparative-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .district-kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .district-performance-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .delay-drivers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .district-chart-container {
+        min-height: 240px;
+    }
+
+}

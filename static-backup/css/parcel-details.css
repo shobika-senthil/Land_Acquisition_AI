@@ -1,0 +1,1120 @@
+/* =========================================================
+   LANDLYTICS
+   PARCEL DETAILS
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.parcel-details-container {
+    padding-bottom: 24px;
+}
+
+
+/* =========================================================
+   PARCEL HEADER
+   ========================================================= */
+
+.parcel-header {
+    margin-top: 24px;
+    padding: 21px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+
+    box-shadow: var(--shadow-xs);
+}
+
+
+.parcel-header-main {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 25px;
+}
+
+
+.parcel-identification {
+    min-width: 0;
+}
+
+
+.parcel-identification > span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--brown-400);
+
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 0.05em;
+}
+
+
+.parcel-identification h2 {
+    color: var(--brown-700);
+
+    font-size: 22px;
+    font-weight: 650;
+
+    line-height: 1.25;
+}
+
+
+.parcel-identification p {
+    margin-top: 5px;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+}
+
+
+.parcel-header-actions {
+    display: flex;
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   LOCATION PATH
+   ========================================================= */
+
+.parcel-location-path {
+    display: flex;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 18px;
+    padding-top: 15px;
+
+    border-top: 1px solid var(--border-light);
+}
+
+
+.parcel-location-path span {
+    color: var(--text-muted);
+
+    font-size: 9px;
+}
+
+
+.parcel-location-path strong {
+    color: var(--brown-600);
+
+    font-size: 9px;
+    font-weight: 650;
+}
+
+
+.parcel-location-separator {
+    color: var(--border-medium) !important;
+}
+
+
+/* =========================================================
+   PARCEL RISK OVERVIEW
+   ========================================================= */
+
+.parcel-risk-overview {
+    display: grid;
+
+    grid-template-columns:
+        1.15fr
+        repeat(3, 1fr);
+
+    gap: 14px;
+
+    margin-top: 18px;
+}
+
+
+.parcel-risk-main {
+    position: relative;
+
+    padding: 20px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--brown-600),
+            var(--brown-700)
+        );
+
+    border-radius: var(--radius-md);
+
+    color: #ffffff;
+
+    box-shadow: var(--shadow-sm);
+}
+
+
+.parcel-risk-main::after {
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    right: -60px;
+    bottom: -70px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 50%;
+}
+
+
+.parcel-risk-main > span {
+    position: relative;
+    z-index: 1;
+
+    display: block;
+
+    color: rgba(255,255,255,0.65);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+
+.parcel-risk-score {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 3px;
+
+    margin-top: 10px;
+}
+
+
+.parcel-risk-score strong {
+    font-size: 35px;
+    font-weight: 650;
+}
+
+
+.parcel-risk-score span {
+    color: rgba(255,255,255,0.55);
+
+    font-size: 10px;
+}
+
+
+.parcel-risk-level {
+    position: relative;
+    z-index: 1;
+
+    display: inline-flex;
+
+    margin-top: 9px;
+
+    padding: 5px 8px;
+
+    background: rgba(255,255,255,0.1);
+
+    border: 1px solid rgba(255,255,255,0.14);
+
+    border-radius: 3px;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 0.06em;
+}
+
+
+.parcel-risk-card {
+    padding: 18px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border-light);
+
+    border-radius: var(--radius-md);
+
+    box-shadow: var(--shadow-xs);
+}
+
+
+.parcel-risk-card span {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 0.07em;
+
+    text-transform: uppercase;
+}
+
+
+.parcel-risk-card strong {
+    display: block;
+
+    margin-top: 9px;
+
+    color: var(--brown-700);
+
+    font-size: 23px;
+    font-weight: 650;
+}
+
+
+.parcel-risk-card p {
+    margin-top: 5px;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   PARCEL INFORMATION
+   ========================================================= */
+
+.parcel-information-section {
+    margin-top: 18px;
+}
+
+
+.parcel-information-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 1px;
+
+    overflow: hidden;
+
+    background: var(--border-light);
+
+    border: 1px solid var(--border-light);
+
+    border-radius: var(--radius-md);
+}
+
+
+.parcel-information-item {
+    padding: 14px;
+
+    background: var(--surface);
+}
+
+
+.parcel-information-item span {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 0.07em;
+
+    text-transform: uppercase;
+}
+
+
+.parcel-information-item strong {
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--text-primary);
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.parcel-content-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.35fr)
+        minmax(300px, 0.85fr);
+
+    gap: 16px;
+
+    margin-top: 18px;
+}
+
+
+/* =========================================================
+   PANEL
+   ========================================================= */
+
+.parcel-panel {
+    overflow: hidden;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border-light);
+
+    border-radius: var(--radius-md);
+
+    box-shadow: var(--shadow-xs);
+}
+
+
+.parcel-panel-body {
+    padding: 19px;
+}
+
+
+/* =========================================================
+   OWNERSHIP
+   ========================================================= */
+
+.ownership-section {
+    margin-top: 0;
+}
+
+
+.ownership-status {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 13px;
+
+    background: var(--surface-soft);
+
+    border: 1px solid var(--border-light);
+
+    border-radius: var(--radius-sm);
+}
+
+
+.ownership-status-label {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.ownership-status-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: var(--success);
+}
+
+
+.ownership-status.conflict
+.ownership-status-dot {
+    background: var(--critical);
+}
+
+
+.ownership-status-label strong {
+    color: var(--text-primary);
+
+    font-size: 10px;
+}
+
+
+.ownership-status-value {
+    color: var(--brown-600);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   RISK FACTORS
+   ========================================================= */
+
+.parcel-factors-section {
+    margin-top: 18px;
+}
+
+
+.parcel-factor-list {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.parcel-factor {
+    padding: 14px 0;
+
+    border-bottom: 1px solid var(--border-light);
+}
+
+
+.parcel-factor:last-child {
+    border-bottom: none;
+}
+
+
+.parcel-factor-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+.parcel-factor-header span {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+.parcel-factor-header strong {
+    color: var(--brown-600);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+.parcel-factor-track {
+    width: 100%;
+
+    height: 7px;
+
+    margin-top: 8px;
+
+    overflow: hidden;
+
+    background: var(--sand-200);
+
+    border-radius: 10px;
+}
+
+
+.parcel-factor-value {
+    width: 0;
+    height: 100%;
+
+    background: var(--brown-400);
+
+    border-radius: inherit;
+
+    transition: width 0.5s ease;
+}
+
+
+.parcel-factor.critical
+.parcel-factor-value {
+    background: var(--critical);
+}
+
+
+.parcel-factor.warning
+.parcel-factor-value {
+    background: var(--high);
+}
+
+
+.parcel-factor.good
+.parcel-factor-value {
+    background: var(--success);
+}
+
+
+.parcel-factor-description {
+    margin-top: 5px;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   LEGAL / OWNERSHIP ISSUES
+   ========================================================= */
+
+.parcel-issues-section {
+    margin-top: 18px;
+}
+
+
+.parcel-issue {
+    display: grid;
+
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid var(--border-light);
+}
+
+
+.parcel-issue:last-child {
+    border-bottom: none;
+}
+
+
+.parcel-issue-icon {
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--sand-100);
+
+    border-radius: 50%;
+
+    color: var(--brown-600);
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+.parcel-issue.critical
+.parcel-issue-icon {
+    background: var(--critical-soft);
+
+    color: var(--critical);
+}
+
+
+.parcel-issue-content strong {
+    display: block;
+
+    color: var(--text-primary);
+
+    font-size: 10px;
+}
+
+
+.parcel-issue-content span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--text-muted);
+
+    font-size: 9px;
+}
+
+
+.parcel-issue-count {
+    color: var(--brown-600);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   COMPENSATION
+   ========================================================= */
+
+.compensation-section {
+    margin-top: 18px;
+}
+
+
+.compensation-summary {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+}
+
+
+.compensation-card {
+    padding: 13px;
+
+    background: var(--surface-soft);
+
+    border: 1px solid var(--border-light);
+
+    border-radius: var(--radius-sm);
+}
+
+
+.compensation-card span {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 8px;
+}
+
+
+.compensation-card strong {
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--brown-700);
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   DOCUMENTATION
+   ========================================================= */
+
+.documentation-section {
+    margin-top: 18px;
+}
+
+
+.documentation-list {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.documentation-item {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 11px 0;
+
+    border-bottom: 1px solid var(--border-light);
+}
+
+
+.documentation-item:last-child {
+    border-bottom: none;
+}
+
+
+.documentation-name {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+}
+
+
+.documentation-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    font-size: 9px;
+    font-weight: 600;
+}
+
+
+.documentation-status::before {
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: var(--success);
+}
+
+
+.documentation-status.pending {
+    color: var(--high);
+}
+
+
+.documentation-status.pending::before {
+    background: var(--high);
+}
+
+
+.documentation-status.complete {
+    color: var(--success);
+}
+
+
+/* =========================================================
+   R&R / POSSESSION
+   ========================================================= */
+
+.parcel-progress-section {
+    margin-top: 18px;
+}
+
+
+.parcel-progress-item {
+    margin-top: 14px;
+}
+
+
+.parcel-progress-item:first-child {
+    margin-top: 0;
+}
+
+
+.parcel-progress-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+
+.parcel-progress-header span {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+}
+
+
+.parcel-progress-header strong {
+    color: var(--brown-600);
+
+    font-size: 10px;
+}
+
+
+.parcel-progress-track {
+    height: 7px;
+
+    margin-top: 7px;
+
+    overflow: hidden;
+
+    background: var(--sand-200);
+
+    border-radius: 10px;
+}
+
+
+.parcel-progress-value {
+    width: 0;
+    height: 100%;
+
+    background: var(--brown-400);
+
+    border-radius: inherit;
+}
+
+
+/* =========================================================
+   RECOMMENDED ACTION
+   ========================================================= */
+
+.parcel-recommendation {
+    margin-top: 18px;
+
+    padding: 17px;
+
+    background: var(--sand-100);
+
+    border: 1px solid var(--border-light);
+
+    border-left: 3px solid var(--brown-300);
+
+    border-radius: var(--radius-md);
+}
+
+
+.parcel-recommendation-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.parcel-recommendation-icon {
+    width: 29px;
+    height: 29px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--brown-200);
+
+    border-radius: 50%;
+
+    color: var(--brown-700);
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+.parcel-recommendation h4 {
+    color: var(--brown-700);
+
+    font-size: 11px;
+}
+
+
+.parcel-recommendation p {
+    margin-top: 8px;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   PARCEL MAP PREVIEW
+   ========================================================= */
+
+.parcel-map-preview {
+    position: relative;
+
+    min-height: 270px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--sand-100),
+            var(--sand-200)
+        );
+
+    border: 1px solid var(--border-light);
+
+    border-radius: var(--radius-sm);
+}
+
+
+.parcel-map-grid {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            rgba(93,70,52,0.04) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(93,70,52,0.04) 1px,
+            transparent 1px
+        );
+
+    background-size: 35px 35px;
+}
+
+
+.parcel-boundary {
+    position: absolute;
+
+    left: 28%;
+    top: 22%;
+
+    width: 42%;
+    height: 48%;
+
+    background: rgba(118,93,69,0.08);
+
+    border: 2px solid var(--brown-400);
+
+    clip-path:
+        polygon(
+            8% 18%,
+            65% 4%,
+            95% 27%,
+            83% 85%,
+            42% 96%,
+            5% 72%
+        );
+}
+
+
+.parcel-map-label {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    padding: 5px 8px;
+
+    background: rgba(255,255,255,0.92);
+
+    border: 1px solid var(--border-light);
+
+    border-radius: 3px;
+
+    color: var(--brown-700);
+
+    font-family: var(--font-mono);
+
+    font-size: 8px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   AUDIT INFORMATION
+   ========================================================= */
+
+.parcel-audit {
+    margin-top: 18px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid var(--border-light);
+}
+
+
+.parcel-audit-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+}
+
+
+.parcel-audit-item span {
+    display: block;
+
+    color: var(--text-muted);
+
+    font-size: 8px;
+}
+
+
+.parcel-audit-item strong {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--text-secondary);
+
+    font-family: var(--font-mono);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .parcel-risk-overview {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .parcel-risk-main {
+        grid-column: span 2;
+    }
+
+    .parcel-information-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .parcel-content-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .parcel-header-main {
+        flex-direction: column;
+    }
+
+    .parcel-header-actions {
+        width: 100%;
+    }
+
+    .parcel-header-actions button {
+        flex: 1;
+    }
+
+    .parcel-risk-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .parcel-risk-main {
+        grid-column: auto;
+    }
+
+    .parcel-information-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .compensation-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .parcel-audit-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

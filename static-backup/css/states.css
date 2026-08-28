@@ -1,0 +1,548 @@
+/* =========================================================
+   LANDLYTICS
+   STATE-WISE ANALYSIS STYLES
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.states-container {
+    padding-bottom: 20px;
+}
+
+
+/* =========================================================
+   STATE SELECTION
+   ========================================================= */
+
+.state-selection-panel {
+    margin-top: 24px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+}
+
+
+.state-selection-grid {
+    display: grid;
+    grid-template-columns: minmax(250px, 0.8fr) 1fr 1fr;
+    gap: 14px;
+    align-items: end;
+}
+
+
+.state-selected-summary {
+    padding: 12px 14px;
+    background: var(--sand-100);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+}
+
+
+.state-selected-summary span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+
+.state-selected-summary strong {
+    display: block;
+    margin-top: 3px;
+    color: var(--brown-700);
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   STATE KPI CARDS
+   ========================================================= */
+
+.state-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+}
+
+
+.state-kpi-card {
+    padding: 18px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+}
+
+
+.state-kpi-card span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+
+.state-kpi-card strong {
+    display: block;
+    margin-top: 9px;
+    color: var(--brown-700);
+    font-size: 25px;
+    font-weight: 650;
+    line-height: 1.1;
+}
+
+
+.state-kpi-card p {
+    margin-top: 5px;
+    color: var(--text-muted);
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   MAIN ANALYTICS GRID
+   ========================================================= */
+
+.state-analysis-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.85fr);
+    gap: 16px;
+    margin-top: 18px;
+}
+
+
+.state-analysis-panel {
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xs);
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CHART PANEL
+   ========================================================= */
+
+.state-chart-container {
+    min-height: 300px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.state-chart-placeholder {
+    width: 100%;
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 51px,
+            var(--border-light) 52px
+        );
+    border-bottom: 1px solid var(--border-medium);
+    color: var(--text-muted);
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   RISK DISTRIBUTION
+   ========================================================= */
+
+.state-risk-distribution {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 20px;
+}
+
+
+.state-risk-item {
+    display: grid;
+    grid-template-columns: 75px 1fr 45px;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.state-risk-item-label {
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 600;
+}
+
+
+.state-risk-track {
+    height: 8px;
+    overflow: hidden;
+    background: var(--sand-200);
+    border-radius: 20px;
+}
+
+
+.state-risk-value {
+    width: 0;
+    height: 100%;
+    background: var(--brown-400);
+    border-radius: inherit;
+    transition: width 0.5s ease;
+}
+
+
+.state-risk-item.critical .state-risk-value {
+    background: var(--critical);
+}
+
+
+.state-risk-item.high .state-risk-value {
+    background: var(--high);
+}
+
+
+.state-risk-item.medium .state-risk-value {
+    background: var(--medium);
+}
+
+
+.state-risk-item.low .state-risk-value {
+    background: var(--low);
+}
+
+
+.state-risk-percentage {
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 600;
+    text-align: right;
+}
+
+
+/* =========================================================
+   DELAY TREND
+   ========================================================= */
+
+.state-delay-trend {
+    margin-top: 18px;
+}
+
+
+.state-delay-chart {
+    min-height: 310px;
+    padding: 20px;
+}
+
+
+/* =========================================================
+   DISTRICT COMPARISON
+   ========================================================= */
+
+.district-comparison-section {
+    margin-top: 18px;
+}
+
+
+.district-comparison-table {
+    min-width: 760px;
+}
+
+
+.district-comparison-table .district-name {
+    color: var(--brown-600);
+    font-weight: 600;
+}
+
+
+.district-comparison-table .risk-score {
+    color: var(--brown-700);
+    font-weight: 650;
+}
+
+
+.district-comparison-table .delay-value {
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   DISTRICT RANK
+   ========================================================= */
+
+.district-rank {
+    width: 27px;
+    height: 27px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--sand-100);
+    border: 1px solid var(--border-light);
+    border-radius: 50%;
+    color: var(--brown-500);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PERFORMANCE SECTION
+   ========================================================= */
+
+.state-performance-section {
+    margin-top: 18px;
+}
+
+
+.state-performance-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+
+.state-performance-card {
+    padding: 17px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+}
+
+
+.state-performance-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+
+.state-performance-card-header span {
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+
+.state-performance-card-header strong {
+    color: var(--brown-700);
+    font-size: 18px;
+}
+
+
+.state-performance-card p {
+    margin-top: 6px;
+    color: var(--text-muted);
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   STATE RISK SUMMARY
+   ========================================================= */
+
+.state-risk-summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 14px;
+}
+
+
+.state-risk-summary-item {
+    padding: 13px;
+    background: var(--surface-soft);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+}
+
+
+.state-risk-summary-item span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+
+.state-risk-summary-item strong {
+    display: block;
+    margin-top: 4px;
+    color: var(--brown-600);
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   TOP RISK DISTRICTS
+   ========================================================= */
+
+.top-risk-districts {
+    margin-top: 18px;
+}
+
+
+.top-risk-district-list {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.top-risk-district {
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 4px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+
+.top-risk-district:last-child {
+    border-bottom: none;
+}
+
+
+.top-risk-district-name {
+    color: var(--text-primary);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+.top-risk-district-location {
+    display: block;
+    margin-top: 2px;
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+
+.top-risk-district-score {
+    color: var(--brown-600);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   STATE INSIGHT
+   ========================================================= */
+
+.state-insight-section {
+    margin-top: 18px;
+}
+
+
+.state-insight-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    padding: 18px;
+    background: var(--sand-100);
+    border: 1px solid var(--border-light);
+    border-left: 3px solid var(--brown-300);
+    border-radius: var(--radius-md);
+}
+
+
+.state-insight-icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--brown-200);
+    color: var(--brown-700);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+.state-insight-card h4 {
+    color: var(--brown-700);
+    font-size: 12px;
+    font-weight: 650;
+}
+
+
+.state-insight-card p {
+    margin-top: 4px;
+    color: var(--text-secondary);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.state-loading {
+    min-height: 80px;
+    background: var(--sand-100);
+    border-radius: var(--radius-sm);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .state-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .state-analysis-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .state-performance-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .state-selection-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .state-kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .state-performance-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .state-risk-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .state-chart-container,
+    .state-delay-chart {
+        min-height: 240px;
+    }
+
+}

@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LANDLYTICS | Project Details</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/projects.css') }}">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         APPLICATION HEADER
+    ====================================================== -->
+
+    <header class="application-header">
+
+        <div class="header-brand">
+
+            <a href="/dashboard" class="brand-link">
+
+                <div class="brand-emblem">
+                    LL
+                </div>
+
+                <div class="brand-details">
+
+                    <h1>LANDLYTICS</h1>
+
+                    <p>
+                        Land Acquisition Intelligence & Monitoring System
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <div class="header-user">
+
+            <div class="system-status">
+
+                <span class="status-indicator"></span>
+
+                <span>
+                    System Operational
+                </span>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div class="user-avatar">
+                    U
+                </div>
+
+                <div class="user-details">
+
+                    <strong id="userName">
+                        User
+                    </strong>
+
+                    <span id="userRole">
+                        Authorized Officer
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-button"
+            >
+                Sign out
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN NAVIGATION
+    ====================================================== -->
+
+    <nav
+        class="main-navigation"
+        aria-label="Main navigation"
+    >
+
+        <div class="navigation-container">
+
+            <a href="/dashboard"
+               class="navigation-item">
+                Dashboard
+            </a>
+
+            <a href="/states"
+               class="navigation-item">
+                State-wise Analysis
+            </a>
+
+            <a href="/districts"
+               class="navigation-item">
+                District-wise Analysis
+            </a>
+
+            <a href="/projects"
+               class="navigation-item active">
+                Projects
+            </a>
+
+            <a href="/gis-map"
+               class="navigation-item">
+                GIS Risk Map
+            </a>
+
+            <a href="/ai-insights"
+               class="navigation-item">
+                AI Insights
+            </a>
+
+            <a href="/alerts"
+               class="navigation-item">
+                Alerts
+            </a>
+
+            <a href="/reports"
+               class="navigation-item">
+                Reports
+            </a>
+
+            <a href="/admin"
+               class="navigation-item">
+                Administration
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="project-details-container">
+
+
+        <!-- =================================================
+             BACK NAVIGATION
+        ================================================== -->
+
+        <div class="detail-navigation">
+
+            <a
+                href="/projects"
+                class="back-link"
+            >
+                ← Back to Projects
+            </a>
+
+            <span>
+                /
+            </span>
+
+            <span id="projectBreadcrumb">
+                Project Details
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             PROJECT HEADER
+        ================================================== -->
+
+        <section class="project-header-section">
+
+            <div class="project-header-information">
+
+                <span class="section-label">
+                    LAND ACQUISITION PROJECT
+                </span>
+
+                <h2 id="projectName">
+                    Project —
+                </h2>
+
+                <div class="project-identifiers">
+
+                    <span>
+                        Project ID:
+                    </span>
+
+                    <strong id="projectId">
+                        —
+                    </strong>
+
+
+                    <span>
+                        State:
+                    </span>
+
+                    <strong id="projectState">
+                        —
+                    </strong>
+
+
+                    <span>
+                        District:
+                    </span>
+
+                    <strong id="projectDistrict">
+                        —
+                    </strong>
+
+
+                    <span>
+                        Type:
+                    </span>
+
+                    <strong id="projectType">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="project-header-actions">
+
+                <button
+                    type="button"
+                    id="projectReportButton"
+                    class="secondary-button"
+                >
+                    Project Report
+                </button>
+
+                <a
+                    id="projectGISLink"
+                    href="/gis-map"
+                    class="primary-button"
+                >
+                    View on GIS
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROJECT STATUS
+        ================================================== -->
+
+        <section class="project-status-section">
+
+            <div class="status-card">
+
+                <span>
+                    PROJECT STATUS
+                </span>
+
+                <strong id="projectStatus">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="status-card">
+
+                <span>
+                    ACQUISITION PROGRESS
+                </span>
+
+                <strong id="projectProgress">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="status-card">
+
+                <span>
+                    LAND PARCELS
+                </span>
+
+                <strong id="projectParcelCount">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="status-card">
+
+                <span>
+                    LAST UPDATED
+                </span>
+
+                <strong id="projectLastUpdated">
+                    —
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             AI RISK SUMMARY
+        ================================================== -->
+
+        <section class="ai-risk-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        AI RISK ASSESSMENT
+                    </span>
+
+                    <h3>
+                        Predictive Project Risk
+                    </h3>
+
+                </div>
+
+
+                <span class="ai-model-label">
+                    LANDLYTICS AI
+                </span>
+
+            </div>
+
+
+            <div class="ai-risk-grid">
+
+
+                <!-- DELAY PROBABILITY -->
+
+                <article class="ai-risk-card">
+
+                    <span class="risk-card-label">
+                        DELAY PROBABILITY
+                    </span>
+
+                    <strong
+                        id="delayProbability"
+                        class="risk-card-value"
+                    >
+                        —
+                    </strong>
+
+                    <p>
+                        AI-predicted probability of acquisition delay
+                    </p>
+
+                </article>
+
+
+                <!-- RISK SCORE -->
+
+                <article class="ai-risk-card">
+
+                    <span class="risk-card-label">
+                        RISK SCORE
+                    </span>
+
+                    <strong
+                        id="riskScore"
+                        class="risk-card-value"
+                    >
+                        —
+                    </strong>
+
+                    <p>
+                        Composite project risk assessment
+                    </p>
+
+                </article>
+
+
+                <!-- RISK CATEGORY -->
+
+                <article
+                    class="ai-risk-card risk-category-card"
+                >
+
+                    <span class="risk-card-label">
+                        RISK CATEGORY
+                    </span>
+
+                    <strong
+                        id="riskCategory"
+                        class="risk-card-value"
+                    >
+                        —
+                    </strong>
+
+                    <p>
+                        Current AI risk classification
+                    </p>
+
+                </article>
+
+            </div>
+
+
+            <!-- AI EXPLANATION SUMMARY -->
+
+            <div class="ai-assessment-summary">
+
+                <div class="ai-assessment-icon">
+                    AI
+                </div>
+
+                <div>
+
+                    <span class="section-label">
+                        AI ASSESSMENT
+                    </span>
+
+                    <h4 id="aiAssessmentTitle">
+                        Assessment pending
+                    </h4>
+
+                    <p id="aiAssessmentSummary">
+                        AI assessment information will appear here
+                        after project analysis.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROJECT INFORMATION
+        ================================================== -->
+
+        <section class="project-information-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        PROJECT INFORMATION
+                    </span>
+
+                    <h3>
+                        Project Information
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="information-grid">
+
+
+                <div class="information-item">
+
+                    <span>
+                        Project ID
+                    </span>
+
+                    <strong id="informationProjectId">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span>
+                        Project Type
+                    </span>
+
+                    <strong id="informationProjectType">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span>
+                        State
+                    </span>
+
+                    <strong id="informationState">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span>
+                        District
+                    </span>
+
+                    <strong id="informationDistrict">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span>
+                        Project Start
+                    </span>
+
+                    <strong id="projectStartDate">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span>
+                        Target Completion
+                    </span>
+
+                    <strong id="projectTargetDate">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span>
+                        Total Land Required
+                    </span>
+
+                    <strong id="totalLandRequired">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="information-item">
+
+                    <span>
+                        Land Acquired
+                    </span>
+
+                    <strong id="landAcquired">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             TIMELINE ANALYSIS
+        ================================================== -->
+
+        <section class="project-timeline-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        PROJECT TIMELINE
+                    </span>
+
+                    <h3>
+                        Timeline Analysis
+                    </h3>
+
+                    <p>
+                        Track major acquisition milestones and
+                        identify delayed activities.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="timeline-container"
+                 id="projectTimeline">
+
+
+                <!-- MILESTONE: NOTIFICATION -->
+
+                <article class="timeline-item">
+
+                    <div class="timeline-marker">
+                        01
+                    </div>
+
+                    <div class="timeline-content">
+
+                        <div class="timeline-header">
+
+                            <h4>
+                                Preliminary Notification
+                            </h4>
+
+                            <span
+                                id="notificationStatus"
+                                class="timeline-status"
+                            >
+                                —
+                            </span>
+
+                        </div>
+
+                        <p>
+                            Initial land acquisition notification.
+                        </p>
+
+                        <div class="timeline-date">
+
+                            <span>
+                                Planned:
+                            </span>
+
+                            <strong id="notificationPlannedDate">
+                                —
+                            </strong>
+
+                            <span>
+                                Actual:
+                            </span>
+
+                            <strong id="notificationActualDate">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- MILESTONE: VERIFICATION -->
+
+                <article class="timeline-item">
+
+                    <div class="timeline-marker">
+                        02
+                    </div>
+
+                    <div class="timeline-content">
+
+                        <div class="timeline-header">
+
+                            <h4>
+                                Land & Ownership Verification
+                            </h4>
+
+                            <span
+                                id="verificationStatus"
+                                class="timeline-status"
+                            >
+                                —
+                            </span>
+
+                        </div>
+
+                        <p>
+                            Verification of land records and ownership.
+                        </p>
+
+                        <div class="timeline-date">
+
+                            <span>
+                                Planned:
+                            </span>
+
+                            <strong id="verificationPlannedDate">
+                                —
+                            </strong>
+
+                            <span>
+                                Actual:
+                            </span>
+
+                            <strong id="verificationActualDate">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- MILESTONE: COMPENSATION -->
+
+                <article class="timeline-item">
+
+                    <div class="timeline-marker">
+                        03
+                    </div>
+
+                    <div class="timeline-content">
+
+                        <div class="timeline-header">
+
+                            <h4>
+                                Compensation
+                            </h4>
+
+                            <span
+                                id="compensationStatus"
+                                class="timeline-status"
+                            >
+                                —
+                            </span>
+
+                        </div>
+
+                        <p>
+                            Compensation assessment and disbursement.
+                        </p>
+
+                        <div class="timeline-date">
+
+                            <span>
+                                Planned:
+                            </span>
+
+                            <strong id="compensationPlannedDate">
+                                —
+                            </strong>
+
+                            <span>
+                                Actual:
+                            </span>
+
+                            <strong id="compensationActualDate">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- MILESTONE: POSSESSION -->
+
+                <article class="timeline-item">
+
+                    <div class="timeline-marker">
+                        04
+                    </div>
+
+                    <div class="timeline-content">
+
+                        <div class="timeline-header">
+
+                            <h4>
+                                Land Possession
+                            </h4>
+
+                            <span
+                                id="possessionStatus"
+                                class="timeline-status"
+                            >
+                                —
+                            </span>
+
+                        </div>
+
+                        <p>
+                            Physical possession of acquired land.
+                        </p>
+
+                        <div class="timeline-date">
+
+                            <span>
+                                Planned:
+                            </span>
+
+                            <strong id="possessionPlannedDate">
+                                —
+                            </strong>
+
+                            <span>
+                                Actual:
+                            </span>
+
+                            <strong id="possessionActualDate">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- MILESTONE: CLOSURE -->
+
+                <article class="timeline-item">
+
+                    <div class="timeline-marker">
+                        05
+                    </div>
+
+                    <div class="timeline-content">
+
+                        <div class="timeline-header">
+
+                            <h4>
+                                Acquisition Closure
+                            </h4>
+
+                            <span
+                                id="closureStatus"
+                                class="timeline-status"
+                            >
+                                —
+                            </span>
+
+                        </div>
+
+                        <p>
+                            Completion and closure of the
+                            acquisition process.
+                        </p>
+
+                        <div class="timeline-date">
+
+                            <span>
+                                Planned:
+                            </span>
+
+                            <strong id="closurePlannedDate">
+                                —
+                            </strong>
+
+                            <span>
+                                Actual:
+                            </span>
+
+                            <strong id="closureActualDate">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROGRESS INDICATORS
+        ================================================== -->
+
+        <section class="project-progress-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        ACQUISITION PROGRESS
+                    </span>
+
+                    <h3>
+                        Progress Indicators
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="progress-indicator-grid">
+
+
+                <!-- COMPENSATION -->
+
+                <article class="progress-indicator-card">
+
+                    <div class="progress-indicator-header">
+
+                        <div>
+
+                            <h4>
+                                Compensation
+                            </h4>
+
+                            <span>
+                                Completion
+                            </span>
+
+                        </div>
+
+                        <strong id="projectCompensation">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="progress-track">
+
+                        <div
+                            id="projectCompensationProgress"
+                            class="progress-value"
+                        ></div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- DOCUMENTATION -->
+
+                <article class="progress-indicator-card">
+
+                    <div class="progress-indicator-header">
+
+                        <div>
+
+                            <h4>
+                                Documentation
+                            </h4>
+
+                            <span>
+                                Completion
+                            </span>
+
+                        </div>
+
+                        <strong id="projectDocumentation">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="progress-track">
+
+                        <div
+                            id="projectDocumentationProgress"
+                            class="progress-value"
+                        ></div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- R&R -->
+
+                <article class="progress-indicator-card">
+
+                    <div class="progress-indicator-header">
+
+                        <div>
+
+                            <h4>
+                                Rehabilitation & Resettlement
+                            </h4>
+
+                            <span>
+                                Completion
+                            </span>
+
+                        </div>
+
+                        <strong id="projectRR">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="progress-track">
+
+                        <div
+                            id="projectRRProgress"
+                            class="progress-value"
+                        ></div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- POSSESSION -->
+
+                <article class="progress-indicator-card">
+
+                    <div class="progress-indicator-header">
+
+                        <div>
+
+                            <h4>
+                                Land Possession
+                            </h4>
+
+                            <span>
+                                Completion
+                            </span>
+
+                        </div>
+
+                        <strong id="projectPossession">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="progress-track">
+
+                        <div
+                            id="projectPossessionProgress"
+                            class="progress-value"
+                        ></div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- STAKEHOLDER RESPONSE -->
+
+                <article class="progress-indicator-card">
+
+                    <div class="progress-indicator-header">
+
+                        <div>
+
+                            <h4>
+                                Stakeholder Response
+                            </h4>
+
+                            <span>
+                                Response Rate
+                            </span>
+
+                        </div>
+
+                        <strong id="projectStakeholderResponse">
+                            —
+                        </strong>
+
+                    </div>
+
+                    <div class="progress-track">
+
+                        <div
+                            id="projectStakeholderProgress"
+                            class="progress-value"
+                        ></div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             KEY DELAY DRIVERS
+        ================================================== -->
+
+        <section class="delay-drivers-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        AI-IDENTIFIED FACTORS
+                    </span>
+
+                    <h3>
+                        Key Delay Drivers
+                    </h3>
+
+                    <p>
+                        Factors currently contributing to the
+                        project's predicted delay risk.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="delayDrivers"
+                class="delay-drivers-list"
+            >
+
+                <div class="empty-state">
+                    AI delay drivers will appear here.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             EXPLAINABLE AI
+        ================================================== -->
+
+        <section class="explainable-ai-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        EXPLAINABLE ARTIFICIAL INTELLIGENCE
+                    </span>
+
+                    <h3>
+                        Why is this project at risk?
+                    </h3>
+
+                    <p>
+                        Understand the factors behind the AI prediction
+                        instead of receiving a prediction alone.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="explainable-ai-container">
+
+
+                <!-- AI EXPLANATION -->
+
+                <article class="explanation-card">
+
+                    <header>
+
+                        <span class="explanation-number">
+                            01
+                        </span>
+
+                        <div>
+
+                            <h4>
+                                Prediction Explanation
+                            </h4>
+
+                            <p>
+                                Factors influencing the current
+                                project risk assessment.
+                            </p>
+
+                        </div>
+
+                    </header>
+
+
+                    <div
+                        id="aiExplanation"
+                        class="ai-explanation-content"
+                    >
+
+                        <div class="empty-state">
+                            Explainable AI information will appear
+                            after the project is analysed.
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- CONTRIBUTION -->
+
+                <article class="explanation-card">
+
+                    <header>
+
+                        <span class="explanation-number">
+                            02
+                        </span>
+
+                        <div>
+
+                            <h4>
+                                Risk Factor Contribution
+                            </h4>
+
+                            <p>
+                                Relative contribution of identified
+                                delay drivers.
+                            </p>
+
+                        </div>
+
+                    </header>
+
+
+                    <div
+                        id="riskFactorContribution"
+                        class="risk-factor-contribution"
+                    >
+
+                        <div class="empty-state">
+                            Risk factor contribution will appear here.
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CORRECTIVE RECOMMENDATIONS
+        ================================================== -->
+
+        <section class="recommendations-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        DECISION SUPPORT
+                    </span>
+
+                    <h3>
+                        Corrective Recommendations
+                    </h3>
+
+                    <p>
+                        Recommended actions based on the identified
+                        project risk drivers.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="correctiveRecommendations"
+                class="recommendations-list"
+            >
+
+                <div class="empty-state">
+                    AI-generated corrective recommendations
+                    will appear here.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PROJECT PARCEL SUMMARY
+        ================================================== -->
+
+        <section class="project-parcel-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        GEOSPATIAL RISK
+                    </span>
+
+                    <h3>
+                        Project Parcel Risk
+                    </h3>
+
+                    <p>
+                        View parcel-level risk contributing to
+                        the overall project assessment.
+                    </p>
+
+                </div>
+
+
+                <a
+                    id="viewProjectGIS"
+                    href="/gis-map"
+                    class="secondary-button"
+                >
+                    Open GIS Risk Map
+                </a>
+
+            </div>
+
+
+            <div class="parcel-summary-grid">
+
+
+                <article class="parcel-summary-card">
+
+                    <span>
+                        TOTAL PARCELS
+                    </span>
+
+                    <strong id="totalParcels">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="parcel-summary-card">
+
+                    <span>
+                        CRITICAL PARCELS
+                    </span>
+
+                    <strong id="criticalParcels">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="parcel-summary-card">
+
+                    <span>
+                        HIGH-RISK PARCELS
+                    </span>
+
+                    <strong id="highRiskParcels">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="parcel-summary-card">
+
+                    <span>
+                        AVERAGE PARCEL RISK
+                    </span>
+
+                    <strong id="averageParcelRisk">
+                        —
+                    </strong>
+
+                </article>
+
+            </div>
+
+
+            <div
+                id="projectParcelTable"
+                class="table-container"
+            >
+
+                <div class="empty-state">
+                    Parcel risk information will appear here.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SYSTEM INFORMATION
+        ================================================== -->
+
+        <section class="system-information">
+
+            <div class="system-information-item">
+
+                <span>
+                    API
+                </span>
+
+                <strong
+                    id="apiStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Database
+                </span>
+
+                <strong
+                    id="databaseStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    AI Model
+                </span>
+
+                <strong
+                    id="modelStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="application-footer">
+
+        <div>
+
+            <strong>
+                LANDLYTICS
+            </strong>
+
+            <span>
+                Land Acquisition Intelligence & Monitoring System
+            </span>
+
+        </div>
+
+        <div>
+
+            <span>
+                Authorized Government Decision Support Platform
+            </span>
+
+            <span>
+                © 2026
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/projects.js') }}"></script>
+
+</body>
+
+</html>

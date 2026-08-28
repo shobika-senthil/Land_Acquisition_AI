@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LANDLYTICS | Alerts</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/alerts.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         APPLICATION HEADER
+    ====================================================== -->
+
+    <header class="application-header">
+
+        <div class="header-brand">
+
+            <a href="/dashboard" class="brand-link">
+
+                <div class="brand-emblem">
+                    LL
+                </div>
+
+                <div class="brand-details">
+
+                    <h1>
+                        LANDLYTICS
+                    </h1>
+
+                    <p>
+                        Land Acquisition Intelligence & Monitoring System
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <div class="header-user">
+
+            <div class="system-status">
+
+                <span class="status-indicator"></span>
+
+                <span>
+                    System Operational
+                </span>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div class="user-avatar">
+                    U
+                </div>
+
+                <div class="user-details">
+
+                    <strong id="userName">
+                        User
+                    </strong>
+
+                    <span id="userRole">
+                        Authorized Officer
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-button"
+            >
+                Sign out
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN NAVIGATION
+    ====================================================== -->
+
+    <nav
+        class="main-navigation"
+        aria-label="Main navigation"
+    >
+
+        <div class="navigation-container">
+
+            <a
+                href="/dashboard"
+                class="navigation-item"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="/states"
+                class="navigation-item"
+            >
+                State-wise Analysis
+            </a>
+
+            <a
+                href="/districts"
+                class="navigation-item"
+            >
+                District-wise Analysis
+            </a>
+
+            <a
+                href="/projects"
+                class="navigation-item"
+            >
+                Projects
+            </a>
+
+            <a
+                href="/gis-map"
+                class="navigation-item"
+            >
+                GIS Risk Map
+            </a>
+
+            <a
+                href="/ai-insights"
+                class="navigation-item"
+            >
+                AI Insights
+            </a>
+
+            <a
+                href="/alerts"
+                class="navigation-item active"
+            >
+                Alerts
+            </a>
+
+            <a
+                href="/reports"
+                class="navigation-item"
+            >
+                Reports
+            </a>
+
+            <a
+                href="/admin"
+                class="navigation-item"
+            >
+                Administration
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="alerts-container">
+
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <section class="page-introduction">
+
+            <div class="page-heading">
+
+                <span class="section-label">
+                    RISK MONITORING
+                </span>
+
+                <h2>
+                    Alerts & Interventions
+                </h2>
+
+                <p>
+                    Monitor critical acquisition risks and
+                    prioritize actions requiring intervention.
+                </p>
+
+            </div>
+
+
+            <div class="page-actions">
+
+                <button
+                    type="button"
+                    id="refreshAlerts"
+                    class="secondary-button"
+                >
+                    Refresh Alerts
+                </button>
+
+                <button
+                    type="button"
+                    id="markAllRead"
+                    class="primary-button"
+                >
+                    Mark All as Reviewed
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ALERT SUMMARY
+        ================================================== -->
+
+        <section
+            class="alert-summary-grid"
+            aria-label="Alert summary"
+        >
+
+
+            <!-- CRITICAL -->
+
+            <article class="alert-summary-card critical">
+
+                <div class="summary-card-header">
+
+                    <span class="summary-icon">
+                        !
+                    </span>
+
+                    <span>
+                        CRITICAL
+                    </span>
+
+                </div>
+
+                <strong id="criticalAlertCount">
+                    --
+                </strong>
+
+                <p>
+                    Immediate intervention required
+                </p>
+
+            </article>
+
+
+
+            <!-- HIGH -->
+
+            <article class="alert-summary-card high">
+
+                <div class="summary-card-header">
+
+                    <span class="summary-icon">
+                        !
+                    </span>
+
+                    <span>
+                        HIGH RISK
+                    </span>
+
+                </div>
+
+                <strong id="highAlertCount">
+                    --
+                </strong>
+
+                <p>
+                    Requires close monitoring
+                </p>
+
+            </article>
+
+
+
+            <!-- NEW -->
+
+            <article class="alert-summary-card new">
+
+                <div class="summary-card-header">
+
+                    <span class="summary-icon">
+                        +
+                    </span>
+
+                    <span>
+                        NEW RISK
+                    </span>
+
+                </div>
+
+                <strong id="newRiskAlertCount">
+                    --
+                </strong>
+
+                <p>
+                    Newly detected risk conditions
+                </p>
+
+            </article>
+
+
+
+            <!-- ACTION -->
+
+            <article class="alert-summary-card action">
+
+                <div class="summary-card-header">
+
+                    <span class="summary-icon">
+                        →
+                    </span>
+
+                    <span>
+                        ACTION REQUIRED
+                    </span>
+
+                </div>
+
+                <strong id="actionRequiredCount">
+                    --
+                </strong>
+
+                <p>
+                    Pending recommended interventions
+                </p>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ALERT FILTERS
+        ================================================== -->
+
+        <section class="alert-filter-section">
+
+            <div class="filter-section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        ALERT MANAGEMENT
+                    </span>
+
+                    <h3>
+                        Filter Alerts
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="clearAlertFilters"
+                    class="text-button"
+                >
+                    Clear Filters
+                </button>
+
+            </div>
+
+
+            <div class="alert-filter-grid">
+
+
+                <!-- SEARCH -->
+
+                <div class="search-field">
+
+                    <label for="alertSearch">
+                        Search
+                    </label>
+
+                    <div class="search-input-wrapper">
+
+                        <input
+                            type="search"
+                            id="alertSearch"
+                            name="alert_search"
+                            placeholder="Project ID, parcel, district..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SEVERITY -->
+
+                <div class="form-field">
+
+                    <label for="alertSeverityFilter">
+                        Severity
+                    </label>
+
+                    <select
+                        id="alertSeverityFilter"
+                        name="severity"
+                    >
+
+                        <option value="">
+                            All Severity Levels
+                        </option>
+
+                        <option value="CRITICAL">
+                            Critical
+                        </option>
+
+                        <option value="HIGH">
+                            High
+                        </option>
+
+                        <option value="MEDIUM">
+                            Medium
+                        </option>
+
+                        <option value="LOW">
+                            Low
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- ALERT TYPE -->
+
+                <div class="form-field">
+
+                    <label for="alertTypeFilter">
+                        Alert Type
+                    </label>
+
+                    <select
+                        id="alertTypeFilter"
+                        name="alert_type"
+                    >
+
+                        <option value="">
+                            All Alert Types
+                        </option>
+
+                        <option value="critical-risk">
+                            Critical Risk
+                        </option>
+
+                        <option value="high-risk">
+                            High Risk
+                        </option>
+
+                        <option value="new-risk">
+                            New Risk Detected
+                        </option>
+
+                        <option value="delay">
+                            Delay Risk
+                        </option>
+
+                        <option value="ownership">
+                            Ownership Conflict
+                        </option>
+
+                        <option value="legal">
+                            Legal Dispute
+                        </option>
+
+                        <option value="compensation">
+                            Compensation
+                        </option>
+
+                        <option value="documentation">
+                            Documentation
+                        </option>
+
+                        <option value="rr">
+                            R&R
+                        </option>
+
+                        <option value="possession">
+                            Possession
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- STATE -->
+
+                <div class="form-field">
+
+                    <label for="alertStateFilter">
+                        State
+                    </label>
+
+                    <select
+                        id="alertStateFilter"
+                        name="state"
+                    >
+
+                        <option value="">
+                            All States
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DISTRICT -->
+
+                <div class="form-field">
+
+                    <label for="alertDistrictFilter">
+                        District
+                    </label>
+
+                    <select
+                        id="alertDistrictFilter"
+                        name="district"
+                    >
+
+                        <option value="">
+                            All Districts
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- STATUS -->
+
+                <div class="form-field">
+
+                    <label for="alertStatusFilter">
+                        Status
+                    </label>
+
+                    <select
+                        id="alertStatusFilter"
+                        name="status"
+                    >
+
+                        <option value="">
+                            All Statuses
+                        </option>
+
+                        <option value="new">
+                            New
+                        </option>
+
+                        <option value="reviewed">
+                            Reviewed
+                        </option>
+
+                        <option value="assigned">
+                            Action Assigned
+                        </option>
+
+                        <option value="resolved">
+                            Resolved
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CRITICAL RISK
+        ================================================== -->
+
+        <section class="alert-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        PRIORITY 01
+                    </span>
+
+                    <h3>
+                        Critical Risk Alerts
+                    </h3>
+
+                    <p>
+                        Immediate attention required to prevent
+                        further acquisition delays.
+                    </p>
+
+                </div>
+
+
+                <span
+                    id="criticalResultsCount"
+                    class="result-count"
+                >
+                    0 alerts
+                </span>
+
+            </div>
+
+
+            <div
+                id="criticalAlertsContainer"
+                class="alerts-list"
+            >
+
+                <article class="alert-card critical">
+
+                    <div class="alert-severity-indicator">
+                        CRITICAL
+                    </div>
+
+
+                    <div class="alert-content">
+
+                        <div class="alert-header">
+
+                            <h4>
+                                Critical risk detected
+                            </h4>
+
+                            <time>
+                                —
+                            </time>
+
+                        </div>
+
+
+                        <p>
+                            Critical alert information will appear
+                            here when detected by the system.
+                        </p>
+
+
+                        <div class="alert-meta">
+
+                            <span>
+                                Project: —
+                            </span>
+
+                            <span>
+                                District: —
+                            </span>
+
+                            <span>
+                                Risk Score: —
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert-actions">
+
+                        <button
+                            type="button"
+                            class="primary-button"
+                        >
+                            Review
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             HIGH RISK
+        ================================================== -->
+
+        <section class="alert-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        PRIORITY 02
+                    </span>
+
+                    <h3>
+                        High-Risk Alerts
+                    </h3>
+
+                    <p>
+                        Projects and parcels requiring enhanced
+                        monitoring.
+                    </p>
+
+                </div>
+
+
+                <span
+                    id="highResultsCount"
+                    class="result-count"
+                >
+                    0 alerts
+                </span>
+
+            </div>
+
+
+            <div
+                id="highRiskAlertsContainer"
+                class="alerts-list"
+            >
+
+                <article class="alert-card high">
+
+                    <div class="alert-severity-indicator">
+                        HIGH
+                    </div>
+
+
+                    <div class="alert-content">
+
+                        <div class="alert-header">
+
+                            <h4>
+                                High-risk condition detected
+                            </h4>
+
+                            <time>
+                                —
+                            </time>
+
+                        </div>
+
+
+                        <p>
+                            High-risk alert information will appear
+                            here when detected.
+                        </p>
+
+
+                        <div class="alert-meta">
+
+                            <span>
+                                Project: —
+                            </span>
+
+                            <span>
+                                District: —
+                            </span>
+
+                            <span>
+                                Risk Score: —
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert-actions">
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                        >
+                            Review
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             NEW RISK DETECTED
+        ================================================== -->
+
+        <section class="alert-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        EARLY WARNING
+                    </span>
+
+                    <h3>
+                        New Risk Detected
+                    </h3>
+
+                    <p>
+                        Newly emerging conditions identified by
+                        the LANDLYTICS intelligence engine.
+                    </p>
+
+                </div>
+
+
+                <span
+                    id="newRiskResultsCount"
+                    class="result-count"
+                >
+                    0 alerts
+                </span>
+
+            </div>
+
+
+            <div
+                id="newRiskAlertsContainer"
+                class="alerts-list"
+            >
+
+                <article class="alert-card new-risk">
+
+                    <div class="alert-severity-indicator">
+                        NEW
+                    </div>
+
+
+                    <div class="alert-content">
+
+                        <div class="alert-header">
+
+                            <h4>
+                                New risk condition
+                            </h4>
+
+                            <time>
+                                —
+                            </time>
+
+                        </div>
+
+
+                        <p>
+                            Newly detected risk conditions will
+                            appear here.
+                        </p>
+
+
+                        <div class="alert-meta">
+
+                            <span>
+                                Entity: —
+                            </span>
+
+                            <span>
+                                Location: —
+                            </span>
+
+                            <span>
+                                Change: —
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="alert-actions">
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                        >
+                            Investigate
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             RECOMMENDED ACTIONS
+        ================================================== -->
+
+        <section class="recommended-alert-actions">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        DECISION SUPPORT
+                    </span>
+
+                    <h3>
+                        Recommended Actions
+                    </h3>
+
+                    <p>
+                        Priority interventions suggested from
+                        current risk conditions.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="recommendedAlertActions"
+                class="recommended-alert-grid"
+            >
+
+
+                <article class="recommended-alert-card">
+
+                    <div class="action-priority">
+                        HIGH
+                    </div>
+
+
+                    <div class="action-content">
+
+                        <span class="section-label">
+                            RECOMMENDED ACTION
+                        </span>
+
+                        <h4>
+                            Action pending
+                        </h4>
+
+                        <p>
+                            Recommended intervention will appear
+                            here based on detected project or
+                            parcel risk.
+                        </p>
+
+                    </div>
+
+
+                    <div class="action-footer">
+
+                        <span>
+                            Target: —
+                        </span>
+
+                        <button
+                            type="button"
+                            class="primary-button"
+                        >
+                            Assign Action
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <article class="recommended-alert-card">
+
+                    <div class="action-priority medium">
+                        MEDIUM
+                    </div>
+
+
+                    <div class="action-content">
+
+                        <span class="section-label">
+                            RECOMMENDED ACTION
+                        </span>
+
+                        <h4>
+                            Action pending
+                        </h4>
+
+                        <p>
+                            Recommended intervention will appear
+                            here based on detected risk indicators.
+                        </p>
+
+                    </div>
+
+
+                    <div class="action-footer">
+
+                        <span>
+                            Target: —
+                        </span>
+
+                        <button
+                            type="button"
+                            class="secondary-button"
+                        >
+                            Review
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ALERT ACTIVITY
+        ================================================== -->
+
+        <section class="alert-history-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        ALERT ACTIVITY
+                    </span>
+
+                    <h3>
+                        Alert History
+                    </h3>
+
+                    <p>
+                        Record of alerts generated and actions
+                        taken by authorized users.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table
+                    class="alert-history-table"
+                    id="alertHistoryTable"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Alert ID
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Type
+                            </th>
+
+                            <th>
+                                Entity
+                            </th>
+
+                            <th>
+                                Severity
+                            </th>
+
+                            <th>
+                                Assigned To
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="alertHistoryBody">
+
+                        <tr>
+
+                            <td colspan="8">
+                                Alert history will appear here.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ALERT NOTIFICATION SETTINGS
+        ================================================== -->
+
+        <section class="alert-settings-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        NOTIFICATION CONTROL
+                    </span>
+
+                    <h3>
+                        Alert Preferences
+                    </h3>
+
+                    <p>
+                        Configure which risk events require
+                        immediate notification.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="alert-settings-grid">
+
+
+                <label class="alert-setting">
+
+                    <div>
+
+                        <strong>
+                            Critical Risk
+                        </strong>
+
+                        <span>
+                            Notify when critical project or
+                            parcel risk is detected.
+                        </span>
+
+                    </div>
+
+                    <input
+                        type="checkbox"
+                        id="notifyCritical"
+                        checked
+                    >
+
+                </label>
+
+
+                <label class="alert-setting">
+
+                    <div>
+
+                        <strong>
+                            New Risk Detection
+                        </strong>
+
+                        <span>
+                            Notify when a new risk condition
+                            is identified.
+                        </span>
+
+                    </div>
+
+                    <input
+                        type="checkbox"
+                        id="notifyNewRisk"
+                        checked
+                    >
+
+                </label>
+
+
+                <label class="alert-setting">
+
+                    <div>
+
+                        <strong>
+                            Legal Disputes
+                        </strong>
+
+                        <span>
+                            Notify when legal-risk conditions
+                            change.
+                        </span>
+
+                    </div>
+
+                    <input
+                        type="checkbox"
+                        id="notifyLegal"
+                        checked
+                    >
+
+                </label>
+
+
+                <label class="alert-setting">
+
+                    <div>
+
+                        <strong>
+                            Ownership Conflicts
+                        </strong>
+
+                        <span>
+                            Notify when ownership conflicts
+                            are detected.
+                        </span>
+
+                    </div>
+
+                    <input
+                        type="checkbox"
+                        id="notifyOwnership"
+                        checked
+                    >
+
+                </label>
+
+
+                <label class="alert-setting">
+
+                    <div>
+
+                        <strong>
+                            Compensation Delays
+                        </strong>
+
+                        <span>
+                            Notify when compensation milestones
+                            are delayed.
+                        </span>
+
+                    </div>
+
+                    <input
+                        type="checkbox"
+                        id="notifyCompensation"
+                        checked
+                    >
+
+                </label>
+
+
+                <label class="alert-setting">
+
+                    <div>
+
+                        <strong>
+                            Possession Delays
+                        </strong>
+
+                        <span>
+                            Notify when expected possession dates
+                            are at risk.
+                        </span>
+
+                    </div>
+
+                    <input
+                        type="checkbox"
+                        id="notifyPossession"
+                        checked
+                    >
+
+                </label>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SYSTEM INFORMATION
+        ================================================== -->
+
+        <section class="system-information">
+
+            <div class="system-information-item">
+
+                <span>
+                    Alert Engine
+                </span>
+
+                <strong
+                    id="alertEngineStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    AI Model
+                </span>
+
+                <strong
+                    id="modelStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    API
+                </span>
+
+                <strong
+                    id="apiStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Last Updated
+                </span>
+
+                <strong id="lastUpdated">
+                    —
+                </strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="application-footer">
+
+        <div>
+
+            <strong>
+                LANDLYTICS
+            </strong>
+
+            <span>
+                Land Acquisition Intelligence & Monitoring System
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Authorized Government Decision Support Platform
+            </span>
+
+            <span>
+                © 2026
+            </span>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/alerts.js') }}"></script>
+
+</body>
+
+</html>

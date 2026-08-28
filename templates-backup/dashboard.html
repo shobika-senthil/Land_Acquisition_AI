@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LANDLYTICS | Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         APPLICATION HEADER
+    ====================================================== -->
+
+    <header class="application-header">
+
+        <div class="header-brand">
+
+            <a href="/dashboard" class="brand-link">
+
+                <div class="brand-emblem">
+                    LL
+                </div>
+
+                <div class="brand-details">
+                    <h1>LANDLYTICS</h1>
+
+                    <p>
+                        Land Acquisition Intelligence & Monitoring System
+                    </p>
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <div class="header-user">
+
+            <div class="system-status">
+
+                <span class="status-indicator"></span>
+
+                <span>
+                    System Operational
+                </span>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div class="user-avatar">
+                    U
+                </div>
+
+                <div class="user-details">
+
+                    <strong id="userName">
+                        User
+                    </strong>
+
+                    <span id="userRole">
+                        Authorized Officer
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-button"
+            >
+                Sign out
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN NAVIGATION
+    ====================================================== -->
+
+    <nav class="main-navigation"
+         aria-label="Main navigation">
+
+        <div class="navigation-container">
+
+            <a
+                href="/dashboard"
+                class="navigation-item active"
+            >
+                Dashboard
+            </a>
+
+            <a
+                href="/states"
+                class="navigation-item"
+            >
+                State-wise Analysis
+            </a>
+
+            <a
+                href="/districts"
+                class="navigation-item"
+            >
+                District-wise Analysis
+            </a>
+
+            <a
+                href="/projects"
+                class="navigation-item"
+            >
+                Projects
+            </a>
+
+            <a
+                href="/gis-map"
+                class="navigation-item"
+            >
+                GIS Risk Map
+            </a>
+
+            <a
+                href="/ai-insights"
+                class="navigation-item"
+            >
+                AI Insights
+            </a>
+
+            <a
+                href="/alerts"
+                class="navigation-item"
+            >
+                Alerts
+            </a>
+
+            <a
+                href="/reports"
+                class="navigation-item"
+            >
+                Reports
+            </a>
+
+            <a
+                href="/admin"
+                class="navigation-item"
+            >
+                Administration
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="dashboard-container">
+
+
+        <!-- =================================================
+             PAGE INTRODUCTION
+        ================================================== -->
+
+        <section class="page-introduction">
+
+            <div class="page-heading">
+
+                <span class="section-label">
+                    NATIONAL MONITORING OVERVIEW
+                </span>
+
+                <h2>
+                    Land Acquisition Dashboard
+                </h2>
+
+                <p>
+                    Monitor acquisition progress, project risk,
+                    emerging delays and regional performance.
+                </p>
+
+            </div>
+
+
+            <div class="page-actions">
+
+                <button
+                    type="button"
+                    id="refreshDashboard"
+                    class="secondary-button"
+                >
+                    Refresh Data
+                </button>
+
+                <a
+                    href="/reports"
+                    class="primary-button"
+                >
+                    Generate Report
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             1. TOTAL PROJECTS
+        ================================================== -->
+
+        <section
+            class="dashboard-kpi-section"
+            aria-label="Project overview"
+        >
+
+            <article class="kpi-card">
+
+                <div class="kpi-header">
+
+                    <span class="kpi-label">
+                        Total Projects
+                    </span>
+
+                    <span class="kpi-icon"
+                          aria-hidden="true">
+                        PROJECTS
+                    </span>
+
+                </div>
+
+                <strong
+                    id="totalProjects"
+                    class="kpi-value"
+                >
+                    --
+                </strong>
+
+                <p class="kpi-description">
+                    Projects currently under monitoring
+                </p>
+
+            </article>
+
+
+            <!-- =============================================
+                 2. HIGH-RISK PROJECTS
+            ============================================== -->
+
+            <article class="kpi-card kpi-high-risk">
+
+                <div class="kpi-header">
+
+                    <span class="kpi-label">
+                        High-Risk Projects
+                    </span>
+
+                    <span class="kpi-icon"
+                          aria-hidden="true">
+                        HIGH
+                    </span>
+
+                </div>
+
+                <strong
+                    id="highRiskProjects"
+                    class="kpi-value"
+                >
+                    --
+                </strong>
+
+                <p class="kpi-description">
+                    Projects requiring close monitoring
+                </p>
+
+            </article>
+
+
+            <!-- =============================================
+                 3. CRITICAL PROJECTS
+            ============================================== -->
+
+            <article class="kpi-card kpi-critical">
+
+                <div class="kpi-header">
+
+                    <span class="kpi-label">
+                        Critical Projects
+                    </span>
+
+                    <span class="kpi-icon"
+                          aria-hidden="true">
+                        CRITICAL
+                    </span>
+
+                </div>
+
+                <strong
+                    id="criticalProjects"
+                    class="kpi-value"
+                >
+                    --
+                </strong>
+
+                <p class="kpi-description">
+                    Immediate intervention required
+                </p>
+
+            </article>
+
+
+            <!-- =============================================
+                 4. DELAY PROBABILITY
+            ============================================== -->
+
+            <article class="kpi-card">
+
+                <div class="kpi-header">
+
+                    <span class="kpi-label">
+                        Delay Probability
+                    </span>
+
+                    <span class="kpi-icon"
+                          aria-hidden="true">
+                        AI
+                    </span>
+
+                </div>
+
+                <strong
+                    id="delayProbability"
+                    class="kpi-value"
+                >
+                    --
+                </strong>
+
+                <p class="kpi-description">
+                    Average AI-predicted delay probability
+                </p>
+
+            </article>
+
+        </section>
+
+
+        <!-- =================================================
+             5. OVERALL PERFORMANCE INDICATORS
+        ================================================== -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        ACQUISITION PERFORMANCE
+                    </span>
+
+                    <h3>
+                        Overall Performance Indicators
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="performance-grid">
+
+
+                <!-- COMPENSATION -->
+
+                <article class="performance-card">
+
+                    <div class="performance-header">
+
+                        <div>
+
+                            <h4>
+                                Compensation
+                            </h4>
+
+                            <p>
+                                Compensation completion
+                            </p>
+
+                        </div>
+
+                        <strong id="compensationPercentage">
+                            --
+                        </strong>
+
+                    </div>
+
+                    <div class="progress-track">
+
+                        <div
+                            id="compensationProgress"
+                            class="progress-value"
+                        ></div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- DOCUMENTATION -->
+
+                <article class="performance-card">
+
+                    <div class="performance-header">
+
+                        <div>
+
+                            <h4>
+                                Documentation
+                            </h4>
+
+                            <p>
+                                Documentation completion
+                            </p>
+
+                        </div>
+
+                        <strong id="documentationPercentage">
+                            --
+                        </strong>
+
+                    </div>
+
+                    <div class="progress-track">
+
+                        <div
+                            id="documentationProgress"
+                            class="progress-value"
+                        ></div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- R&R -->
+
+                <article class="performance-card">
+
+                    <div class="performance-header">
+
+                        <div>
+
+                            <h4>
+                                Rehabilitation & Resettlement
+                            </h4>
+
+                            <p>
+                                R&R completion
+                            </p>
+
+                        </div>
+
+                        <strong id="rrPercentage">
+                            --
+                        </strong>
+
+                    </div>
+
+                    <div class="progress-track">
+
+                        <div
+                            id="rrProgress"
+                            class="progress-value"
+                        ></div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- POSSESSION -->
+
+                <article class="performance-card">
+
+                    <div class="performance-header">
+
+                        <div>
+
+                            <h4>
+                                Land Possession
+                            </h4>
+
+                            <p>
+                                Possession completion
+                            </p>
+
+                        </div>
+
+                        <strong id="possessionPercentage">
+                            --
+                        </strong>
+
+                    </div>
+
+                    <div class="progress-track">
+
+                        <div
+                            id="possessionProgress"
+                            class="progress-value"
+                        ></div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             6. STATE-WISE RISK
+             7. DISTRICT-WISE RISK
+        ================================================== -->
+
+        <section class="dashboard-analytics-grid">
+
+
+            <!-- STATE-WISE RISK -->
+
+            <article class="dashboard-panel">
+
+                <header class="panel-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            REGIONAL RISK
+                        </span>
+
+                        <h3>
+                            State-wise Risk
+                        </h3>
+
+                    </div>
+
+                    <a
+                        href="/states"
+                        class="panel-action"
+                    >
+                        View Analysis
+                    </a>
+
+                </header>
+
+
+                <div
+                    id="stateRiskContainer"
+                    class="risk-list"
+                >
+
+                    <div class="empty-state">
+                        State risk data will appear here.
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- DISTRICT-WISE RISK -->
+
+            <article class="dashboard-panel">
+
+                <header class="panel-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            DISTRICT INTELLIGENCE
+                        </span>
+
+                        <h3>
+                            District-wise Risk
+                        </h3>
+
+                    </div>
+
+                    <a
+                        href="/districts"
+                        class="panel-action"
+                    >
+                        View Analysis
+                    </a>
+
+                </header>
+
+
+                <div
+                    id="districtRiskContainer"
+                    class="risk-list"
+                >
+
+                    <div class="empty-state">
+                        District risk data will appear here.
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =================================================
+             RISK SUMMARY
+        ================================================== -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        NATIONAL RISK PROFILE
+                    </span>
+
+                    <h3>
+                        Risk Distribution
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="risk-distribution-grid">
+
+
+                <article class="risk-summary critical">
+
+                    <span class="risk-summary-label">
+                        Critical
+                    </span>
+
+                    <strong
+                        id="criticalRiskCount"
+                    >
+                        --
+                    </strong>
+
+                    <p>
+                        Immediate intervention
+                    </p>
+
+                </article>
+
+
+                <article class="risk-summary high">
+
+                    <span class="risk-summary-label">
+                        High
+                    </span>
+
+                    <strong
+                        id="highRiskCount"
+                    >
+                        --
+                    </strong>
+
+                    <p>
+                        Close monitoring required
+                    </p>
+
+                </article>
+
+
+                <article class="risk-summary medium">
+
+                    <span class="risk-summary-label">
+                        Medium
+                    </span>
+
+                    <strong
+                        id="mediumRiskCount"
+                    >
+                        --
+                    </strong>
+
+                    <p>
+                        Monitor progress
+                    </p>
+
+                </article>
+
+
+                <article class="risk-summary low">
+
+                    <span class="risk-summary-label">
+                        Low
+                    </span>
+
+                    <strong
+                        id="lowRiskCount"
+                    >
+                        --
+                    </strong>
+
+                    <p>
+                        Normal monitoring
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             8. RECENT ALERTS
+        ================================================== -->
+
+        <section class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        ATTENTION REQUIRED
+                    </span>
+
+                    <h3>
+                        Recent Alerts
+                    </h3>
+
+                </div>
+
+                <a
+                    href="/alerts"
+                    class="panel-action"
+                >
+                    View All Alerts
+                </a>
+
+            </div>
+
+
+            <div
+                id="recentAlerts"
+                class="alerts-container"
+            >
+
+                <div class="empty-state">
+                    Recent alerts will appear here.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SYSTEM INFORMATION
+        ================================================== -->
+
+        <section class="system-information">
+
+            <div class="system-information-item">
+
+                <span>
+                    API
+                </span>
+
+                <strong
+                    id="apiStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Database
+                </span>
+
+                <strong
+                    id="databaseStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    AI Model
+                </span>
+
+                <strong
+                    id="modelStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Last Updated
+                </span>
+
+                <strong id="lastUpdated">
+                    --
+                </strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="application-footer">
+
+        <div>
+
+            <strong>
+                LANDLYTICS
+            </strong>
+
+            <span>
+                Land Acquisition Intelligence & Monitoring System
+            </span>
+
+        </div>
+
+        <div>
+
+            <span>
+                Authorized Government Decision Support Platform
+            </span>
+
+            <span>
+                © 2026
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         DASHBOARD JAVASCRIPT
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+</body>
+
+</html>

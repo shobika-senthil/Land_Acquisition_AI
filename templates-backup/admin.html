@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LANDLYTICS | Administration</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         APPLICATION HEADER
+    ====================================================== -->
+
+    <header class="application-header">
+
+        <div class="header-brand">
+
+            <a href="/dashboard" class="brand-link">
+
+                <div class="brand-emblem">
+                    LL
+                </div>
+
+                <div class="brand-details">
+
+                    <h1>
+                        LANDLYTICS
+                    </h1>
+
+                    <p>
+                        Land Acquisition Intelligence & Monitoring System
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <div class="header-user">
+
+            <div class="system-status">
+
+                <span class="status-indicator"></span>
+
+                <span>
+                    System Operational
+                </span>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div class="user-avatar">
+                    A
+                </div>
+
+                <div class="user-details">
+
+                    <strong id="userName">
+                        Administrator
+                    </strong>
+
+                    <span id="userRole">
+                        System Administrator
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-button"
+            >
+                Sign out
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN NAVIGATION
+    ====================================================== -->
+
+    <nav
+        class="main-navigation"
+        aria-label="Main navigation"
+    >
+
+        <div class="navigation-container">
+
+            <a href="/dashboard"
+               class="navigation-item">
+                Dashboard
+            </a>
+
+            <a href="/states"
+               class="navigation-item">
+                State-wise Analysis
+            </a>
+
+            <a href="/districts"
+               class="navigation-item">
+                District-wise Analysis
+            </a>
+
+            <a href="/projects"
+               class="navigation-item">
+                Projects
+            </a>
+
+            <a href="/gis-map"
+               class="navigation-item">
+                GIS Risk Map
+            </a>
+
+            <a href="/ai-insights"
+               class="navigation-item">
+                AI Insights
+            </a>
+
+            <a href="/alerts"
+               class="navigation-item">
+                Alerts
+            </a>
+
+            <a href="/reports"
+               class="navigation-item">
+                Reports
+            </a>
+
+            <a href="/admin"
+               class="navigation-item active">
+                Administration
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="admin-container">
+
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <section class="page-introduction">
+
+            <div class="page-heading">
+
+                <span class="section-label">
+                    SYSTEM ADMINISTRATION
+                </span>
+
+                <h2>
+                    Administration
+                </h2>
+
+                <p>
+                    Manage authorized users, permissions, audit
+                    activity and LANDLYTICS system health.
+                </p>
+
+            </div>
+
+
+            <div class="page-actions">
+
+                <button
+                    type="button"
+                    id="refreshAdmin"
+                    class="secondary-button"
+                >
+                    Refresh Status
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ADMIN OVERVIEW
+        ================================================== -->
+
+        <section class="admin-summary-grid">
+
+
+            <article class="admin-summary-card">
+
+                <span class="section-label">
+                    USERS
+                </span>
+
+                <strong id="totalUsers">
+                    --
+                </strong>
+
+                <p>
+                    Registered system users
+                </p>
+
+            </article>
+
+
+            <article class="admin-summary-card">
+
+                <span class="section-label">
+                    ACTIVE USERS
+                </span>
+
+                <strong id="activeUsers">
+                    --
+                </strong>
+
+                <p>
+                    Currently authorized accounts
+                </p>
+
+            </article>
+
+
+            <article class="admin-summary-card">
+
+                <span class="section-label">
+                    AUDIT EVENTS
+                </span>
+
+                <strong id="auditEventCount">
+                    --
+                </strong>
+
+                <p>
+                    Recorded system activities
+                </p>
+
+            </article>
+
+
+            <article class="admin-summary-card">
+
+                <span class="section-label">
+                    SYSTEM HEALTH
+                </span>
+
+                <strong
+                    id="systemHealth"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+                <p>
+                    Overall platform status
+                </p>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SYSTEM STATUS
+        ================================================== -->
+
+        <section class="admin-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        SYSTEM STATUS
+                    </span>
+
+                    <h3>
+                        Platform Health
+                    </h3>
+
+                    <p>
+                        Monitor the operational status of the
+                        LANDLYTICS platform components.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="system-status-grid">
+
+
+                <!-- API -->
+
+                <article class="system-status-card">
+
+                    <div class="system-status-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                APPLICATION
+                            </span>
+
+                            <h4>
+                                API Service
+                            </h4>
+
+                        </div>
+
+                        <span
+                            id="apiIndicator"
+                            class="system-indicator"
+                        ></span>
+
+                    </div>
+
+
+                    <div class="system-status-value">
+
+                        <strong id="apiSystemStatus">
+                            Checking
+                        </strong>
+
+                        <span id="apiResponseTime">
+                            —
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- DATABASE -->
+
+                <article class="system-status-card">
+
+                    <div class="system-status-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                DATA
+                            </span>
+
+                            <h4>
+                                Database
+                            </h4>
+
+                        </div>
+
+                        <span
+                            id="databaseIndicator"
+                            class="system-indicator"
+                        ></span>
+
+                    </div>
+
+
+                    <div class="system-status-value">
+
+                        <strong id="databaseSystemStatus">
+                            Checking
+                        </strong>
+
+                        <span id="databaseResponse">
+                            —
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- AI MODEL -->
+
+                <article class="system-status-card">
+
+                    <div class="system-status-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                INTELLIGENCE
+                            </span>
+
+                            <h4>
+                                AI Model
+                            </h4>
+
+                        </div>
+
+                        <span
+                            id="modelIndicator"
+                            class="system-indicator"
+                        ></span>
+
+                    </div>
+
+
+                    <div class="system-status-value">
+
+                        <strong id="modelSystemStatus">
+                            Checking
+                        </strong>
+
+                        <span id="modelVersion">
+                            Version —
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- GIS -->
+
+                <article class="system-status-card">
+
+                    <div class="system-status-card-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                GEOSPATIAL
+                            </span>
+
+                            <h4>
+                                GIS Engine
+                            </h4>
+
+                        </div>
+
+                        <span
+                            id="gisIndicator"
+                            class="system-indicator"
+                        ></span>
+
+                    </div>
+
+
+                    <div class="system-status-value">
+
+                        <strong id="gisSystemStatus">
+                            Checking
+                        </strong>
+
+                        <span id="gisSystemVersion">
+                            Version —
+                        </span>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             USERS
+        ================================================== -->
+
+        <section class="admin-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        ACCESS MANAGEMENT
+                    </span>
+
+                    <h3>
+                        Users
+                    </h3>
+
+                    <p>
+                        Manage authorized users and their assigned
+                        roles.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="addUserButton"
+                    class="primary-button"
+                >
+                    Add User
+                </button>
+
+            </div>
+
+
+            <div class="user-filter-bar">
+
+                <div class="search-field">
+
+                    <label for="userSearch">
+                        Search Users
+                    </label>
+
+                    <input
+                        type="search"
+                        id="userSearch"
+                        placeholder="Name, email or user ID..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="userRoleFilter">
+                        Role
+                    </label>
+
+                    <select id="userRoleFilter">
+
+                        <option value="">
+                            All Roles
+                        </option>
+
+                        <option value="administrator">
+                            Administrator
+                        </option>
+
+                        <option value="state-officer">
+                            State Officer
+                        </option>
+
+                        <option value="district-officer">
+                            District Officer
+                        </option>
+
+                        <option value="project-officer">
+                            Project Officer
+                        </option>
+
+                        <option value="viewer">
+                            Viewer
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="userStatusFilter">
+                        Status
+                    </label>
+
+                    <select id="userStatusFilter">
+
+                        <option value="">
+                            All Statuses
+                        </option>
+
+                        <option value="active">
+                            Active
+                        </option>
+
+                        <option value="inactive">
+                            Inactive
+                        </option>
+
+                        <option value="locked">
+                            Locked
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table
+                    class="admin-table"
+                    id="usersTable"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                User ID
+                            </th>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Role
+                            </th>
+
+                            <th>
+                                Scope
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Last Login
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="usersTableBody">
+
+                        <tr>
+
+                            <td colspan="8">
+                                User records will appear here.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ROLES & PERMISSIONS
+        ================================================== -->
+
+        <section class="admin-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        AUTHORIZATION
+                    </span>
+
+                    <h3>
+                        Roles & Permissions
+                    </h3>
+
+                    <p>
+                        Control which parts of LANDLYTICS each
+                        user role can access.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="permissions-table-container">
+
+                <table
+                    class="permissions-table"
+                    id="permissionsTable"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Permission
+                            </th>
+
+                            <th>
+                                Administrator
+                            </th>
+
+                            <th>
+                                State Officer
+                            </th>
+
+                            <th>
+                                District Officer
+                            </th>
+
+                            <th>
+                                Project Officer
+                            </th>
+
+                            <th>
+                                Viewer
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        <tr>
+
+                            <td>
+                                View Dashboard
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                View GIS Risk Map
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                View AI Insights
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Add Projects
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       disabled>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Manage Parcels
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       disabled>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Generate Reports
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                Manage Users
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       disabled>
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <td>
+                                View Audit Logs
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       checked
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       disabled>
+                            </td>
+
+                            <td>
+                                <input type="checkbox"
+                                       disabled>
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             AUDIT LOGS
+        ================================================== -->
+
+        <section class="admin-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        SECURITY & ACCOUNTABILITY
+                    </span>
+
+                    <h3>
+                        Audit Logs
+                    </h3>
+
+                    <p>
+                        Track important actions performed within
+                        the LANDLYTICS platform.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="exportAuditLogs"
+                    class="secondary-button"
+                >
+                    Export Logs
+                </button>
+
+            </div>
+
+
+            <div class="audit-filter-bar">
+
+                <div class="form-field">
+
+                    <label for="auditActionFilter">
+                        Action
+                    </label>
+
+                    <select id="auditActionFilter">
+
+                        <option value="">
+                            All Actions
+                        </option>
+
+                        <option value="login">
+                            Login
+                        </option>
+
+                        <option value="logout">
+                            Logout
+                        </option>
+
+                        <option value="create">
+                            Create
+                        </option>
+
+                        <option value="update">
+                            Update
+                        </option>
+
+                        <option value="delete">
+                            Delete
+                        </option>
+
+                        <option value="export">
+                            Export
+                        </option>
+
+                        <option value="risk">
+                            Risk Analysis
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="auditUserFilter">
+                        User
+                    </label>
+
+                    <select id="auditUserFilter">
+
+                        <option value="">
+                            All Users
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="auditDateFrom">
+                        From
+                    </label>
+
+                    <input
+                        type="date"
+                        id="auditDateFrom"
+                    >
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="auditDateTo">
+                        To
+                    </label>
+
+                    <input
+                        type="date"
+                        id="auditDateTo"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table
+                    class="audit-table"
+                    id="auditLogsTable"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Timestamp
+                            </th>
+
+                            <th>
+                                User
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                            <th>
+                                Resource
+                            </th>
+
+                            <th>
+                                Resource ID
+                            </th>
+
+                            <th>
+                                IP / Session
+                            </th>
+
+                            <th>
+                                Result
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="auditLogsBody">
+
+                        <tr>
+
+                            <td colspan="7">
+                                Audit events will appear here.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SECURITY INFORMATION
+        ================================================== -->
+
+        <section class="admin-security-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        SECURITY
+                    </span>
+
+                    <h3>
+                        Security Controls
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="security-controls-grid">
+
+
+                <article class="security-control-card">
+
+                    <span class="section-label">
+                        AUTHENTICATION
+                    </span>
+
+                    <h4>
+                        Secure Authentication
+                    </h4>
+
+                    <p>
+                        User authentication and session validation
+                        are required before accessing protected
+                        platform resources.
+                    </p>
+
+                    <strong
+                        id="authenticationStatus"
+                        class="status-ok"
+                    >
+                        Checking
+                    </strong>
+
+                </article>
+
+
+                <article class="security-control-card">
+
+                    <span class="section-label">
+                        AUTHORIZATION
+                    </span>
+
+                    <h4>
+                        Role-Based Access
+                    </h4>
+
+                    <p>
+                        Access to projects, parcels, reports,
+                        analytics and administration is controlled
+                        by assigned roles.
+                    </p>
+
+                    <strong
+                        id="authorizationStatus"
+                        class="status-ok"
+                    >
+                        Checking
+                    </strong>
+
+                </article>
+
+
+                <article class="security-control-card">
+
+                    <span class="section-label">
+                        AUDIT
+                    </span>
+
+                    <h4>
+                        Activity Logging
+                    </h4>
+
+                    <p>
+                        Important user and system activities are
+                        recorded for accountability and review.
+                    </p>
+
+                    <strong
+                        id="auditStatus"
+                        class="status-ok"
+                    >
+                        Checking
+                    </strong>
+
+                </article>
+
+
+                <article class="security-control-card">
+
+                    <span class="section-label">
+                        SESSION
+                    </span>
+
+                    <h4>
+                        Session Protection
+                    </h4>
+
+                    <p>
+                        Protected sessions help prevent unauthorized
+                        access to restricted platform resources.
+                    </p>
+
+                    <strong
+                        id="sessionSecurityStatus"
+                        class="status-ok"
+                    >
+                        Checking
+                    </strong>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MODEL INFORMATION
+        ================================================== -->
+
+        <section class="model-information-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        AI GOVERNANCE
+                    </span>
+
+                    <h3>
+                        AI Model Status
+                    </h3>
+
+                    <p>
+                        Monitor the predictive model used for
+                        acquisition risk assessment.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="model-information-grid">
+
+
+                <div class="model-information-item">
+
+                    <span>
+                        Model
+                    </span>
+
+                    <strong id="adminModelName">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="model-information-item">
+
+                    <span>
+                        Version
+                    </span>
+
+                    <strong id="adminModelVersion">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="model-information-item">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong
+                        id="adminModelStatus"
+                        class="status-ok"
+                    >
+                        Checking
+                    </strong>
+
+                </div>
+
+
+                <div class="model-information-item">
+
+                    <span>
+                        Last Loaded
+                    </span>
+
+                    <strong id="adminModelLoaded">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="model-information-item">
+
+                    <span>
+                        Prediction Engine
+                    </span>
+
+                    <strong id="predictionEngineStatus">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="model-information-item">
+
+                    <span>
+                        Database Connection
+                    </span>
+
+                    <strong id="modelDatabaseStatus">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SYSTEM INFORMATION
+        ================================================== -->
+
+        <section class="system-information">
+
+            <div class="system-information-item">
+
+                <span>
+                    Authentication
+                </span>
+
+                <strong
+                    id="systemAuthentication"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    API
+                </span>
+
+                <strong
+                    id="systemAPI"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Database
+                </span>
+
+                <strong
+                    id="systemDatabase"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Last Updated
+                </span>
+
+                <strong id="lastUpdated">
+                    —
+                </strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="application-footer">
+
+        <div>
+
+            <strong>
+                LANDLYTICS
+            </strong>
+
+            <span>
+                Land Acquisition Intelligence & Monitoring System
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Authorized Government Decision Support Platform
+            </span>
+
+            <span>
+                © 2026
+            </span>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#2B1D14"/>
+  <!-- Contour lines -->
+  <path d="M12 48 C 24 40, 40 52, 52 44" stroke="#BCA47E" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <path d="M10 34 C 22 24, 42 38, 54 28" stroke="#D5C4A7" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  <!-- Parcel Boundary -->
+  <polygon points="20,18 44,14 48,38 24,42" fill="rgba(188, 108, 37, 0.25)" stroke="#BC6C25" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Prediction point -->
+  <circle cx="34" cy="27" r="4" fill="#BC6C25"/>
+  <circle cx="34" cy="27" r="8" stroke="#BC6C25" stroke-width="1.5" stroke-dasharray="2 2" opacity="0.8"/>
+</svg>

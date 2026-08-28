@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LANDLYTICS | State-wise Analysis</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/base.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/analysis.css') }}">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         APPLICATION HEADER
+    ====================================================== -->
+
+    <header class="application-header">
+
+        <div class="header-brand">
+
+            <a href="/dashboard" class="brand-link">
+
+                <div class="brand-emblem">
+                    LL
+                </div>
+
+                <div class="brand-details">
+                    <h1>LANDLYTICS</h1>
+
+                    <p>
+                        Land Acquisition Intelligence & Monitoring System
+                    </p>
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <div class="header-user">
+
+            <div class="system-status">
+
+                <span class="status-indicator"></span>
+
+                <span>
+                    System Operational
+                </span>
+
+            </div>
+
+
+            <div class="user-profile">
+
+                <div class="user-avatar">
+                    U
+                </div>
+
+                <div class="user-details">
+
+                    <strong id="userName">
+                        User
+                    </strong>
+
+                    <span id="userRole">
+                        Authorized Officer
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="logoutButton"
+                class="logout-button"
+            >
+                Sign out
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN NAVIGATION
+    ====================================================== -->
+
+    <nav class="main-navigation"
+         aria-label="Main navigation">
+
+        <div class="navigation-container">
+
+            <a href="/dashboard"
+               class="navigation-item">
+                Dashboard
+            </a>
+
+            <a href="/states"
+               class="navigation-item active">
+                State-wise Analysis
+            </a>
+
+            <a href="/districts"
+               class="navigation-item">
+                District-wise Analysis
+            </a>
+
+            <a href="/projects"
+               class="navigation-item">
+                Projects
+            </a>
+
+            <a href="/gis-map"
+               class="navigation-item">
+                GIS Risk Map
+            </a>
+
+            <a href="/ai-insights"
+               class="navigation-item">
+                AI Insights
+            </a>
+
+            <a href="/alerts"
+               class="navigation-item">
+                Alerts
+            </a>
+
+            <a href="/reports"
+               class="navigation-item">
+                Reports
+            </a>
+
+            <a href="/admin"
+               class="navigation-item">
+                Administration
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="analysis-container">
+
+
+        <!-- =================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <section class="page-introduction">
+
+            <div class="page-heading">
+
+                <span class="section-label">
+                    REGIONAL INTELLIGENCE
+                </span>
+
+                <h2>
+                    State-wise Analysis
+                </h2>
+
+                <p>
+                    Analyse land acquisition performance, project
+                    risk and delay patterns across states.
+                </p>
+
+            </div>
+
+
+            <div class="page-actions">
+
+                <button
+                    type="button"
+                    id="refreshStateAnalysis"
+                    class="secondary-button"
+                >
+                    Refresh Data
+                </button>
+
+                <a
+                    href="/reports"
+                    class="primary-button"
+                >
+                    State Report
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             1. STATE SELECTION
+        ================================================== -->
+
+        <section class="analysis-filter-section">
+
+            <div class="filter-heading">
+
+                <span class="section-label">
+                    ANALYSIS FILTER
+                </span>
+
+                <h3>
+                    Select State
+                </h3>
+
+            </div>
+
+
+            <div class="state-selection">
+
+                <div class="form-field">
+
+                    <label for="stateSelector">
+                        State
+                    </label>
+
+                    <select
+                        id="stateSelector"
+                        name="state"
+                    >
+
+                        <option value="">
+                            Select a state
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div
+                    id="selectedStateInfo"
+                    class="selected-state-info"
+                >
+
+                    <span>
+                        Selected State
+                    </span>
+
+                    <strong id="selectedStateName">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             2. PROJECT COUNT
+        ================================================== -->
+
+        <section
+            class="analysis-kpi-grid"
+            aria-label="State project statistics"
+        >
+
+            <article class="analysis-kpi-card">
+
+                <span class="kpi-label">
+                    PROJECT COUNT
+                </span>
+
+                <strong
+                    id="stateProjectCount"
+                    class="kpi-value"
+                >
+                    --
+                </strong>
+
+                <p>
+                    Projects under monitoring
+                </p>
+
+            </article>
+
+
+            <article class="analysis-kpi-card">
+
+                <span class="kpi-label">
+                    ACTIVE PROJECTS
+                </span>
+
+                <strong
+                    id="stateActiveProjects"
+                    class="kpi-value"
+                >
+                    --
+                </strong>
+
+                <p>
+                    Currently active acquisition projects
+                </p>
+
+            </article>
+
+
+            <article class="analysis-kpi-card">
+
+                <span class="kpi-label">
+                    HIGH-RISK PROJECTS
+                </span>
+
+                <strong
+                    id="stateHighRiskProjects"
+                    class="kpi-value"
+                >
+                    --
+                </strong>
+
+                <p>
+                    Projects requiring close monitoring
+                </p>
+
+            </article>
+
+
+            <article class="analysis-kpi-card">
+
+                <span class="kpi-label">
+                    CRITICAL PROJECTS
+                </span>
+
+                <strong
+                    id="stateCriticalProjects"
+                    class="kpi-value"
+                >
+                    --
+                </strong>
+
+                <p>
+                    Immediate intervention required
+                </p>
+
+            </article>
+
+
+            <article class="analysis-kpi-card">
+
+                <span class="kpi-label">
+                    DELAY PROBABILITY
+                </span>
+
+                <strong
+                    id="stateDelayProbability"
+                    class="kpi-value"
+                >
+                    --
+                </strong>
+
+                <p>
+                    Average AI-predicted probability
+                </p>
+
+            </article>
+
+        </section>
+
+
+        <!-- =================================================
+             3. DELAY TRENDS
+        ================================================== -->
+
+        <section class="analysis-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        TIME-SERIES ANALYSIS
+                    </span>
+
+                    <h3>
+                        Delay Trends
+                    </h3>
+
+                    <p>
+                        Track how acquisition delay risk changes
+                        over time for the selected state.
+                    </p>
+
+                </div>
+
+
+                <div class="chart-controls">
+
+                    <select id="delayTrendPeriod">
+
+                        <option value="monthly">
+                            Monthly
+                        </option>
+
+                        <option value="quarterly">
+                            Quarterly
+                        </option>
+
+                        <option value="yearly">
+                            Yearly
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-panel">
+
+                <div
+                    id="stateDelayTrendChart"
+                    class="chart-container"
+                    aria-label="State delay trend chart"
+                >
+
+                    <div class="chart-placeholder">
+                        Delay trend visualization
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             4. RISK DISTRIBUTION
+        ================================================== -->
+
+        <section class="analysis-grid">
+
+
+            <article class="analysis-panel">
+
+                <header class="panel-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            RISK ANALYTICS
+                        </span>
+
+                        <h3>
+                            Risk Distribution
+                        </h3>
+
+                    </div>
+
+                </header>
+
+
+                <div class="risk-distribution">
+
+                    <div
+                        id="stateRiskDistributionChart"
+                        class="chart-container"
+                    >
+
+                        <div class="chart-placeholder">
+                            Risk distribution visualization
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="stateRiskLegend"
+                        class="risk-legend"
+                    >
+
+                        <div class="risk-legend-item">
+
+                            <span class="risk-indicator critical"></span>
+
+                            <span>
+                                Critical
+                            </span>
+
+                            <strong id="stateCriticalRiskCount">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="risk-legend-item">
+
+                            <span class="risk-indicator high"></span>
+
+                            <span>
+                                High
+                            </span>
+
+                            <strong id="stateHighRiskCount">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="risk-legend-item">
+
+                            <span class="risk-indicator medium"></span>
+
+                            <span>
+                                Medium
+                            </span>
+
+                            <strong id="stateMediumRiskCount">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="risk-legend-item">
+
+                            <span class="risk-indicator low"></span>
+
+                            <span>
+                                Low
+                            </span>
+
+                            <strong id="stateLowRiskCount">
+                                --
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- STATE PERFORMANCE -->
+
+            <article class="analysis-panel">
+
+                <header class="panel-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            PERFORMANCE
+                        </span>
+
+                        <h3>
+                            State Performance
+                        </h3>
+
+                    </div>
+
+                </header>
+
+
+                <div class="performance-list">
+
+
+                    <div class="performance-item">
+
+                        <div class="performance-heading">
+
+                            <span>
+                                Compensation
+                            </span>
+
+                            <strong id="stateCompensation">
+                                --
+                            </strong>
+
+                        </div>
+
+                        <div class="progress-track">
+
+                            <div
+                                id="stateCompensationProgress"
+                                class="progress-value"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance-item">
+
+                        <div class="performance-heading">
+
+                            <span>
+                                Documentation
+                            </span>
+
+                            <strong id="stateDocumentation">
+                                --
+                            </strong>
+
+                        </div>
+
+                        <div class="progress-track">
+
+                            <div
+                                id="stateDocumentationProgress"
+                                class="progress-value"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance-item">
+
+                        <div class="performance-heading">
+
+                            <span>
+                                Rehabilitation & Resettlement
+                            </span>
+
+                            <strong id="stateRR">
+                                --
+                            </strong>
+
+                        </div>
+
+                        <div class="progress-track">
+
+                            <div
+                                id="stateRRProgress"
+                                class="progress-value"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="performance-item">
+
+                        <div class="performance-heading">
+
+                            <span>
+                                Land Possession
+                            </span>
+
+                            <strong id="statePossession">
+                                --
+                            </strong>
+
+                        </div>
+
+                        <div class="progress-track">
+
+                            <div
+                                id="statePossessionProgress"
+                                class="progress-value"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =================================================
+             5. DISTRICT COMPARISON
+        ================================================== -->
+
+        <section class="analysis-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        DISTRICT COMPARISON
+                    </span>
+
+                    <h3>
+                        District Comparison
+                    </h3>
+
+                    <p>
+                        Compare project risk, delay probability and
+                        acquisition performance across districts.
+                    </p>
+
+                </div>
+
+
+                <div class="comparison-controls">
+
+                    <select id="districtComparisonMetric">
+
+                        <option value="risk">
+                            Risk Score
+                        </option>
+
+                        <option value="delay">
+                            Delay Probability
+                        </option>
+
+                        <option value="projects">
+                            Project Count
+                        </option>
+
+                        <option value="performance">
+                            Performance
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="comparison-chart-panel">
+
+                <div
+                    id="districtComparisonChart"
+                    class="chart-container"
+                >
+
+                    <div class="chart-placeholder">
+                        District comparison visualization
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DISTRICT TABLE -->
+
+            <div class="analysis-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            DISTRICT DETAILS
+                        </span>
+
+                        <h3>
+                            District Risk Comparison
+                        </h3>
+
+                    </div>
+
+                    <span
+                        id="districtResultCount"
+                        class="result-count"
+                    >
+                        0 districts
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="districtComparisonTable"
+                    class="table-container"
+                >
+
+                    <div class="empty-state">
+                        District comparison data will appear here.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             STATE PROJECT LIST
+        ================================================== -->
+
+        <section class="analysis-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        PROJECT OVERVIEW
+                    </span>
+
+                    <h3>
+                        Projects in Selected State
+                    </h3>
+
+                </div>
+
+                <a
+                    href="/projects"
+                    class="panel-action"
+                >
+                    View All Projects
+                </a>
+
+            </div>
+
+
+            <div
+                id="stateProjectTable"
+                class="table-container"
+            >
+
+                <div class="empty-state">
+                    Select a state to view projects.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SYSTEM INFORMATION
+        ================================================== -->
+
+        <section class="system-information">
+
+            <div class="system-information-item">
+
+                <span>
+                    API
+                </span>
+
+                <strong
+                    id="apiStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    Database
+                </span>
+
+                <strong
+                    id="databaseStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+
+            <div class="system-information-item">
+
+                <span>
+                    AI Model
+                </span>
+
+                <strong
+                    id="modelStatus"
+                    class="status-ok"
+                >
+                    Checking
+                </strong>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="application-footer">
+
+        <div>
+
+            <strong>
+                LANDLYTICS
+            </strong>
+
+            <span>
+                Land Acquisition Intelligence & Monitoring System
+            </span>
+
+        </div>
+
+        <div>
+
+            <span>
+                Authorized Government Decision Support Platform
+            </span>
+
+            <span>
+                © 2026
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/analysis.js') }}"></script>
+
+</body>
+
+</html>
